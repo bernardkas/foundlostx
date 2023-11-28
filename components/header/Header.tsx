@@ -7,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { Combobox } from '../ui/combobox';
+import { Input } from '../ui/input';
 
 const Header = () => {
   const [suggestedAddresses, setSuggestedAddresses] = useState([
@@ -24,6 +26,20 @@ const Header = () => {
     'Prishtin, 2 Janari',
     'Prishtin, 28 Dhjetori',
   ]);
+  const frameworks = [
+    {
+      value: 'next.js',
+      label: 'Next.js',
+    },
+    {
+      value: 'react',
+      label: 'react',
+    },
+    {
+      value: 'csharp',
+      label: 'Csharp',
+    },
+  ];
   return (
     <div className='h-[50vh]  w-full'>
       <div className='flex flex-col items-center justify-center h-full'>
@@ -35,26 +51,20 @@ const Header = () => {
             Search what you lost here !!
           </p>
           <div className='flex flex-row flex-wrap border-[1px] border-orange-400 p-5 rounded-md px-2'>
-            <input
-              className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text '
+            <Input
+              className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'
               placeholder='Descripe what you lost...'
-              type='text'
-              name=''
-              id=''
             />
-            <input
-              className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text '
-              placeholder='Descripe what you lost...'
-              type='text'
-              name=''
-              id=''
+
+            <Combobox
+              frameworks={frameworks}
+              className=' border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'
+              placeholder='Country...'
             />
-            <input
-              className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text '
-              placeholder='Descripe what you lost...'
-              type='text'
-              name=''
-              id=''
+            <Combobox
+              frameworks={frameworks}
+              className=' border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'
+              placeholder='City...'
             />
             <Select>
               <SelectTrigger className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'>
