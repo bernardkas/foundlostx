@@ -63,7 +63,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
               <CommandItem
                 key={framework.value}
                 value={framework.value}
-                className='cursor-pointer'
+                className='cursor-pointer w-full'
                 onSelect={currentValue => {
                   setValue(currentValue === value ? '' : currentValue);
                   setOpen(false);

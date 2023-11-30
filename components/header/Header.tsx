@@ -43,31 +43,31 @@ const Header = () => {
   return (
     <div className='h-[50vh]  w-full'>
       <div className='flex flex-col items-center justify-center h-full'>
-        <div className='flex flex-col items-center'>
-          <h1 className='text-4xl font-golos-text font-bold text-slate-600 mb-2'>
+        <div className='flex flex-col items-center justify-center'>
+          <h1 className='text-3xl mt-16 md:mt-0 md:text-4xl font-golos-text font-bold text-slate-600 mb-2 text-center'>
             Did you lose something?
           </h1>
           <p className='mb-12 font-golos-text  text-slate-500'>
             Search what you lost here !!
           </p>
-          <div className='flex flex-row flex-wrap border-[1px] border-orange-400 p-5 rounded-md px-2'>
+          <div className='flex flex-row flex-wrap justify-center gap-3 md:gap-0 border-[1px] border-orange-400 p-5 rounded-md px-2'>
             <Input
-              className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'
+              className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='Descripe what you lost...'
             />
 
             <Combobox
               frameworks={frameworks}
-              className=' border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'
+              className=' border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='Country...'
             />
             <Combobox
               frameworks={frameworks}
-              className=' border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'
+              className=' border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='City...'
             />
             <Select>
-              <SelectTrigger className='border-b-[1px] pb-1 outline-none w-[250px] font-golos-text text-base'>
+              <SelectTrigger className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
                 <SelectValue placeholder='Where did you lose item?' />
               </SelectTrigger>
               <SelectContent>
@@ -77,7 +77,7 @@ const Header = () => {
                 <SelectItem value='system'>Somwhere in the city</SelectItem>
               </SelectContent>
             </Select>
-            <button className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-[100px]'>
+            <button className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-[250px] md:w-[100px] '>
               Search
             </button>
           </div>

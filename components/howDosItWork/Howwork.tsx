@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import reporLost from '@/assets/howitworks/itemlost.png';
 import browsing from '@/assets/howitworks/browsing.png';
+import reporting from '@/assets/howitworks/reporting.png';
+import matching from '@/assets/howitworks/matching.png';
 
 const Howwork = () => {
   const data = [
@@ -19,19 +21,19 @@ const Howwork = () => {
     },
     {
       key: 3,
-      icon: '',
+      icon: reporting,
       title: 'Reporting Found Items',
       desc: 'If someone finds a lost item, they can report it on the website',
     },
     {
       key: 4,
-      icon: '',
-      title: ' Matching Lost and Found Items:',
+      icon: matching,
+      title: ' Matching Lost and Found Items',
       desc: 'The system actively searches for matches between reported lost and found items.',
     },
   ];
   return (
-    <div className='mt-16  bg-slate-700 bg-opacity-30 p-3'>
+    <div className='mt-16  bg-slate-400 bg-opacity-30 p-3'>
       <div className='mx-1 lg:mx-[15%] '>
         <div className='text-center mb-2'>
           <h1 className='text-[24px] font-semibold text-orange-600'>
