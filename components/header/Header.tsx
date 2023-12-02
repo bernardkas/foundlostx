@@ -9,6 +9,12 @@ import {
 } from '../ui/select';
 import { Combobox } from '../ui/combobox';
 import { Input } from '../ui/input';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip';
 
 const Header = () => {
   const [suggestedAddresses, setSuggestedAddresses] = useState([
@@ -51,24 +57,35 @@ const Header = () => {
             Search what you lost here !!
           </p>
           <div className='flex flex-row flex-wrap justify-center gap-3 md:gap-0 border-[1px] border-orange-400 p-5 rounded-md px-2'>
-            <Input
-              className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-              placeholder='Descripe what you lost...'
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Input
+                    className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
+                    placeholder='Descripe what you lose...'
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>
+                    Leave it empty if you want to show all lost and found items
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             <Combobox
               frameworks={frameworks}
               className=' border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-              placeholder='Country...'
+              placeholder='*Country...'
             />
             <Combobox
               frameworks={frameworks}
               className=' border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-              placeholder='City...'
+              placeholder='*City...'
             />
             <Select>
               <SelectTrigger className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
-                <SelectValue placeholder='Where did you lose item?' />
+                <SelectValue placeholder='*Where did you lose item?' />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='light'>Airport</SelectItem>

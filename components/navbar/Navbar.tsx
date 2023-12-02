@@ -9,7 +9,7 @@ const Navbar = () => {
   const links = [
     {
       id: '1',
-      to: '/',
+      to: '/found',
       text: 'Found',
     },
     {
@@ -38,7 +38,7 @@ const Navbar = () => {
         <div className='hidden flex-row gap-2 lg:flex'>
           {links.map(item => (
             <Link
-              className='mx-2 font-noto-sans font-[500] text-lg text-gray-800'
+              className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
               href={item.to}
               key={item.id}>
               {item.text}

@@ -33,7 +33,7 @@ const Howwork = () => {
     },
   ];
   return (
-    <div className='mt-16  bg-slate-400 bg-opacity-30 p-3'>
+    <div className='mt-16  bg-slate-400 bg-opacity-30 p-3 my-3'>
       <div className='mx-1 lg:mx-[15%] '>
         <div className='text-center mb-2'>
           <h1 className='text-[24px] font-semibold text-orange-600'>
