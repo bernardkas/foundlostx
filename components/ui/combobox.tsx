@@ -1,7 +1,6 @@
-// components/ui/Combobox.tsx
 import React, { useState } from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
-import { Button } from './button'; // Update the import path as needed
+import { Button } from './button';
 import {
   Command,
   CommandEmpty,
@@ -30,16 +29,23 @@ export const Combobox: React.FC<ComboboxProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
+  const [buttonWidth, setButtonWidth] = useState(0);
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setButtonWidth(event.currentTarget.offsetWidth);
+    setOpen(!open);
+  };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={() => setOpen(!open)}>
       <PopoverTrigger asChild>
         <Button
+          onClick={handleButtonClick}
           variant='default'
           role='combobox'
           aria-expanded={open}
           className={cn(
-            'justify-between bg-white text-black hover:bg-white font-normal',
+            'justify-between border-[1px] bg-white text-black hover:bg-white font-normal',
             className
           )}>
           <span
@@ -54,7 +60,9 @@ export const Combobox: React.FC<ComboboxProps> = ({
           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-auto p-0'>
+      <PopoverContent
+        style={{ width: `${buttonWidth}px` }}
+        className='w-auto p-0'>
         <Command>
           <CommandInput placeholder='...' />
           <CommandEmpty>No Country found.</CommandEmpty>

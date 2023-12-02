@@ -61,7 +61,7 @@ const Header = () => {
               <Tooltip>
                 <TooltipTrigger>
                   <Input
-                    className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
+                    className='border-t-0 border-l-0 border-r-0 border-b-[1px]  pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
                     placeholder='Descripe what you lose...'
                   />
                 </TooltipTrigger>
@@ -75,16 +75,16 @@ const Header = () => {
 
             <Combobox
               frameworks={frameworks}
-              className=' border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
+              className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*Country...'
             />
             <Combobox
               frameworks={frameworks}
-              className=' border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
+              className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*City...'
             />
             <Select>
-              <SelectTrigger className='border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
+              <SelectTrigger className='border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
                 <SelectValue placeholder='*Where did you lose item?' />
               </SelectTrigger>
               <SelectContent>
