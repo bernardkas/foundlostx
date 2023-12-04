@@ -14,7 +14,7 @@ const Navbar = () => {
     },
     {
       id: '2',
-      to: '/',
+      to: '/lost',
       text: 'Lost',
     },
     {
