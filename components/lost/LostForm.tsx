@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { Combobox } from '../ui/combobox';
 import {
@@ -12,6 +12,7 @@ import {
 import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 import CustomUpload from '../ui/upload';
+import { DatePicker } from '../ui/dataPicker';
 
 const LostForm = () => {
   const frameworks = [
@@ -31,6 +32,12 @@ const LostForm = () => {
   const handleChange = info => {
     // Handle file change logic if needed
     console.log(info.fileList);
+  };
+  const [selectedDate, setSelectedDate] = useState<Date>();
+
+  const handleDateSelect = (date: Date) => {
+    // Handle the selected date
+    setSelectedDate(date);
   };
   return (
     <div className='w-full my-16 flex items-center justify-center'>
@@ -107,6 +114,14 @@ const LostForm = () => {
         <div className='flex flex-col'>
           <label htmlFor=''>*Can you please describe the item you lost?</label>
           <Textarea className='text-base font-noto-sans w-96 lg:w-2/3' />
+        </div>
+        <div className='flex flex-col'>
+          <label htmlFor=''>*What day you losted?</label>
+          <DatePicker
+            selectedDate={selectedDate}
+            onSelectDate={handleDateSelect}
+            placeholder='Select your date'
+          />
         </div>
         <div>
           <label htmlFor=''>*Please upload a photo here</label>
