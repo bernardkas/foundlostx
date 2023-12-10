@@ -17,7 +17,6 @@ const Filter = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const handleDateSelect = (date: Date) => {
-    // Handle the selected date
     setSelectedDate(date);
   };
   return (
@@ -89,7 +88,7 @@ const Filter = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className='block lg:hidden'>
         <div className='flex flex-row justify-end my-4'>
           <p
             className='cursor-pointer  text-base bg-stone-300 p-2 rounded-md '

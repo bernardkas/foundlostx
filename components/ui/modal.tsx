@@ -1,7 +1,7 @@
 // components/Modal.tsx
 
 import { cn } from '@/lib/utils';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useCallback, useEffect, useRef } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -16,6 +16,16 @@ const Modal: React.FC<ModalProps> = ({
   children,
   className,
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = useCallback(
+    (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -24,22 +34,26 @@ const Modal: React.FC<ModalProps> = ({
     };
     if (isOpen) {
       document.addEventListener('keydown', handleKeyPress);
-      document.body.style.overflow = 'hidden'; // Disable scrolling
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('mousedown', handleOutsideClick);
     } else {
       document.removeEventListener('keydown', handleKeyPress);
       document.body.style.overflow = '';
+      document.removeEventListener('mousedown', handleOutsideClick);
     }
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
       document.body.style.overflow = '';
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, handleOutsideClick]);
 
   return (
     <>
       {isOpen && (
         <div className='fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50'>
           <div
+            ref={modalRef}
             className={cn(
               `relative z-50 w-96 p-4 bg-white rounded-md `,
               className
