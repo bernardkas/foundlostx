@@ -10,7 +10,7 @@ const Card = ({}: CardPorps) => {
   console.log('allPosts', allPosts);
 
   return (
-    <div className='flex flex-col gap-7 justify-center my-10 w-full'>
+    <div className='flex flex-col gap-7 justify-center my:2 lg:my-10 w-full'>
       {allPosts.map(item => (
         <div
           className='border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer'
