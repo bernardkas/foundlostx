@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../ui/tooltip';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const [suggestedAddresses, setSuggestedAddresses] = useState([
@@ -46,6 +47,13 @@ const Header = () => {
       label: 'Csharp',
     },
   ];
+
+  const router = useRouter();
+
+  const handleGoToCity = () => {
+    router.push('/posts/pristina');
+  };
+
   return (
     <div className='h-[50vh]  w-full'>
       <div className='flex flex-col items-center justify-center h-full'>
@@ -96,7 +104,9 @@ const Header = () => {
                 <SelectItem value='city'>Somwhere in the city</SelectItem>
               </SelectContent>
             </Select>
-            <button className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-[250px] md:w-[100px] '>
+            <button
+              onClick={handleGoToCity}
+              className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-[250px] md:w-[100px] '>
               Search
             </button>
           </div>
