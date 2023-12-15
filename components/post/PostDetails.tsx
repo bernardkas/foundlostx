@@ -5,11 +5,11 @@ import {
   LocateFixed,
   MailCheck,
   MapPin,
-  MessageSquare,
   Plane,
   Smartphone,
   TrainFront,
   UserRound,
+  MessageCircle,
 } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
@@ -44,7 +44,19 @@ const PostDetails = () => {
     },
     {
       id: 6,
-      icon: <MessageSquare />,
+      icon: <MessageCircle />,
+    },
+    {
+      id: 7,
+      icon: <Plane />,
+    },
+    {
+      id: 8,
+      icon: <Bus />,
+    },
+    {
+      id: 9,
+      icon: <TrainFront />,
     },
   ];
   const allPosts = foundPosts.concat(lostPosts);
@@ -128,8 +140,39 @@ const PostDetails = () => {
               </div>
             </div>
           </div>
-          <div>
-            <p>Description</p>
+          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
+            <MessageCircle size={70} className=' text-orange-500 ' />
+            <div>
+              <p className=' text-slate-500 font-noto-sans'>Description</p>
+              <p className=' text-slate-800 font-noto-sans'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea non
+                voluptatem distinctio nesciunt quis laborum eos atque, magnam,
+                incidunt nulla ullam! Ad veniam omnis accusantium id debitis
+                doloribus? Consectetur, magnam.
+              </p>
+            </div>
+          </div>
+          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
+            <Plane size={22} className=' text-orange-500 ' />
+            <div>
+              <p className=' text-slate-500 font-noto-sans'>Airoport</p>
+              <p className=' text-slate-800 font-noto-sans'>Airlane: </p>
+              <p className=' text-slate-800 font-noto-sans'>Flight Number: </p>
+            </div>
+          </div>
+          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
+            <Bus size={22} className=' text-orange-500 ' />
+            <div>
+              <p className=' text-slate-500 font-noto-sans'>Bus</p>
+              <p className=' text-slate-800 font-noto-sans'>Buss Number: </p>
+            </div>
+          </div>
+          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
+            <TrainFront size={22} className=' text-orange-500 ' />
+            <div>
+              <p className=' text-slate-500 font-noto-sans'>Train</p>
+              <p className=' text-slate-800 font-noto-sans'>Line: </p>
+            </div>
           </div>
         </div>
       </div>
