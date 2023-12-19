@@ -13,6 +13,7 @@ import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 import CustomUpload from '../ui/upload';
 import { DatePicker } from '../ui/dataPicker';
+import MapFound from '../map/MapFound';
 
 const FoundForm = () => {
   const frameworks = [
@@ -88,13 +89,14 @@ const FoundForm = () => {
           <Input className='w-96 lg: outline-none text-base font-noto-sans' />
         </div>
         <div className='flex flex-row flex-wrap gap-5'>
-          <div className='flex flex-col'>
+           {/* To implemented for the future */}
+          {/* <div className='flex flex-col'>
             <label htmlFor=''>*Country</label>
             <Combobox
               frameworks={frameworks}
               className='w-96 outline-none text-base font-noto-sans'
             />
-          </div>
+          </div> */}
           <div className='flex flex-col'>
             <label htmlFor=''>*City</label>
             <Combobox
@@ -153,6 +155,10 @@ const FoundForm = () => {
             onSelectDate={handleDateSelect}
             placeholder='Select your date'
           />
+        </div>
+        <div className=''>
+          <label htmlFor=''>Select address where did you lost it?</label>
+          <MapFound />
         </div>
         <div>
           <label htmlFor=''>*Please upload a photo here</label>

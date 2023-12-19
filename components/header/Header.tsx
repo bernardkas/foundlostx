@@ -64,7 +64,7 @@ const Header = () => {
           <p className='mb-12 font-golos-text  text-slate-500'>
             Search what you lost here !!
           </p>
-          <div className='flex flex-row flex-wrap justify-center gap-3 md:gap-0 border-[1px] border-orange-400 p-5 rounded-md px-2'>
+          <div className='flex flex-row flex-wrap justify-center gap-3 md:gap-0 border-[1px] m-1 border-orange-400 p-5 rounded-md px-2'>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
@@ -80,12 +80,12 @@ const Header = () => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-
-            <Combobox
+            {/* To implemented for the future */}
+            {/* <Combobox
               frameworks={frameworks}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*Country...'
-            />
+            /> */}
             <Combobox
               frameworks={frameworks}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'

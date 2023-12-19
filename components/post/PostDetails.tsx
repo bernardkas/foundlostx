@@ -10,11 +10,13 @@ import {
   TrainFront,
   UserRound,
   MessageCircle,
+  Map,
 } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 
 import photo from '@/assets/howitworks/matching.png';
+import Link from 'next/link';
 
 const PostDetails = () => {
   const icons = [
@@ -64,14 +66,14 @@ const PostDetails = () => {
     <div className='mx-2 my-5 lg:mx-[15%]'>
       <div>posts/pristina</div>
       <div className='flex flex-col justify-center items-center '>
-        <div className='border-[1px] rounded-md p-5 w-[800px] flex flex-col gap-5'>
-          <div className='flex flex-row justify-between'>
-            <div className='flex flex-row gap-5 '>
+        <div className='border-[1px] rounded-md p-5 w-auto lg:w-[800px] flex flex-col gap-5'>
+          <div className='flex flex-wrap flex-row-reverse md:flex-row justify-between'>
+            <div className='flex flex-row flex-wrap gap-5 '>
               <div>
                 <Image width={400} height={400} src={photo} alt='' />
               </div>
               <div className='flex flex-col gap-5'>
-                <div className='flex flex-row items-center gap-1'>
+                <div className='flex flex-row flex-wrap items-center gap-1'>
                   <p className='bg-green-500 p-1 rounded-md text-white font-noto-sans'>
                     Found:
                   </p>
@@ -95,6 +97,18 @@ const PostDetails = () => {
                     <p className='text-slate-900 font-noto-sans'>
                       Afer bankes te raifaisen
                     </p>
+                  </div>
+                </div>
+                <div className='flex flex-row gap-1'>
+                  <Map size={22} />
+                  <div>
+                    <p>Map</p>
+                    <Link
+                      className='font-noto-sans'
+                      href='https://what3words.com/hecklers.president.coining'
+                      target='_blank'>
+                      click here to show the map
+                    </Link>
                   </div>
                 </div>
               </div>
