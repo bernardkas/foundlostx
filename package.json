@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.1",
+    "@prisma/client": "^5.7.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-radio-group": "^1.1.3",
@@ -25,6 +27,7 @@
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.293.0",
     "next": "14.0.3",
+    "prisma": "^5.7.1",
     "react": "^18",
     "react-day-picker": "^8.9.1",
     "react-dom": "^18",

@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id        Int      @id @default(sequence())
+  name      String
+  lastname  String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lostItems  Lost[]   @relation("UserLostItems")
+  foundItems Found[]  @relation("UserFoundItems")
+}
+
+model Lost {
+  id            Int      @id @default(sequence())
+  userId        Int
+  user          User     @relation("UserLostItems", fields: [userId], references: [id])
+  name          String
+  lastname      String
+  phone         String
+  email         String
+  title         String
+  city          String
+  whereDidFind  String
+  airoport      String
+  buss          String
+  hotel         String
+  InCity        String
+  description   String
+  findingDate   DateTime
+  mapAddress    String
+  photo         String
+  label         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Found {
+  id            Int       @id @default(sequence())
+  userId        Int
+  user          User     @relation("UserFoundItems", fields: [userId], references: [id])
+  name          String
+  lastname      String
+  phone         String
+  email         String
+  title         String
+  city          String
+  whereDidFind  String
+    airoport      String
+  buss          String
+  hotel         String
+  InCity        String
+  description   String
+  findingDate   DateTime
+  mapAddress    String
+  photo         String
+  label         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+

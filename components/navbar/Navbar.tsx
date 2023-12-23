@@ -1,10 +1,16 @@
 'use client';
+import { UserButton, useSignIn } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { auth } from '@clerk/nextjs';
 
-const Navbar = () => {
+interface NavbarProps {
+  userId: any;
+}
+
+const Navbar = ({ userId }: NavbarProps) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const links = [
     {
@@ -17,12 +23,8 @@ const Navbar = () => {
       to: '/lost',
       text: 'Lost',
     },
-    {
-      id: '3',
-      to: '/',
-      text: 'Login',
-    },
   ];
+
   return (
     <div className='shadow-lg '>
       <div className='mx-1 flex  h-16 flex-row items-center justify-between  lg:mx-[15%]'>
@@ -35,7 +37,7 @@ const Navbar = () => {
             <span className='uppercase text-orange-400'>x</span>
           </Link>
         </div>
-        <div className='hidden flex-row gap-2 lg:flex'>
+        <div className='hidden flex-row gap-1 items-center lg:flex'>
           {links.map(item => (
             <Link
               className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
@@ -44,6 +46,14 @@ const Navbar = () => {
               {item.text}
             </Link>
           ))}
+          {!userId && (
+            <Link
+              className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
+              href='sign-in'>
+              Login
+            </Link>
+          )}
+          <UserButton afterSignOutUrl='/' />
         </div>
 
         <div className='block text-gray-800 lg:hidden'>
@@ -71,6 +81,14 @@ const Navbar = () => {
                   {item.text}
                 </Link>
               ))}
+              {!userId && (
+                <Link
+                  className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
+                  href='sign-in'>
+                  Login
+                </Link>
+              )}
+              <UserButton afterSignOutUrl='/' />
             </div>
           </div>
         </motion.div>

@@ -4,12 +4,14 @@ import '../styles/globals.css';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
 require('dotenv').config();
+import { ClerkProvider } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'foundlostx',
-  description: 'Found everything',
+  description: 'Find everything',
 };
 
 export default function RootLayout({
@@ -17,13 +19,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { userId } = auth();
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body className={inter.className}>
+          <Navbar userId={userId} />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

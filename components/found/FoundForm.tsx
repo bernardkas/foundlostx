@@ -89,7 +89,7 @@ const FoundForm = () => {
           <Input className='w-96 lg: outline-none text-base font-noto-sans' />
         </div>
         <div className='flex flex-row flex-wrap gap-5'>
-           {/* To implemented for the future */}
+          {/* To implemented for the future */}
           {/* <div className='flex flex-col'>
             <label htmlFor=''>*Country</label>
             <Combobox
@@ -117,10 +117,10 @@ const FoundForm = () => {
                 value='airport'>
                 Airoport
               </SelectItem>
-              <SelectItem value='train'>Train</SelectItem>
+              {/* <SelectItem value='train'>Train</SelectItem> */}
               <SelectItem value='bus'>Bus Station</SelectItem>
               <SelectItem value='hotel'>Hotel</SelectItem>
-              <SelectItem value='ferry'>Ferry</SelectItem>
+              {/* <SelectItem value='ferry'>Ferry</SelectItem> */}
               <SelectItem value='city'>Somwhere in the city</SelectItem>
             </SelectContent>
           </Select>

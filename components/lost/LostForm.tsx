@@ -101,10 +101,10 @@ const LostForm = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='airport'>Airport</SelectItem>
-              <SelectItem value='train'>Train</SelectItem>
+              {/* <SelectItem value='train'>Train</SelectItem> */}
               <SelectItem value='bus'>Bus Station</SelectItem>
               <SelectItem value='hotel'>Hotel</SelectItem>
-              <SelectItem value='ferry'>Ferry</SelectItem>
+              {/* <SelectItem value='ferry'>Ferry</SelectItem> */}
               <SelectItem value='city'>Somwhere in the city</SelectItem>
             </SelectContent>
           </Select>
