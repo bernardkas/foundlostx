@@ -20,7 +20,7 @@ const Navbar = ({ userId }: NavbarProps) => {
     // },
     {
       id: '2',
-      to: '/lost',
+      to: '/foundlost',
       text: 'Items you lost or find',
     },
   ];

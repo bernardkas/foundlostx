@@ -232,7 +232,7 @@ const FoundLostForm = () => {
             <label htmlFor=''>*What day you losted?</label>
           )}
           <DatePicker
-            selectedDate={input.findingDate}
+            // selectedDate={input.findingDate}
             onSelectDate={value => handleInputChange('findingDate', value)}
             placeholder='Select your date'
           />

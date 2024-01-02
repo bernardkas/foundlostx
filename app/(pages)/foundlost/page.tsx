@@ -1,7 +1,7 @@
 import LostForm from '@/components/foundlost/FoundLostForm';
 import React from 'react';
 
-const Lost = () => {
+const FoundLost = () => {
   return (
     <div>
       <LostForm />
@@ -9,4 +9,4 @@ const Lost = () => {
   );
 };
 
-export default Lost;
+export default FoundLost;
