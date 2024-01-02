@@ -54,7 +54,9 @@ const CustomUpload: React.FC<CustomUploadProps> = ({ onChange }) => {
         onPreview={handlePreview}
         onChange={info => {
           setFileList(info.fileList);
-          onChange(info);
+          if (onChange) {
+            onChange(info);
+          }
         }}>
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
