@@ -13,11 +13,13 @@ datasource db {
 
 model User {
   id        Int      @id @default(sequence())
+  extrenalId String @unique
   username      String?
   name String?
   lastname String?
   email  String
   password  String
+  attributes Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   lostItems  LostAndFound[]   @relation("UserLostItems")

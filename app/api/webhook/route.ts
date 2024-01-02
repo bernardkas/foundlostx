@@ -3,7 +3,6 @@ import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 
 export async function POST(req: Request) {
-  // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
@@ -12,29 +11,24 @@ export async function POST(req: Request) {
     );
   }
 
-  // Get the headers
   const headerPayload = headers();
   const svix_id = headerPayload.get('svix-id');
   const svix_timestamp = headerPayload.get('svix-timestamp');
   const svix_signature = headerPayload.get('svix-signature');
 
-  // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
     return new Response('Error occured -- no svix headers', {
       status: 400,
     });
   }
 
-  // Get the body
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
-  // Create a new Svix instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
 
   let evt: WebhookEvent;
 
-  // Verify the payload with the headers
   try {
     evt = wh.verify(body, {
       'svix-id': svix_id,
@@ -48,12 +42,44 @@ export async function POST(req: Request) {
     });
   }
 
-  // Get the ID and type
-  const { id } = evt.data;
   const eventType = evt.type;
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   console.log('Webhook body:', body);
+
+  try {
+    if (eventType === 'user.created' || eventType === 'user.updated') {
+      const eventData = evt.data;
+
+      const userData = {
+        id: eventData.id || '',
+        username: eventData.username || '',
+        name: eventData.first_name || '',
+        lastname: eventData.last_name || '',
+        email: eventData.email_addresses || '',
+        password:
+          eventData.password_enabled === true
+            ? 'true'
+            : eventData.password_enabled,
+      };
+      console.log('user Data', userData);
+
+      await prisma?.user;
+
+      // await prisma?.user.upsert({
+      //   where: { id: userId },
+      //   update: { ...userData },
+      //   create: {
+      //     id: userId,
+      //     ...userData,
+      //   },
+      // });
+    }
+  } catch (error) {
+    console.error('Error updating database:', error);
+    return new Response('Error occurred', {
+      status: 500,
+    });
+  }
 
   return new Response('', { status: 200 });
 }
