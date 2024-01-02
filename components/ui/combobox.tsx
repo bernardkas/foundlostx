@@ -39,7 +39,6 @@ export const Combobox: React.FC<ComboboxProps> = ({
     setOpen(!open);
   };
 
-
   return (
     <Popover open={open} onOpenChange={() => setOpen(!open)}>
       <PopoverTrigger asChild>

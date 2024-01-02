@@ -18,21 +18,6 @@ import {
 import { useRouter } from 'next/navigation';
 
 const Header = () => {
-  const [suggestedAddresses, setSuggestedAddresses] = useState([
-    'Prishtin, 17 Nentori',
-    'Prishtin, 17 Shtaotri',
-    'Ferizaj, 15 Nentori',
-    'Prishtin, 2 Janari',
-    'Prishtin, 28 Dhjetori',
-    'Prishtin, 2 Janari',
-    'Prishtin, 28 Dhjetori',
-    'Prishtin, 2 Janari',
-    'Prishtin, 28 Dhjetori',
-    'Prishtin, 2 Janari',
-    'Prishtin, 28 Dhjetori',
-    'Prishtin, 2 Janari',
-    'Prishtin, 28 Dhjetori',
-  ]);
   const frameworks = [
     {
       value: 'next.js',
@@ -53,6 +38,8 @@ const Header = () => {
   const handleGoToCity = () => {
     router.push('/posts/pristina');
   };
+
+  const [input, setInput] = useState('');
 
   return (
     <div className='h-[50vh]  w-full'>
@@ -90,6 +77,8 @@ const Header = () => {
               frameworks={frameworks}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*City...'
+              setValue={value => setInput(value.target.value)}
+              value={input}
             />
             <Select>
               <SelectTrigger className='border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
