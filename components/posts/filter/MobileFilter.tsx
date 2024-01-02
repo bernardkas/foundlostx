@@ -49,11 +49,11 @@ const MobileFilter = ({ openModal, setOpenModal }: MobileFilterProps) => {
             </div>
             <div className='flex flex-col'>
               <label htmlFor=''>What day you find it?</label>
-              <DatePicker
+              {/* <DatePicker
                 selectedDate={selectedDate}
                 onSelectDate={handleDateSelect}
                 placeholder='Select your date'
-              />
+              /> */}
             </div>
             <div>
               <label htmlFor=''>Where did you find it</label>
