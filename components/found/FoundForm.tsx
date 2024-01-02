@@ -14,6 +14,7 @@ import { Button } from '../ui/button';
 import CustomUpload from '../ui/upload';
 import { DatePicker } from '../ui/dataPicker';
 import MapFound from '../map/MapFound';
+import { city } from '@/lib/defaultData';
 
 const FoundForm = () => {
   const frameworks = [
@@ -50,6 +51,31 @@ const FoundForm = () => {
     setSelectedLocation(value);
   };
 
+  const [input, setInput] = useState({
+    name: '',
+    lastname: '',
+    phone: '',
+    email: '',
+    title: '',
+    city: '',
+    whereDidFind: '',
+    exatLocation: '',
+    airoport: '',
+    buss: '',
+    hotel: '',
+    inCity: '',
+    description: '',
+    findingDate: '',
+    mapAddress: '',
+    label: '',
+    photo: [],
+  });
+  const handleInputChange = (fieldName: string, fieldValue: any) => {
+    setInput({ ...input, [fieldName]: fieldValue });
+  };
+
+  console.log('inpur', input);
+
   console.log('selecte', selectedLocation);
 
   return (
@@ -67,47 +93,65 @@ const FoundForm = () => {
         <div className='flex flex-row flex-wrap gap-5'>
           <div>
             <label htmlFor=''>*Name</label>
-            <Input className=' w-96 outline-none text-base font-noto-sans' />
+            <Input
+              onChange={value => handleInputChange('name', value.target.value)}
+              value={input.name}
+              className=' w-96 outline-none text-base font-noto-sans'
+            />
           </div>
           <div>
             <label htmlFor=''>Lastname</label>
-            <Input className='w-96 outline-none text-base font-noto-sans' />
+            <Input
+              onChange={value =>
+                handleInputChange('lastname', value.target.value)
+              }
+              value={input.lastname}
+              className='w-96 outline-none text-base font-noto-sans'
+            />
           </div>
         </div>
         <div className='flex flex-row flex-wrap gap-5'>
           <div>
             <label htmlFor=''>*Phone</label>
-            <Input className='w-96 outline-none text-base font-noto-sans' />
+            <Input
+              onChange={value => handleInputChange('phone', value.target.value)}
+              value={input.phone}
+              className='w-96 outline-none text-base font-noto-sans'
+            />
           </div>
           <div>
             <label htmlFor=''>Email</label>
-            <Input className='w-96 outline-none text-base font-noto-sans' />
+            <Input
+              onChange={value => handleInputChange('email', value.target.value)}
+              value={input.email}
+              className='w-96 outline-none text-base font-noto-sans'
+            />
           </div>
         </div>
         <div className=''>
           <label htmlFor=''>*Title</label>
-          <Input className='w-96 lg: outline-none text-base font-noto-sans' />
+          <Input
+            onChange={value => handleInputChange('title', value.target.value)}
+            value={input.title}
+            className='w-96 lg: outline-none text-base font-noto-sans'
+          />
         </div>
         <div className='flex flex-row flex-wrap gap-5'>
-          {/* To implemented for the future */}
-          {/* <div className='flex flex-col'>
-            <label htmlFor=''>*Country</label>
-            <Combobox
-              frameworks={frameworks}
-              className='w-96 outline-none text-base font-noto-sans'
-            />
-          </div> */}
           <div className='flex flex-col'>
             <label htmlFor=''>*City</label>
             <Combobox
-              frameworks={frameworks}
+              frameworks={city}
               className='w-96 outline-none text-base font-noto-sans'
+              setValue={value => handleInputChange('city', value)}
+              value={input.city}
             />
           </div>
         </div>
         <div className='flex flex-col'>
           <label htmlFor=''>*Where did you find it?</label>
-          <Select>
+          <Select
+            onValueChange={value => handleInputChange('whereDidFind', value)}
+            value={input.whereDidFind}>
             <SelectTrigger className='border-[1px] pb-1 outline-none w-96 font-golos-text text-base'>
               <SelectValue />
             </SelectTrigger>
@@ -117,10 +161,8 @@ const FoundForm = () => {
                 value='airport'>
                 Airoport
               </SelectItem>
-              {/* <SelectItem value='train'>Train</SelectItem> */}
               <SelectItem value='bus'>Bus Station</SelectItem>
               <SelectItem value='hotel'>Hotel</SelectItem>
-              {/* <SelectItem value='ferry'>Ferry</SelectItem> */}
               <SelectItem value='city'>Somwhere in the city</SelectItem>
             </SelectContent>
           </Select>
@@ -142,17 +184,29 @@ const FoundForm = () => {
             *Provide details about the specific location where you discovered
             it.
           </label>
-          <Textarea className='text-base font-noto-sans w-96 lg:w-2/3' />
+          <Textarea
+            onChange={value =>
+              handleInputChange('exatLocation', value.target.value)
+            }
+            value={input.exatLocation}
+            className='text-base font-noto-sans w-96 lg:w-2/3'
+          />
         </div>
         <div className='flex flex-col'>
           <label htmlFor=''>*Can you please describe the item you found?</label>
-          <Textarea className='text-base font-noto-sans w-96 lg:w-2/3' />
+          <Textarea
+            onChange={value =>
+              handleInputChange('description', value.target.value)
+            }
+            value={input.description}
+            className='text-base font-noto-sans w-96 lg:w-2/3'
+          />
         </div>
         <div className='flex flex-col'>
           <label htmlFor=''>*What day you find it?</label>
           <DatePicker
-            selectedDate={selectedDate}
-            onSelectDate={handleDateSelect}
+            selectedDate={input.findingDate}
+            onSelectDate={value => handleInputChange('findingDate', value)}
             placeholder='Select your date'
           />
         </div>
@@ -162,7 +216,7 @@ const FoundForm = () => {
         </div>
         <div>
           <label htmlFor=''>*Please upload a photo here</label>
-          <CustomUpload onChange={handleChange} />
+          <CustomUpload onChange={value => handleInputChange('photo', value)} />
         </div>
         <Button className='bg-orange-500 text-base hover:bg-orange-700'>
           Submit

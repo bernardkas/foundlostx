@@ -13,15 +13,15 @@ interface NavbarProps {
 const Navbar = ({ userId }: NavbarProps) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const links = [
-    {
-      id: '1',
-      to: '/found',
-      text: 'Found',
-    },
+    // {
+    //   id: '1',
+    //   to: '/found',
+    //   text: 'Found',
+    // },
     {
       id: '2',
       to: '/lost',
-      text: 'Lost',
+      text: 'Items you lost or find',
     },
   ];
 
@@ -46,14 +46,23 @@ const Navbar = ({ userId }: NavbarProps) => {
               {item.text}
             </Link>
           ))}
-          {!userId && (
+
+          {!userId ? (
             <Link
               className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
               href='sign-in'>
               Login
             </Link>
+          ) : (
+            <>
+              <Link
+                className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
+                href='/'>
+                Dashboard
+              </Link>
+              <UserButton afterSignOutUrl='/' />
+            </>
           )}
-          <UserButton afterSignOutUrl='/' />
         </div>
 
         <div className='block text-gray-800 lg:hidden'>
@@ -81,14 +90,22 @@ const Navbar = ({ userId }: NavbarProps) => {
                   {item.text}
                 </Link>
               ))}
-              {!userId && (
+              {!userId ? (
                 <Link
                   className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
                   href='sign-in'>
                   Login
                 </Link>
+              ) : (
+                <>
+                  <Link
+                    className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
+                    href='/'>
+                    Dashboard
+                  </Link>
+                  <UserButton afterSignOutUrl='/' />
+                </>
               )}
-              <UserButton afterSignOutUrl='/' />
             </div>
           </div>
         </motion.div>

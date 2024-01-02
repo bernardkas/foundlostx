@@ -20,21 +20,25 @@ interface ComboboxProps {
   frameworks: Framework[];
   className?: string;
   placeholder?: string;
+  setValue: (value: any) => void;
+  value: string; // Added the 'value' prop
 }
 
 export const Combobox: React.FC<ComboboxProps> = ({
   frameworks,
   className,
   placeholder,
+  setValue,
+  value, // Added the 'value' prop
 }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
   const [buttonWidth, setButtonWidth] = useState(0);
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setButtonWidth(event.currentTarget.offsetWidth);
     setOpen(!open);
   };
+
 
   return (
     <Popover open={open} onOpenChange={() => setOpen(!open)}>
@@ -73,7 +77,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
                 value={framework.value}
                 className='cursor-pointer w-full'
                 onSelect={currentValue => {
-                  setValue(currentValue === value ? '' : currentValue);
+                  setValue(currentValue === value ? '' : currentValue); // Call the onChange prop with the selected value
                   setOpen(false);
                 }}>
                 <Check

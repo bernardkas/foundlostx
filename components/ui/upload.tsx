@@ -63,7 +63,13 @@ const CustomUpload: React.FC<CustomUploadProps> = ({ onChange }) => {
         title={previewTitle}
         footer={null}
         onCancel={handleCancel}>
-        <Image alt='example' style={{ width: '100%' }} src={previewImage} />
+        <Image
+          alt='example'
+          style={{ width: '100%' }}
+          src={previewImage}
+          width={500}
+          height={300}
+        />
       </Modal>
     </>
   );

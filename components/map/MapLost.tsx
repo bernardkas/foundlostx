@@ -5,10 +5,14 @@ import {
 } from '@what3words/react-components';
 import { useEffect, useState } from 'react';
 
-const API_KEY = 'TYEW9946';
-const MAP_API_KEY = 'AIzaSyDLTfBVtaUXBaflFEyBqa6zhIUjMMYcUTY';
+const API_KEY = process.env.API_KEY;
+const MAP_API_KEY = process.env.MAP_API_KEY;
 
-export default function MapLost() {
+interface MapLostPorps {
+  onChange: (a: any) => void;
+}
+
+const MapLost = ({ onChange }: MapLostPorps) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -28,14 +32,15 @@ export default function MapLost() {
       fullscreen_control_position={3}
       search_control_position={2}
       words='filled.count.soap'>
-      <div slot='map' className='w-[500px] h-[300px]' />
+      <div slot='map' className='w-full h-[200px]  md:w-[500px] md:h-[300px]' />
       <div slot='search-control' style={{ margin: '10px 0 0 10px' }}>
-        <What3wordsAutosuggest>
+        <What3wordsAutosuggest onSelect={onChange}>
           <input
             type='text'
             placeholder='Find your address'
-            style={{ width: '300px' }}
+            className='w-full md:w-[200px]'
             autoComplete='off'
+            onChange={onChange}
           />
         </What3wordsAutosuggest>
       </div>
@@ -48,4 +53,5 @@ export default function MapLost() {
       </div>
     </What3wordsMap>
   );
-}
+};
+export default MapLost;

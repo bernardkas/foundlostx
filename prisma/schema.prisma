@@ -13,30 +13,28 @@ datasource db {
 
 model User {
   id        Int      @id @default(sequence())
-  name      String
-  lastname  String
+  username      String
+  name String?
+  lastname String?
+  email  String
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  lostItems  Lost[]   @relation("UserLostItems")
-  foundItems Found[]  @relation("UserFoundItems")
+  lostItems  LostAndFound[]   @relation("UserLostItems")
 }
 
-model Lost {
+model LostAndFound {
   id            Int      @id @default(sequence())
   userId        Int
   user          User     @relation("UserLostItems", fields: [userId], references: [id])
-  name          String
+  name          String?
   lastname      String
   phone         String
-  email         String
+  email         String?
   title         String
   city          String
   whereDidFind  String
-  airoport      String
-  buss          String
-  hotel         String
-  InCity        String
+  exatLocation  String
   description   String
   findingDate   DateTime
   mapAddress    String
@@ -46,27 +44,5 @@ model Lost {
   updatedAt     DateTime @updatedAt
 }
 
-model Found {
-  id            Int       @id @default(sequence())
-  userId        Int
-  user          User     @relation("UserFoundItems", fields: [userId], references: [id])
-  name          String
-  lastname      String
-  phone         String
-  email         String
-  title         String
-  city          String
-  whereDidFind  String
-    airoport      String
-  buss          String
-  hotel         String
-  InCity        String
-  description   String
-  findingDate   DateTime
-  mapAddress    String
-  photo         String
-  label         String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-}
+
 
