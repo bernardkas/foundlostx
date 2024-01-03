@@ -17,12 +17,19 @@ model User {
   username      String?
   name String?
   lastname String?
-  email  String[]
+  email      Email[] 
   password  String
   attributes Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   lostItems  LostAndFound[]   @relation("UserLostItems")
+}
+
+model Email {
+  id     Int    @id @default(sequence())
+  email  String
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model LostAndFound {

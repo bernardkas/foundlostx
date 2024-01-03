@@ -1,6 +1,7 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
+import { prisma } from '@/server/db';
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -55,15 +56,22 @@ export async function POST(req: Request) {
         username: eventData.username || '',
         name: eventData.first_name || '',
         lastname: eventData.last_name || '',
-        email: eventData.email_addresses,
+        email: eventData.email_addresses.map(emailObj => ({
+          email: emailObj.email_address,
+        })),
+        extrenalId: eventData.external_id || '',
         password:
           eventData.password_enabled === true
             ? 'true'
-            : eventData.password_enabled,
+            : eventData.password_enabled.toString(),
+        attributes: eventData.object,
       };
 
       await prisma?.user.create({
-        data: userData,
+        data: {
+          ...userData,
+          email: { create: userData.email },
+        },
       });
     }
   } catch (error) {
