@@ -51,28 +51,20 @@ export async function POST(req: Request) {
       const eventData = evt.data;
 
       const userData = {
-        id: eventData.id || '',
+        id: Number(eventData.id),
         username: eventData.username || '',
         name: eventData.first_name || '',
         lastname: eventData.last_name || '',
-        email: eventData.email_addresses || '',
+        email: eventData.email_addresses,
         password:
           eventData.password_enabled === true
             ? 'true'
             : eventData.password_enabled,
       };
-      console.log('user Data', userData);
 
-      await prisma?.user;
-
-      // await prisma?.user.upsert({
-      //   where: { id: userId },
-      //   update: { ...userData },
-      //   create: {
-      //     id: userId,
-      //     ...userData,
-      //   },
-      // });
+      await prisma?.user.create({
+        data: userData,
+      });
     }
   } catch (error) {
     console.error('Error updating database:', error);

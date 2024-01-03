@@ -17,7 +17,7 @@ model User {
   username      String?
   name String?
   lastname String?
-  email  String
+  email  String[]
   password  String
   attributes Json
   createdAt DateTime @default(now())
