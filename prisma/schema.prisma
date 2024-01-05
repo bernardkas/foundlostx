@@ -13,7 +13,7 @@ datasource db {
 
 model User {
   id        Int      @id @default(sequence())
-  extrenalId String @unique
+  externalId String @unique
   username      String?
   name String?
   lastname String?
@@ -22,7 +22,7 @@ model User {
   attributes Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  lostItems  LostAndFound[]   @relation("UserLostItems")
+  foundAndLost  LostAndFound[]   @relation("UserLostItems")
 }
 
 model Email {
@@ -43,11 +43,11 @@ model LostAndFound {
   title         String
   city          String
   whereDidFind  String
-  exatLocation  String
+  exactLocation   String
   description   String
-  findingDate   DateTime
-  mapAddress    String
-  photo         String
+  findingDate   DateTime?
+  mapAddress    String?
+  photo         String?
   label         String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

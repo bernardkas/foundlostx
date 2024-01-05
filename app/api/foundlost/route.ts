@@ -3,9 +3,10 @@ import { prisma } from '@/server/db';
 
 export async function POST(req: Request) {
   const body = await req.json();
-  console.log('Request Body:', body);
+
   const {
     userId,
+    externalId, // Correct the variable name here
     user,
     name,
     lastname,
@@ -14,18 +15,22 @@ export async function POST(req: Request) {
     title,
     city,
     whereDidFind,
-    exatLocation,
+    exactLocation,
     description,
     findingDate,
     mapAddress,
     photo,
     label,
   } = body;
+
   try {
     const userPost = await prisma.lostAndFound.create({
       data: {
-        userId,
-        user,
+        user: {
+          connect: {
+            externalId: userId,
+          },
+        },
         name,
         lastname,
         phone,
@@ -33,7 +38,7 @@ export async function POST(req: Request) {
         title,
         city,
         whereDidFind,
-        exatLocation,
+        exactLocation,
         description,
         findingDate,
         mapAddress,
@@ -41,6 +46,7 @@ export async function POST(req: Request) {
         label,
       },
     });
+    console.log('User Post:', userPost);
     return NextResponse.json({ data: userPost });
   } catch (error) {
     console.log('Error creating entry', error);

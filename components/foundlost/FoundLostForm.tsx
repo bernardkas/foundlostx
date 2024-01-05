@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from '../ui/input';
 import { Combobox } from '../ui/combobox';
 import {
@@ -15,11 +15,17 @@ import CustomUpload from '../ui/upload';
 import { DatePicker } from '../ui/dataPicker';
 import MapLost from '../map/MapLost';
 import { city } from '@/lib/defaultData';
-import { FoundLostItems } from '@/lib/interface';
+import { FoundLostItems, UserInterface } from '@/lib/interface';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
-const FoundLostForm = () => {
+interface FoundLostFromProps {
+  userId?: number;
+}
+
+const FoundLostForm = ({ userId }: FoundLostFromProps) => {
   const initialPosts: FoundLostItems[] = [];
+  const initialUser: UserInterface[] = [];
   const [selectedDate, setSelectedDate] = useState<Date>();
 
   const [input, setInput] = useState({
@@ -30,12 +36,12 @@ const FoundLostForm = () => {
     title: '',
     city: '',
     whereDidFind: '',
-    exatLocation: '',
+    exactLocation: '',
     description: '',
-    findingDate: '',
+    // findingDate: '',
     mapAddress: '',
     label: '',
-    photo: [],
+    // photo: [],
   });
 
   // ? To implemnet photos logic
@@ -46,18 +52,20 @@ const FoundLostForm = () => {
   //   setSelectedDate(date);
   // };
 
+  console.log('userIDDDD', userId as number);
   const createForm = async () => {
     try {
       const data = await axios.post('/api/foundlost', {
         ...input,
+        userId: userId,
       });
 
       if (data.status === 200) {
+        toast('foundlost', { type: 'success' });
         console.log('Created successfully');
-      } else {
-        console.log('not created');
       }
     } catch (err) {
+      toast('Error! Not created', { type: 'error' });
       console.log(err);
     }
   };
@@ -201,9 +209,9 @@ const FoundLostForm = () => {
           )}
           <Textarea
             onChange={value =>
-              handleInputChange('exatLocation', value.target.value)
+              handleInputChange('exactLocation', value.target.value)
             }
-            value={input.exatLocation}
+            value={input.exactLocation}
             className='text-base font-noto-sans w-96 lg:w-2/3'
           />
         </div>
@@ -231,11 +239,13 @@ const FoundLostForm = () => {
           ) : (
             <label htmlFor=''>*What day you losted?</label>
           )}
-          <DatePicker
-            // selectedDate={input.findingDate}
-            onSelectDate={value => handleInputChange('findingDate', value)}
+          {/* <DatePicker
+            selectedDate={input.findingDate}
+            onSelectDate={value =>
+              handleInputChange('findingDate', value.toISOString())
+            }
             placeholder='Select your date'
-          />
+          /> */}
         </div>
         {/* To be implemented in the future */}
         {/* <div className='relative'>

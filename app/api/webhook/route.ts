@@ -45,35 +45,44 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
-  console.log('Webhook body:', body);
+  console.log('user data', body);
 
   try {
     if (eventType === 'user.created' || eventType === 'user.updated') {
       const eventData = evt.data;
 
-      const userData = {
-        id: Number(eventData.id),
-        username: eventData.username || '',
-        name: eventData.first_name || '',
-        lastname: eventData.last_name || '',
-        email: eventData.email_addresses.map(emailObj => ({
-          email: emailObj.email_address,
-        })),
-        extrenalId: eventData.external_id || '',
-        password:
-          eventData.password_enabled === true
-            ? 'true'
-            : eventData.password_enabled.toString(),
-        attributes: eventData.object,
-      };
-
-      await prisma?.user.create({
-        data: {
-          ...userData,
-          email: { create: userData.email },
+      await prisma?.user.upsert({
+        where: { externalId: eventData.id },
+        update: {
+          externalId: eventData.id,
+          username: eventData.username || '',
+          name: eventData.first_name || '',
+          lastname: eventData.last_name || '',
+          email: {
+            create: eventData.email_addresses.map(emailObj => ({
+              email: emailObj.email_address,
+            })),
+          },
+          password: eventData.password_enabled ? 'true' : 'false',
+          attributes: eventData.object,
+        },
+        create: {
+          externalId: eventData.id,
+          username: eventData.username || '',
+          name: eventData.first_name || '',
+          lastname: eventData.last_name || '',
+          email: {
+            create: eventData.email_addresses.map(emailObj => ({
+              email: emailObj.email_address,
+            })),
+          },
+          password: eventData.password_enabled ? 'true' : 'false',
+          attributes: eventData.object,
         },
       });
     }
+
+    console.log('user data');
   } catch (error) {
     console.error('Error updating database:', error);
     return new Response('Error occurred', {

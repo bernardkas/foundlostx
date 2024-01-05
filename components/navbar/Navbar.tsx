@@ -3,7 +3,7 @@ import { UserButton, useSignIn } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '@clerk/nextjs';
 
 interface NavbarProps {
@@ -12,18 +12,13 @@ interface NavbarProps {
 
 const Navbar = ({ userId }: NavbarProps) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const links = [
-    // {
-    //   id: '1',
-    //   to: '/found',
-    //   text: 'Found',
-    // },
-    {
-      id: '2',
-      to: '/foundlost',
-      text: 'Items you lost or find',
-    },
-  ];
+  const [userSignIn, setUserSignIn] = useState(false);
+
+  useEffect(() => {
+    if (!userId) {
+      setUserSignIn(true);
+    }
+  }, [userId]);
 
   return (
     <div className='shadow-lg '>
@@ -38,16 +33,13 @@ const Navbar = ({ userId }: NavbarProps) => {
           </Link>
         </div>
         <div className='hidden flex-row gap-1 items-center lg:flex'>
-          {links.map(item => (
-            <Link
-              className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
-              href={item.to}
-              key={item.id}>
-              {item.text}
-            </Link>
-          ))}
+          <Link
+            className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
+            href='foundlost'>
+            Items you lost or find
+          </Link>
 
-          {!userId ? (
+          {userSignIn ? (
             <Link
               className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
               href='sign-in'>
@@ -82,14 +74,11 @@ const Navbar = ({ userId }: NavbarProps) => {
           </button>
           <div>
             <div className=' flex flex-col items-center justify-center gap-5 '>
-              {links.map(item => (
-                <Link
-                  className='mx-2 font-noto-sans font-[500] text-lg text-gray-800'
-                  href={item.to}
-                  key={item.id}>
-                  {item.text}
-                </Link>
-              ))}
+              <Link
+                className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
+                href='foundlost'>
+                Items you lost or find
+              </Link>
               {!userId ? (
                 <Link
                   className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'

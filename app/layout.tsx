@@ -6,6 +6,8 @@ import Footer from '@/components/footer/Footer';
 require('dotenv').config();
 import { ClerkProvider } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +29,7 @@ export default function RootLayout({
           <Navbar userId={userId} />
           {children}
           <Footer />
+          <ToastContainer />
         </body>
       </html>
     </ClerkProvider>

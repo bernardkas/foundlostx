@@ -19,3 +19,13 @@ export interface FoundLostItems {
   photo: string;
   label: string;
 }
+
+export interface UserInterface {
+  id: number;
+  extrenalId: string;
+  attributes: string;
+  name: string;
+  lastname: string;
+  password: string;
+  username: string;
+}
