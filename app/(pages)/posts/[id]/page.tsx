@@ -1,5 +1,5 @@
 import AllPosts from '@/components/posts/AllPosts';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Posts = () => {
   return (

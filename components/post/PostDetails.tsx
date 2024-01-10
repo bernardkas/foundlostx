@@ -1,3 +1,4 @@
+'use client';
 import { foundPosts, lostPosts } from '@/dummyData';
 import {
   Bus,
@@ -11,60 +12,62 @@ import {
   UserRound,
   MessageCircle,
   Map,
+  Phone,
+  Radar,
 } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 
 import photo from '@/assets/howitworks/matching.png';
 import Link from 'next/link';
+import { FoundLostItems } from '@/lib/interface';
+import { usePathname } from 'next/navigation';
 
-const PostDetails = () => {
-  const icons = [
+interface PostDetailsProps {
+  post: FoundLostItems;
+}
+
+const PostDetails = ({ post }: PostDetailsProps) => {
+  console.log('postIDDD', post?.name);
+
+  const otherInformation = [
     {
       id: 1,
-      icons: <UserRound />,
-    },
-    {
-      id: 1,
-      icon: <Smartphone />,
+      label: 'Regjistroi',
+      data: (
+        <div>
+          {post?.name} {post?.lastname}
+        </div>
+      ),
+      icon: <UserRound className='text-orange-500 ' size={22} />,
     },
     {
       id: 2,
-      icon: <MailCheck />,
+      label: 'Telefoni',
+      data: post?.phone,
+      icon: <Phone className='text-orange-500 ' size={22} />,
     },
     {
       id: 3,
-      icon: <Flag />,
+      label: 'Email',
+      data: post?.email,
+      icon: <MailCheck className='text-orange-500 ' size={22} />,
     },
     {
       id: 4,
-      icon: <Flag />,
-    },
-    {
-      id: 5,
-      icon: <MapPin />,
-    },
-    {
-      id: 6,
-      icon: <MessageCircle />,
-    },
-    {
-      id: 7,
-      icon: <Plane />,
-    },
-    {
-      id: 8,
-      icon: <Bus />,
-    },
-    {
-      id: 9,
-      icon: <TrainFront />,
+      label: 'Ku eshte gjetur?',
+      data: post?.whereDidFind,
+      icon: <Radar className='text-orange-500 ' size={22} />,
     },
   ];
-  const allPosts = foundPosts.concat(lostPosts);
+  const pathName = usePathname();
+
   return (
     <div className='mx-2 my-5 lg:mx-[15%]'>
-      <div>posts/pristina</div>
+      <div>
+        <Link href={'/posts'}>posts</Link>
+      {pathName}
+      </div>
       <div className='flex flex-col justify-center items-center '>
         <div className='border-[1px] rounded-md p-5 w-auto lg:w-[800px] flex flex-col gap-5'>
           <div className='flex flex-wrap flex-row-reverse md:flex-row justify-between'>
@@ -75,18 +78,20 @@ const PostDetails = () => {
               <div className='flex flex-col gap-5'>
                 <div className='flex flex-row flex-wrap items-center gap-1'>
                   <p className='bg-green-500 p-1 rounded-md text-white font-noto-sans'>
-                    Found:
+                    {post?.label}
                   </p>
-                  <p className='font-noto-sans font-semibold'>23/12/2023</p>
+                  <p className='font-noto-sans font-semibold'>
+                    {post?.findingDate}23/12/2023
+                  </p>
                 </div>
                 <div>
                   <h1 className='text-3xl font-noto-sans font-semibold'>
-                    Iphone 15
+                    {post?.title}
                   </h1>
                 </div>
                 <div className='flex flex-row gap-1 border-b-[1px] pb-2 text-slate-700 font-noto-sans'>
                   <MapPin size={22} />
-                  <p>Podujeve</p>
+                  <p>{post?.city}</p>
                 </div>
                 <div className='flex flex-row gap-1'>
                   <LocateFixed className='text-slate-700' size={22} />
@@ -95,7 +100,7 @@ const PostDetails = () => {
                       Exact location
                     </p>
                     <p className='text-slate-900 font-noto-sans'>
-                      Afer bankes te raifaisen
+                      {post?.exatLocation}
                     </p>
                   </div>
                 </div>
@@ -118,51 +123,22 @@ const PostDetails = () => {
             </div>
           </div>
           <div className='flex flex-row flex-wrap gap-5 w-auto lg:w-[500px] border-[1px] rounded-md p-2'>
-            <div className='flex flex-row gap-1 flex-wrap'>
-              <UserRound className='text-orange-500 ' size={22} />
-              <div className='flex flex-col gap-1'>
-                <p className=' text-slate-500 font-noto-sans'>Registered</p>
-                <p className='font-noto-sans'>Bernard Kastrati</p>
+            {otherInformation.map(item => (
+              <div key={item.id} className='flex flex-row gap-1 flex-wrap'>
+                {item.icon}
+                <div className='flex flex-col gap-1'>
+                  <p className=' text-slate-500 font-noto-sans'>{item.label}</p>
+                  <p className='font-noto-sans'>{item.data}</p>
+                </div>
               </div>
-            </div>
-            <div className='flex flex-row gap-1 flex-wrap'>
-              <MapPin className='text-orange-500 ' size={22} />
-              <div className='flex flex-col gap-1'>
-                <p className=' text-slate-500 font-noto-sans'>City</p>
-                <p className='font-noto-sans'>Podujeva</p>
-              </div>
-            </div>
-            <div className='flex flex-row gap-1 flex-wrap'>
-              <MapPin className='text-orange-500 ' size={22} />
-              <div className='flex flex-col gap-1'>
-                <p className=' text-slate-500 font-noto-sans'>City</p>
-                <p className='font-noto-sans'>Podujeva</p>
-              </div>
-            </div>
-            <div className='flex flex-row gap-1 flex-wrap'>
-              <MapPin className='text-orange-500 ' size={22} />
-              <div className='flex flex-col gap-1'>
-                <p className=' text-slate-500 font-noto-sans'>City</p>
-                <p className='font-noto-sans'>Podujeva</p>
-              </div>
-            </div>
-            <div className='flex flex-row gap-1 flex-wrap'>
-              <MapPin className='text-orange-500 ' size={22} />
-              <div className='flex flex-col gap-1'>
-                <p className=' text-slate-500 font-noto-sans'>City</p>
-                <p className='font-noto-sans'>Podujeva</p>
-              </div>
-            </div>
+            ))}
           </div>
           <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
-            <MessageCircle size={70} className=' text-orange-500 ' />
+            <MessageCircle size={22} className=' text-orange-500 ' />
             <div>
               <p className=' text-slate-500 font-noto-sans'>Description</p>
               <p className=' text-slate-800 font-noto-sans'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea non
-                voluptatem distinctio nesciunt quis laborum eos atque, magnam,
-                incidunt nulla ullam! Ad veniam omnis accusantium id debitis
-                doloribus? Consectetur, magnam.
+                {post?.description}
               </p>
             </div>
           </div>

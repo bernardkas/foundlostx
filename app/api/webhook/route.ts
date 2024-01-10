@@ -1,7 +1,7 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
-import { prisma } from '@/server/db';
+import prisma from '@/server/db';
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -45,8 +45,6 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
-  console.log('user data', body);
-
   try {
     if (eventType === 'user.created' || eventType === 'user.updated') {
       const eventData = evt.data;
@@ -81,8 +79,6 @@ export async function POST(req: Request) {
         },
       });
     }
-
-    console.log('user data');
   } catch (error) {
     console.error('Error updating database:', error);
     return new Response('Error occurred', {

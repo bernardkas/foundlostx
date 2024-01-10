@@ -1,4 +1,5 @@
 export interface FoundLostItems {
+  id: number;
   userId: number;
   user: string;
   name: string;
@@ -14,7 +15,7 @@ export interface FoundLostItems {
   hotel: string;
   InCity: string;
   description: string;
-  findingDate: Date;
+  findingDate: '';
   mapAddress: string;
   photo: string;
   label: string;

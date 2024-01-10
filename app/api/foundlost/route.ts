@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/server/db';
+import prisma from '@/server/db';
+import { revalidatePath } from 'next/cache';
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -24,7 +25,7 @@ export async function POST(req: Request) {
   } = body;
 
   try {
-    const userPost = await prisma.lostAndFound.create({
+    const userPost = await prisma?.lostAndFound.create({
       data: {
         user: {
           connect: {
@@ -46,6 +47,7 @@ export async function POST(req: Request) {
         label,
       },
     });
+    revalidatePath('/posts');
     console.log('User Post:', userPost);
     return NextResponse.json({ data: userPost });
   } catch (error) {
