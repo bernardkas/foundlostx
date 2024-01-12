@@ -16,20 +16,25 @@ import {
   Radar,
 } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import photo from '@/assets/howitworks/matching.png';
 import Link from 'next/link';
 import { FoundLostItems } from '@/lib/interface';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  formatDate,
+  capitalizeFirstLetter,
+  formatDistanceToNow,
+} from '@/lib/utils';
+import { Button } from '../ui/button';
 
 interface PostDetailsProps {
   post: FoundLostItems;
 }
 
 const PostDetails = ({ post }: PostDetailsProps) => {
-  console.log('postIDDD', post?.name);
-
+  const route = useRouter();
   const otherInformation = [
     {
       id: 1,
@@ -56,17 +61,21 @@ const PostDetails = ({ post }: PostDetailsProps) => {
     {
       id: 4,
       label: 'Ku eshte gjetur?',
-      data: post?.whereDidFind,
+      data: capitalizeFirstLetter(post?.whereDidFind),
       icon: <Radar className='text-orange-500 ' size={22} />,
     },
   ];
-  const pathName = usePathname();
-
+  const handleBack = () => {
+    route.back();
+  };
   return (
-    <div className='mx-2 my-5 lg:mx-[15%]'>
+    <div suppressHydrationWarning className='mx-2 my-5 lg:mx-[15%]'>
       <div>
-        <Link href={'/posts'}>posts</Link>
-      {pathName}
+        <Button
+          onClick={handleBack}
+          className='bg-orange-500 font-noto-sans text-md mb-2'>
+          Kthehu mbrapa
+        </Button>
       </div>
       <div className='flex flex-col justify-center items-center '>
         <div className='border-[1px] rounded-md p-5 w-auto lg:w-[800px] flex flex-col gap-5'>
@@ -78,20 +87,20 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               <div className='flex flex-col gap-5'>
                 <div className='flex flex-row flex-wrap items-center gap-1'>
                   <p className='bg-green-500 p-1 rounded-md text-white font-noto-sans'>
-                    {post?.label}
+                    {capitalizeFirstLetter(post?.label)}
                   </p>
                   <p className='font-noto-sans font-semibold'>
-                    {post?.findingDate}23/12/2023
+                    {formatDate(post?.findingDate)} {post?.findingTime}
                   </p>
                 </div>
                 <div>
                   <h1 className='text-3xl font-noto-sans font-semibold'>
-                    {post?.title}
+                    {capitalizeFirstLetter(post?.title)}
                   </h1>
                 </div>
                 <div className='flex flex-row gap-1 border-b-[1px] pb-2 text-slate-700 font-noto-sans'>
                   <MapPin size={22} />
-                  <p>{post?.city}</p>
+                  <p>{capitalizeFirstLetter(post?.city)}</p>
                 </div>
                 <div className='flex flex-row gap-1'>
                   <LocateFixed className='text-slate-700' size={22} />
@@ -119,7 +128,9 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               </div>
             </div>
             <div>
-              <p className='text-sm text-slate-500'>1 day</p>
+              <p className='text-sm text-slate-500'>
+                {formatDistanceToNow(post?.createdAt)}
+              </p>
             </div>
           </div>
           <div className='flex flex-row flex-wrap gap-5 w-auto lg:w-[500px] border-[1px] rounded-md p-2'>

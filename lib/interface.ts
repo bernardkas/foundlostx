@@ -16,9 +16,11 @@ export interface FoundLostItems {
   InCity: string;
   description: string;
   findingDate: '';
+  findingTime: '';
   mapAddress: string;
   photo: string;
   label: string;
+  createdAt: string;
 }
 
 export interface UserInterface {

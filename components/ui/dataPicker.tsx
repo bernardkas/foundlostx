@@ -15,7 +15,7 @@ import {
 
 interface DatePickerProps {
   selectedDate?: Date;
-  onSelectDate: (date: Date) => void;
+  onSelectDate: (date: Date | undefined) => void;
   placeholder?: string;
 }
 
@@ -45,7 +45,7 @@ export function DatePicker({
         <Calendar
           mode='single'
           selected={selectedDate}
-          // onSelect={onSelectDate}
+          onSelect={onSelectDate}
           initialFocus
         />
       </PopoverContent>

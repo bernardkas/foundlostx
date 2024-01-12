@@ -18,15 +18,15 @@ import { city } from '@/lib/defaultData';
 import { FoundLostItems, UserInterface } from '@/lib/interface';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import TimePicker from '../ui/timePicker';
 
 interface FoundLostFromProps {
   userId?: number;
 }
 
 const FoundLostForm = ({ userId }: FoundLostFromProps) => {
-  const initialPosts: FoundLostItems[] = [];
-  const initialUser: UserInterface[] = [];
   const [selectedDate, setSelectedDate] = useState<Date>();
+  const [selectedTime, setSelectedTime] = useState('');
 
   const [input, setInput] = useState({
     name: '',
@@ -38,7 +38,6 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
     whereDidFind: '',
     exactLocation: '',
     description: '',
-    // findingDate: '',
     mapAddress: '',
     label: '',
     // photo: [],
@@ -48,16 +47,20 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
   // const handleChange = (info: any) => {
   //   console.log(info.fileList);
   // };
-  // const handleDateSelect = (date: Date) => {
-  //   setSelectedDate(date);
-  // };
 
-  console.log('userIDDDD', userId as number);
+  const handleDateSelect = (date: Date | undefined) => {
+    setSelectedDate(date);
+  };
+  const handleTimeSelect = (date: string) => {
+    setSelectedTime(date);
+  };
   const createForm = async () => {
     try {
       const data = await axios.post('/api/foundlost', {
         ...input,
         userId: userId,
+        findingDate: selectedDate,
+        findingTime: selectedTime,
       });
 
       if (data.status === 200) {
@@ -73,8 +76,6 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
   const handleInputChange = (fieldName: string, fieldValue: any) => {
     setInput({ ...input, [fieldName]: fieldValue });
   };
-
-  console.log('inpur', input);
 
   return (
     <div className='w-full my-16 flex items-center justify-center'>
@@ -239,14 +240,17 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
           ) : (
             <label htmlFor=''>*What day you losted?</label>
           )}
-          {/* <DatePicker
-            selectedDate={input.findingDate}
-            onSelectDate={value =>
-              handleInputChange('findingDate', value.toISOString())
-            }
+          <DatePicker
+            selectedDate={selectedDate}
+            onSelectDate={handleDateSelect}
             placeholder='Select your date'
-          /> */}
+          />
         </div>
+        <TimePicker
+          selectedDateTime={selectedTime}
+          onDateTimeChange={handleTimeSelect}
+          label='Select the time'
+        />
         {/* To be implemented in the future */}
         {/* <div className='relative'>
           {input.label === 'found' ? (

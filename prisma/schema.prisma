@@ -46,6 +46,7 @@ model LostAndFound {
   exactLocation   String
   description   String
   findingDate   DateTime?
+  findingTime String?
   mapAddress    String?
   photo         String?
   label         String

@@ -4,6 +4,11 @@ import test from '@/assets/howitworks/matching.png';
 import { foundPosts, lostPosts } from '@/dummyData';
 import { FoundLostItems } from '@/lib/interface';
 import { useRouter } from 'next/navigation';
+import {
+  capitalizeFirstLetter,
+  formatDate,
+  formatDistanceToNow,
+} from '@/lib/utils';
 
 interface CardPorps {
   allPosts: FoundLostItems[];
@@ -31,13 +36,16 @@ const Card = ({ allPosts }: CardPorps) => {
             </div>
             <div className='flex flex-col gap-2'>
               <h1 className='text-lg font-noto-sans font-bold border-b-[1px]'>
-                {item.title}
+                {capitalizeFirstLetter(item.title)}
               </h1>
               <p className='font-noto-sans w-auto md:w-[400px]'>
                 {item.description}
               </p>
-              <p className='font-noto-sans text-sm'>
-                Emri dhe Mbiemri: {item.name} {item.lastname}
+              <p className='font-noto-sans text-sm text-orange-400'>
+                Emri dhe Mbiemri:
+                <span className='font-semibold ml-1'>
+                  {item.name} {item.lastname}
+                </span>
               </p>
             </div>
           </div>
@@ -47,12 +55,16 @@ const Card = ({ allPosts }: CardPorps) => {
                 className={`text-sm font-noto-sans ${
                   item.label === 'found' ? 'bg-green-500' : 'bg-red-600'
                 }  text-white font-semibold p-1 rounded-md mr-1`}>
-                {item.label}
+                {capitalizeFirstLetter(item.label)}
               </label>
-              <label>{item.findingDate}</label>
+              <label className='font-noto-sans text-sm'>
+                {formatDate(item.findingDate)} {item?.findingTime}
+              </label>
             </div>
             <div>
-              <p className='font-noto-sans text-slate-500 text-sm'>1 day ago</p>
+              <p className='font-noto-sans text-slate-500 text-sm'>
+                {formatDistanceToNow(item.createdAt)}
+              </p>
             </div>
           </div>
         </div>
