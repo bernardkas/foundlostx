@@ -1,10 +1,10 @@
 import AllPosts from '@/components/posts/AllPosts';
-import React, { useEffect } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Posts = () => {
   return (
     <div>
-      <AllPosts />
+        <AllPosts />
     </div>
   );
 };

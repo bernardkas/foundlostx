@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.496.0",
     "@clerk/nextjs": "^4.29.1",
     "@prisma/client": "^5.7.1",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -17,8 +18,10 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@types/aws-sdk": "^2.7.0",
     "@what3words/react-components": "^4.2.1",
     "antd": "^5.12.1",
+    "aws-sdk": "^2.1536.0",
     "axios": "^1.6.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

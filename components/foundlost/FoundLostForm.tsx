@@ -19,6 +19,7 @@ import { FoundLostItems, UserInterface } from '@/lib/interface';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import TimePicker from '../ui/timePicker';
+import PhotoUpload from '../ui/uploadphoto';
 
 interface FoundLostFromProps {
   userId?: number;
@@ -40,13 +41,24 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
     description: '',
     mapAddress: '',
     label: '',
-    // photo: [],
   });
 
-  // ? To implemnet photos logic
-  // const handleChange = (info: any) => {
-  //   console.log(info.fileList);
-  // };
+  const [selectPhoto, setSelectPhoto] = useState('');
+
+  console.log('photo', selectPhoto);
+
+  const handlePhoto = (file: any) => {
+    if (file) {
+      const reader = new FileReader();
+      const blob = new Blob([file]);
+      reader.onloadend = () => {
+        const base64Data = reader.result as string;
+
+        setSelectPhoto(base64Data);
+      };
+      reader.readAsDataURL(blob);
+    }
+  };
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
@@ -61,6 +73,7 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
         userId: userId,
         findingDate: selectedDate,
         findingTime: selectedTime,
+        photo: selectPhoto,
       });
 
       if (data.status === 200) {
@@ -251,20 +264,10 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
           onDateTimeChange={handleTimeSelect}
           label='Select the time'
         />
-        {/* To be implemented in the future */}
-        {/* <div className='relative'>
-          {input.label === 'found' ? (
-            <label htmlFor=''>Select address where did you find it?</label>
-          ) : (
-            <label htmlFor=''>Select address where did you lost it?</label>
-          )}
-          <MapLost
-            onChange={value => handleInputChange('mapAddress', value.words)}
-          />
-        </div> */}
         <div>
           <label htmlFor=''>*Please upload a photo here</label>
-          <CustomUpload onChange={value => handleInputChange('photo', value)} />
+          <PhotoUpload onUpload={val => handlePhoto(val)} />
+          {/* <CustomUpload onChange={value => handlePhoto(value)} /> */}
         </div>
         <Button
           onClick={createForm}

@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Card from './Card';
 import Filter from './filter/Filter';
 import axios, { all } from 'axios';
@@ -35,10 +35,10 @@ const AllPosts = () => {
   return (
     <div className='mx-2 lg:mx-[15%] flex flex-col lg:flex-row gap-2 '>
       <Filter />
-      {allPosts.length > 0 ? (
-        <Card allPosts={allPosts} />
-      ) : (
+      {loading ? (
         <Skeleton className='w-[700px] h-[70px] mt-[20px] rounded-full' />
+      ) : (
+        <Card allPosts={allPosts} />
       )}
     </div>
   );

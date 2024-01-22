@@ -16,30 +16,24 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { useRouter } from 'next/navigation';
+import { city } from '@/lib/defaultData';
 
 const Header = () => {
-  const frameworks = [
-    {
-      value: 'next.js',
-      label: 'Next.js',
-    },
-    {
-      value: 'react',
-      label: 'react',
-    },
-    {
-      value: 'csharp',
-      label: 'Csharp',
-    },
-  ];
-
   const router = useRouter();
-
   const handleGoToCity = () => {
     router.push('/posts/pristina');
   };
+  const [input, setInput] = useState({
+    desc: '',
+    city: '',
+    whereDidFind: '',
+  });
 
-  const [input, setInput] = useState('');
+  const handleInputChange = (fieldName: string, fieldValue: any) => {
+    setInput({ ...input, [fieldName]: fieldValue });
+  };
+
+  console.log('input', input);
 
   return (
     <div className='h-[50vh]  w-full'>
@@ -58,6 +52,10 @@ const Header = () => {
                   <Input
                     className='border-t-0 border-l-0 border-r-0 border-b-[1px]  pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
                     placeholder='Descripe what you lose...'
+                    onChange={val =>
+                      handleInputChange('desc', val.target.value)
+                    }
+                    value={input.desc}
                   />
                 </TooltipTrigger>
                 <TooltipContent>
@@ -67,20 +65,16 @@ const Header = () => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            {/* To implemented for the future */}
-            {/* <Combobox
-              frameworks={frameworks}
-              className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-              placeholder='*Country...'
-            /> */}
             <Combobox
-              frameworks={frameworks}
+              frameworks={city}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*City...'
-              setValue={value => setInput(value.target.value)}
-              value={input}
+              setValue={value => handleInputChange('city', value)}
+              value={input.city}
             />
-            <Select>
+            <Select
+              onValueChange={val => handleInputChange('whereDidFind', val)}
+              value={input.whereDidFind}>
               <SelectTrigger className='border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
                 <SelectValue placeholder='*Where did you lose item?' />
               </SelectTrigger>
