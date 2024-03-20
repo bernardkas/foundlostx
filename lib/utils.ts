@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatDate = (dateString: string): string => {
+export const formatDate = (dateString: any): string => {
   const options: Intl.DateTimeFormatOptions = {
     day: '2-digit',
     month: '2-digit',
@@ -20,7 +20,7 @@ export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const formatDistanceToNow = (date: string) => {
+export const formatDistanceToNow = (date: any) => {
   const currentDate = new Date();
   const postDate = new Date(date);
   const diffInMilliseconds = currentDate.getTime() - postDate.getTime();

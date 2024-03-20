@@ -1,17 +1,15 @@
 import Image from 'next/image';
 import React from 'react';
-import test from '@/assets/howitworks/matching.png';
-import { foundPosts, lostPosts } from '@/dummyData';
-import { FoundLostItems } from '@/lib/interface';
 import { useRouter } from 'next/navigation';
 import {
   capitalizeFirstLetter,
   formatDate,
   formatDistanceToNow,
 } from '@/lib/utils';
+import { LostAndFound } from '@prisma/client';
 
 interface CardPorps {
-  allPosts: FoundLostItems[];
+  allPosts: LostAndFound[];
 }
 const Card = ({ allPosts }: CardPorps) => {
   console.log('all post to CARD', allPosts);
@@ -22,16 +20,22 @@ const Card = ({ allPosts }: CardPorps) => {
   };
 
   return (
-    <div className='flex flex-col-reverse gap-7 justify-center my:2 lg:my-10 w-full'>
+    <div className='flex flex-col-reverse gap-7 justify-end my:2 lg:my-10 w-full'>
       {allPosts.map(item => (
         <div
           className='border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer '
           key={item.id}
           onClick={() => handleClickCard(item.id)}>
-          <div className='flex flex-col md:flex-row gap-5 items-start md:items-center '>
+          <div className='flex flex-col md:flex-row gap-5 items-start md:items-start '>
             <div>
               {item.photo && (
-                <Image width={150} height={150} src={item.photo} alt='' />
+                <Image
+                  width={200}
+                  height={200}
+                  src={item.photo[0]}
+                  className='w-[200px] h-[200px]'
+                  alt=''
+                />
               )}
             </div>
             <div className='flex flex-col gap-2'>
@@ -42,7 +46,7 @@ const Card = ({ allPosts }: CardPorps) => {
                 {item.description}
               </p>
               <p className='font-noto-sans text-sm text-orange-400'>
-                Emri dhe Mbiemri:
+                Fullname:
                 <span className='font-semibold ml-1'>
                   {item.name} {item.lastname}
                 </span>
@@ -58,7 +62,7 @@ const Card = ({ allPosts }: CardPorps) => {
                 {capitalizeFirstLetter(item.label)}
               </label>
               <label className='font-noto-sans text-sm'>
-                {formatDate(item.findingDate)} {item?.findingTime}
+                {formatDate(item.findingDate)}
               </label>
             </div>
             <div>

@@ -1,4 +1,5 @@
 import { Copyright } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 const Footer = () => {
@@ -21,7 +22,10 @@ const Footer = () => {
           <div></div>
         </div>
         <p className='flex items-center gap-2 pb-2 font-noto-sans border-t-[1px] border-orange-400 p-2 text-white'>
-          <Copyright size={18} className='' /> foundlostx, 2023
+          <Copyright size={18} className='' /> foundlostx, 2023, by{' '}
+          <Link href='https://www.waxo.tech' target='_blank'>
+            Waxo
+          </Link>
         </p>
       </div>
     </div>

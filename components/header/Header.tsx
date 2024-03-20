@@ -16,15 +16,25 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { useRouter } from 'next/navigation';
-import { city } from '@/lib/defaultData';
+import { city, country } from '@/lib/defaultData';
 
-const Header = () => {
+interface HeaderProps {
+  getEngland?: any;
+}
+
+const Header = ({ getEngland }: HeaderProps) => {
   const router = useRouter();
+
+  console.log(
+    'name',
+    getEngland?.map(item => item.name)
+  );
   const handleGoToCity = () => {
     router.push('/posts/pristina');
   };
   const [input, setInput] = useState({
     desc: '',
+    country: '',
     city: '',
     whereDidFind: '',
   });
@@ -65,6 +75,13 @@ const Header = () => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+            <Combobox
+              frameworks={country}
+              className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
+              placeholder='*Country...'
+              setValue={value => handleInputChange('country', value)}
+              value={input.country}
+            />
             <Combobox
               frameworks={city}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'

@@ -28,9 +28,18 @@ import {
   formatDistanceToNow,
 } from '@/lib/utils';
 import { Button } from '../ui/button';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { LostAndFound } from '@prisma/client';
 
 interface PostDetailsProps {
-  post: FoundLostItems;
+  post: LostAndFound;
 }
 
 const PostDetails = ({ post }: PostDetailsProps) => {
@@ -68,6 +77,9 @@ const PostDetails = ({ post }: PostDetailsProps) => {
   const handleBack = () => {
     route.back();
   };
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
   return (
     <div suppressHydrationWarning className='mx-2 my-5 lg:mx-[15%]'>
       <div>
@@ -78,11 +90,42 @@ const PostDetails = ({ post }: PostDetailsProps) => {
         </Button>
       </div>
       <div className='flex flex-col justify-center items-center '>
-        <div className='border-[1px] rounded-md p-5 w-auto lg:w-[800px] flex flex-col gap-5'>
+        <div className='border-[1px] rounded-md p-5 w-auto lg:w-[850px] flex flex-col gap-5'>
           <div className='flex flex-wrap flex-row-reverse md:flex-row justify-between'>
-            <div className='flex flex-row flex-wrap gap-5 '>
-              <div>
-                <Image width={400} height={400} src={photo} alt='' />
+            <div className='flex flex-row flex-wrap gap-5'>
+              <div className='mr-10 w-[340px] h-[400px]'>
+                {post?.phone.length === 0 ? (
+                  <Image width={400} height={400} src={photo} alt='' />
+                ) : (
+                  <Carousel
+                    plugins={[plugin.current]}
+                    onMouseEnter={plugin.current.stop}
+                    onMouseLeave={plugin.current.reset}>
+                    <CarouselContent>
+                      {post?.photo.map((photo, index) => (
+                        <CarouselItem key={index}>
+                          <div className='p-1'>
+                            <div>
+                              <div className='flex aspect-square items-center justify-center p-6 w-[400px] h-[400px]'>
+                                <Image
+                                  src={photo}
+                                  width={300} // Add the width property
+                                  height={300}
+                                  alt=''
+                                  className='object-contain'
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <div className='hidden lg:block'>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </div>
+                  </Carousel>
+                )}
               </div>
               <div className='flex flex-col gap-5'>
                 <div className='flex flex-row flex-wrap items-center gap-1'>
@@ -109,7 +152,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                       Exact location
                     </p>
                     <p className='text-slate-900 font-noto-sans'>
-                      {post?.exatLocation}
+                      {post?.exactLocation}
                     </p>
                   </div>
                 </div>

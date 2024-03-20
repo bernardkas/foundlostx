@@ -41,6 +41,7 @@ model LostAndFound {
   phone         String
   email         String?
   title         String
+  country       String 
   city          String
   whereDidFind  String
   exactLocation   String
@@ -48,7 +49,7 @@ model LostAndFound {
   findingDate   DateTime?
   findingTime String?
   mapAddress    String?
-  photo         String?
+  photo         String[]
   label         String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
