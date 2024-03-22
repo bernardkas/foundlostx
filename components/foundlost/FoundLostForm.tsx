@@ -14,13 +14,7 @@ import { Button } from '../ui/button';
 import CustomUpload from '../ui/upload';
 import { DatePicker } from '../ui/dataPicker';
 import MapLost from '../map/MapLost';
-import {
-  englandCity,
-  country,
-  formattedAirports,
-  whereDidYouFindIt,
-} from '@/lib/defaultData';
-import { FoundLostItems, UserInterface } from '@/lib/interface';
+import { englandCity, country, whereDidYouFindIt } from '@/lib/defaultData';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import TimePicker from '../ui/timePicker';

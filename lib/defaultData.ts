@@ -227,29 +227,57 @@ export const englandCity = [
   // { value: 'hereford', label: 'Hereford' },
 ];
 
-const englandAirports = [
-  'London Heathrow Airport (LHR)',
-  'London Gatwick Airport (LGW)',
-  'London Stansted Airport (STN)',
-  'London Luton Airport (LTN)',
-  'London City Airport (LCY)',
-  'London Southend Airport (SEN)',
-  'London Biggin Hill Airport (BQH)',
-  'London Ashford Airport (LYX)',
-  'London Elstree Airfield (EGTR)',
-  'London Farnborough Airport (FAB)',
-  'London Oxford Airport (OXF)',
+export const formattedAirports = [
+  {
+    value: 'london heathrow airport',
+    label: 'London Heathrow Airport (LHR)',
+  },
+  {
+    value: 'london gatwick airport',
+    label: 'London Gatwick Airport (LGW)',
+  },
+  {
+    value: 'london stansted airport',
+    label: 'London Stansted Airport (STN)',
+  },
+  {
+    value: 'london luton airport',
+    label: 'London Luton Airport (LTN)',
+  },
+  {
+    value: 'london city airport',
+    label: 'London City Airport (LCY)',
+  },
+  {
+    value: 'london southend airport',
+    label: 'London Southend Airport (SEN)',
+  },
+  {
+    value: 'london biggin hill airport',
+    label: 'London Biggin Hill Airport (BQH)',
+  },
+  {
+    value: 'london ashford airport',
+    label: 'London ashford airport',
+  },
+  {
+    value: 'london elstree airfield',
+    label: 'London Elstree Airfield (EGTR)',
+  },
+  {
+    value: 'london farnborough airport',
+    label: 'London Farnborough Airport (FAB)',
+  },
+  {
+    value: 'london oxford airport',
+    label: 'London Oxford Airport (OXF)',
+  },
 ];
-
-export const formattedAirports = englandAirports.map(airport => ({
-  value: airport,
-  label: airport,
-}));
 
 export const whereDidYouFindIt = [
   {
     value: 'airoport',
-    label: 'Airport',
+    label: 'Airoport',
   },
   {
     value: 'bus',

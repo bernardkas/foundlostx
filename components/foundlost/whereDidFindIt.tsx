@@ -20,6 +20,8 @@ const WhereDidFindIt = ({
   const handleAiroportChange = (fieldName: string, fieldValue: any) => {
     setAiroport({ ...airoport, [fieldName]: fieldValue });
   };
+  console.log('airoport', airoport?.airoportName);
+
   return (
     <div>
       {input.whereDidFind === 'airoport' && (
@@ -31,7 +33,7 @@ const WhereDidFindIt = ({
               className='w-96 outline-none text-base font-noto-sans'
               setValue={value => handleAiroportChange('airoportName', value)}
               value={airoport.airoportName}
-              placeholder=''
+              placeholder='.'
             />
           </div>
           <div className=''>
@@ -93,6 +95,68 @@ const WhereDidFindIt = ({
           </div>
           <div className=''>
             <label htmlFor=''>Train Number or Name</label>
+            <Input
+              onChange={value => handleInputChange('title', value.target.value)}
+              value={input.title}
+              name='title'
+              className='w-96 lg: outline-none text-base font-noto-sans'
+            />
+          </div>
+        </div>
+      )}
+      {input.whereDidFind === 'ferry' && (
+        <div className='border relative p-2 rounded-md border-cyan-500'>
+          <div className=''>
+            <label htmlFor=''>*Ferry Service Name</label>
+            <Input
+              onChange={value => handleInputChange('title', value.target.value)}
+              value={input.title}
+              name='title'
+              className='w-96 lg: outline-none text-base font-noto-sans'
+            />
+          </div>
+          <div className=''>
+            <label htmlFor=''>Ferry Route</label>
+            <Input
+              onChange={value => handleInputChange('title', value.target.value)}
+              value={input.title}
+              name='title'
+              className='w-96 lg: outline-none text-base font-noto-sans'
+            />
+          </div>
+        </div>
+      )}
+      {input.whereDidFind === 'taxi' && (
+        <div className='border relative p-2 rounded-md border-cyan-500'>
+          <div className=''>
+            <label htmlFor=''>*Taxi Name</label>
+            <Input
+              onChange={value => handleInputChange('title', value.target.value)}
+              value={input.title}
+              name='title'
+              className='w-96 lg: outline-none text-base font-noto-sans'
+            />
+          </div>
+          <div className=''>
+            <label htmlFor=''>License Plate</label>
+            <Input
+              onChange={value => handleInputChange('title', value.target.value)}
+              value={input.title}
+              name='title'
+              className='w-96 lg: outline-none text-base font-noto-sans'
+            />
+          </div>
+        </div>
+      )}
+      {input.whereDidFind === 'general' && (
+        <div className='border relative p-2 rounded-md border-cyan-500'>
+          <div className=''>
+            <label htmlFor=''>
+              *General Information{' '}
+              <span className='text-gray-500'>
+                (ex: Hotel, Restaurant, Store)
+              </span>
+            </label>
             <Input
               onChange={value => handleInputChange('title', value.target.value)}
               value={input.title}

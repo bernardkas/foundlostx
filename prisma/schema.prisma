@@ -53,6 +53,18 @@ model LostAndFound {
   label         String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  airoplane Airoport[]
+}
+
+model Airoport {
+  id Int @id @default(sequence())
+  airoplanName String
+  airlineName String
+  flightName String
+  lostAndFoundId Int
+  lostAndFound LostAndFound  @relation(fields: [lostAndFoundId], references: [id])
+  
 }
 
 
