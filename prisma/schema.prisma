@@ -43,6 +43,7 @@ model LostAndFound {
   title         String
   country       String 
   city          String
+  streetAddress String
   whereDidFind  String
   exactLocation   String
   description   String
@@ -51,21 +52,17 @@ model LostAndFound {
   mapAddress    String?
   photo         String[]
   label         String
+  airoport Json?
+  bus Json?
+  train Json? 
+  ferry Json?
+  taxi Json?
+  generalLocation Json?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-
-  airoplane Airoport[]
 }
 
-model Airoport {
-  id Int @id @default(sequence())
-  airoplanName String
-  airlineName String
-  flightName String
-  lostAndFoundId Int
-  lostAndFound LostAndFound  @relation(fields: [lostAndFoundId], references: [id])
-  
-}
+
 
 
 

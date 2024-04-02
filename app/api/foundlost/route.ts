@@ -18,6 +18,7 @@ export async function POST(req: Request) {
     phone,
     email,
     title,
+    country,
     city,
     whereDidFind,
     exactLocation,
@@ -27,8 +28,17 @@ export async function POST(req: Request) {
     mapAddress,
     photo,
     label,
+    airoport,
+    bus,
+    train,
+    ferry,
+    taxi,
+    generalLocation,
   } = body;
   try {
+    console.log('airoport', airoport);
+    console.log('bus', bus);
+
     const userPost = await prisma?.lostAndFound.create({
       data: {
         user: {
@@ -41,6 +51,7 @@ export async function POST(req: Request) {
         phone,
         email,
         title,
+        country,
         city,
         whereDidFind,
         exactLocation,
@@ -50,6 +61,19 @@ export async function POST(req: Request) {
         mapAddress,
         photo,
         label,
+        // airoport: {
+        //   create: {
+        //     airportName: airoport.airportName,
+        //     airlineName: airoport.airlineName,
+        //     flightName: airoport.flightNumber,
+        //   },
+        // },
+        airoport,
+        bus,
+        train,
+        ferry,
+        taxi,
+        generalLocation,
       },
     });
     revalidatePath('/posts');

@@ -7,8 +7,18 @@ import { LostAndFound } from '@prisma/client';
 interface WhereDidFindItProps {
   input: any;
   handleInputChange: (a: any, b: any) => void;
-  setAiroport: (a: any) => void;
   airoport: any;
+  setAiroport: (a: any) => void;
+  bus: any;
+  setBus: (a: any) => void;
+  train: any;
+  setTrain: (a: any) => void;
+  ferry: any;
+  setFerry: (a: any) => void;
+  taxi: any;
+  setTaxi: (a: any) => void;
+  generale: any;
+  setGenerale: (a: any) => void;
 }
 
 const WhereDidFindIt = ({
@@ -16,11 +26,85 @@ const WhereDidFindIt = ({
   handleInputChange,
   airoport,
   setAiroport,
+  bus,
+  setBus,
+  train,
+  setTrain,
+  ferry,
+  setFerry,
+  taxi,
+  setTaxi,
+  generale,
+  setGenerale,
 }: WhereDidFindItProps) => {
   const handleAiroportChange = (fieldName: string, fieldValue: any) => {
+    if (airoport) {
+      setBus({
+        busName: '',
+        busRouteNumber: '',
+      });
+    }
     setAiroport({ ...airoport, [fieldName]: fieldValue });
   };
-  console.log('airoport', airoport?.airoportName);
+
+  const handleBusChange = (fieldName: string, fieldValue: any) => {
+    if (bus) {
+      setAiroport({
+        airoportName: '',
+        airlineName: '',
+        flightNumber: '',
+      });
+    }
+
+    setBus({ ...bus, [fieldName]: fieldValue });
+  };
+  const handleTrainChange = (fieldName: string, fieldValue: any) => {
+    if (bus) {
+      setAiroport({
+        airoportName: '',
+        airlineName: '',
+        flightNumber: '',
+      });
+    }
+
+    setTrain({ ...train, [fieldName]: fieldValue });
+  };
+
+  const handleFerryChange = (fieldName: string, fieldValue: any) => {
+    if (bus) {
+      setAiroport({
+        airoportName: '',
+        airlineName: '',
+        flightNumber: '',
+      });
+    }
+
+    setFerry({ ...ferry, [fieldName]: fieldValue });
+  };
+
+  const handleTaxiChange = (fieldName: string, fieldValue: any) => {
+    if (bus) {
+      setAiroport({
+        airoportName: '',
+        airlineName: '',
+        flightNumber: '',
+      });
+    }
+
+    setTaxi({ ...taxi, [fieldName]: fieldValue });
+  };
+
+  const handleGeneralChange = (fieldName: string, fieldValue: any) => {
+    if (bus) {
+      setAiroport({
+        airoplanName: '',
+        airlineName: '',
+        flightNumber: '',
+      });
+    }
+
+    setGenerale({ ...generale, [fieldName]: fieldValue });
+  };
 
   return (
     <div>
@@ -31,8 +115,8 @@ const WhereDidFindIt = ({
             <Combobox
               frameworks={formattedAirports}
               className='w-96 outline-none text-base font-noto-sans'
-              setValue={value => handleAiroportChange('airoportName', value)}
-              value={airoport.airoportName}
+              setValue={value => handleAiroportChange('airportName', value)}
+              value={airoport.airportName}
               placeholder='.'
             />
           </div>
@@ -65,8 +149,8 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>*Bus Station Name</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value => handleBusChange('busName', value.target.value)}
+              value={bus.busName}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -74,8 +158,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>Bus Route Number</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleBusChange('busRouteNumber', value.target.value)
+              }
+              value={bus.busRouteNumber}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -87,8 +173,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>*Train Station Name</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleTrainChange('trainName', value.target.value)
+              }
+              value={train.trainName}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -96,8 +184,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>Train Number or Name</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleTrainChange('trainNumber', value.target.value)
+              }
+              value={train.trainNumber}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -109,8 +199,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>*Ferry Service Name</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleFerryChange('ferryName', value.target.value)
+              }
+              value={ferry.ferryName}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -118,8 +210,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>Ferry Route</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleFerryChange('ferryRoute', value.target.value)
+              }
+              value={ferry.ferryRoute}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -131,8 +225,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>*Taxi Name</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleTaxiChange('taxiName', value.target.value)
+              }
+              value={taxi.taxiName}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -140,8 +236,10 @@ const WhereDidFindIt = ({
           <div className=''>
             <label htmlFor=''>License Plate</label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleTaxiChange('taxiPlate', value.target.value)
+              }
+              value={taxi.taxiPlate}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />
@@ -158,8 +256,10 @@ const WhereDidFindIt = ({
               </span>
             </label>
             <Input
-              onChange={value => handleInputChange('title', value.target.value)}
-              value={input.title}
+              onChange={value =>
+                handleGeneralChange('generaleLocation', value.target.value)
+              }
+              value={generale.generaleLocation}
               name='title'
               className='w-96 lg: outline-none text-base font-noto-sans'
             />

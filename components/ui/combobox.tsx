@@ -70,7 +70,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
           <CommandInput placeholder='...' />
           <CommandEmpty>No Country found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map(framework => (
+            {frameworks?.map(framework => (
               <CommandItem
                 key={framework.value}
                 value={framework.value}

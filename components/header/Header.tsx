@@ -16,19 +16,13 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { useRouter } from 'next/navigation';
-import { city, country } from '@/lib/defaultData';
+import { englandCity, country, whereDidYouFindIt } from '@/lib/defaultData';
 
-interface HeaderProps {
-  getEngland?: any;
-}
+interface HeaderProps {}
 
-const Header = ({ getEngland }: HeaderProps) => {
+const Header = ({}: HeaderProps) => {
   const router = useRouter();
 
-  console.log(
-    'name',
-    getEngland?.map(item => item.name)
-  );
   const handleGoToCity = () => {
     router.push('/posts/pristina');
   };
@@ -83,7 +77,7 @@ const Header = ({ getEngland }: HeaderProps) => {
               value={input.country}
             />
             <Combobox
-              frameworks={city}
+              frameworks={englandCity}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*City...'
               setValue={value => handleInputChange('city', value)}
@@ -96,12 +90,9 @@ const Header = ({ getEngland }: HeaderProps) => {
                 <SelectValue placeholder='*Where did you lose item?' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='airport'>Airport</SelectItem>
-                <SelectItem value='train'>Train</SelectItem>
-                <SelectItem value='bus'>Bus Station</SelectItem>
-                <SelectItem value='hotel'>Hotel</SelectItem>
-                <SelectItem value='ferry'>Ferry</SelectItem>
-                <SelectItem value='city'>Somwhere in the city</SelectItem>
+                {whereDidYouFindIt.map(item => (
+                  <SelectItem value={item.value}>{item.label}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <button

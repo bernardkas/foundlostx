@@ -37,6 +37,7 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { LostAndFound } from '@prisma/client';
+import WhereDidLostItRender from './WhereDidLostItRender';
 
 interface PostDetailsProps {
   post: LostAndFound;
@@ -47,7 +48,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
   const otherInformation = [
     {
       id: 1,
-      label: 'Regjistroi',
+      label: 'Fullname',
       data: (
         <div>
           {post?.name} {post?.lastname}
@@ -57,7 +58,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
     },
     {
       id: 2,
-      label: 'Telefoni',
+      label: 'Phone',
       data: post?.phone,
       icon: <Phone className='text-orange-500 ' size={22} />,
     },
@@ -69,7 +70,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
     },
     {
       id: 4,
-      label: 'Ku eshte gjetur?',
+      label: 'Where was it found?',
       data: capitalizeFirstLetter(post?.whereDidFind),
       icon: <Radar className='text-orange-500 ' size={22} />,
     },
@@ -80,13 +81,35 @@ const PostDetails = ({ post }: PostDetailsProps) => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
+
+  const airoportData = post?.airoport as
+    | { airlineName: string; airoportName: string; flightNumber: string }
+    | undefined;
+  const busData = post?.bus as
+    | { busName: string; busRouteNumber: string }
+    | undefined;
+  const trainData = post?.train as
+    | { trainName: string; trainNumber: string }
+    | undefined;
+  const ferryData = post?.ferry as
+    | { ferryName: string; ferryRoute: string }
+    | undefined;
+  const taxiData = post?.taxi as
+    | { taxiName: string; taxiPlate: string }
+    | undefined;
+  const generalData = post?.generalLocation as
+    | { generaleLocation: string }
+    | undefined;
+
+  console.log('generalData', generalData);
+
   return (
     <div suppressHydrationWarning className='mx-2 my-5 lg:mx-[15%]'>
-      <div>
+      <div className=''>
         <Button
           onClick={handleBack}
           className='bg-orange-500 font-noto-sans text-md mb-2'>
-          Kthehu mbrapa
+          Back
         </Button>
       </div>
       <div className='flex flex-col justify-center items-center '>
@@ -94,7 +117,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
           <div className='flex flex-wrap flex-row-reverse md:flex-row justify-between'>
             <div className='flex flex-row flex-wrap gap-5'>
               <div className='mr-10 w-[340px] h-[400px]'>
-                {post?.phone.length === 0 ? (
+                {post?.photo.length === 0 ? (
                   <Image width={400} height={400} src={photo} alt='' />
                 ) : (
                   <Carousel
@@ -129,12 +152,12 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               </div>
               <div className='flex flex-col gap-5'>
                 <div className='flex flex-row flex-wrap items-center gap-1'>
-                  <p className='bg-green-500 p-1 rounded-md text-white font-noto-sans'>
+                  <div className='bg-green-500 p-1 rounded-md text-white font-noto-sans'>
                     {capitalizeFirstLetter(post?.label)}
-                  </p>
-                  <p className='font-noto-sans font-semibold'>
+                  </div>
+                  <div className='font-noto-sans font-semibold'>
                     {formatDate(post?.findingDate)} {post?.findingTime}
-                  </p>
+                  </div>
                 </div>
                 <div>
                   <h1 className='text-3xl font-noto-sans font-semibold'>
@@ -143,9 +166,12 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                 </div>
                 <div className='flex flex-row gap-1 border-b-[1px] pb-2 text-slate-700 font-noto-sans'>
                   <MapPin size={22} />
-                  <p>{capitalizeFirstLetter(post?.city)}</p>
+                  <div>
+                    <span className='text-gray-500'>City: </span>{' '}
+                    {capitalizeFirstLetter(post?.city)}
+                  </div>
                 </div>
-                <div className='flex flex-row gap-1'>
+                <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
                   <LocateFixed className='text-slate-700' size={22} />
                   <div>
                     <p className='text-slate-700 font-noto-sans text-[16px]'>
@@ -156,7 +182,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                     </p>
                   </div>
                 </div>
-                <div className='flex flex-row gap-1'>
+                <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
                   <Map size={22} />
                   <div>
                     <p>Map</p>
@@ -171,11 +197,12 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               </div>
             </div>
             <div>
-              <p className='text-sm text-slate-500'>
+              <div className='text-sm text-slate-500'>
                 {formatDistanceToNow(post?.createdAt)}
-              </p>
+              </div>
             </div>
           </div>
+          <h2 className='font-bold border-b-[2px] pb-2 text-lg'>Information</h2>
           <div className='flex flex-row flex-wrap gap-5 w-auto lg:w-[500px] border-[1px] rounded-md p-2'>
             {otherInformation.map(item => (
               <div key={item.id} className='flex flex-row gap-1 flex-wrap'>
@@ -187,6 +214,15 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               </div>
             ))}
           </div>
+
+          <WhereDidLostItRender
+            airoportData={airoportData}
+            busData={busData}
+            trainData={trainData}
+            ferryData={ferryData}
+            taxiData={taxiData}
+            generalData={generalData}
+          />
           <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
             <MessageCircle size={22} className=' text-orange-500 ' />
             <div>
@@ -194,28 +230,6 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               <p className=' text-slate-800 font-noto-sans'>
                 {post?.description}
               </p>
-            </div>
-          </div>
-          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
-            <Plane size={22} className=' text-orange-500 ' />
-            <div>
-              <p className=' text-slate-500 font-noto-sans'>Airoport</p>
-              <p className=' text-slate-800 font-noto-sans'>Airlane: </p>
-              <p className=' text-slate-800 font-noto-sans'>Flight Number: </p>
-            </div>
-          </div>
-          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
-            <Bus size={22} className=' text-orange-500 ' />
-            <div>
-              <p className=' text-slate-500 font-noto-sans'>Bus</p>
-              <p className=' text-slate-800 font-noto-sans'>Buss Number: </p>
-            </div>
-          </div>
-          <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
-            <TrainFront size={22} className=' text-orange-500 ' />
-            <div>
-              <p className=' text-slate-500 font-noto-sans'>Train</p>
-              <p className=' text-slate-800 font-noto-sans'>Line: </p>
             </div>
           </div>
         </div>

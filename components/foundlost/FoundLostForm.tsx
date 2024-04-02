@@ -24,12 +24,33 @@ import WhereDidFindIt from './whereDidFindIt';
 interface FoundLostFromProps {}
 
 const FoundLostForm = ({}: FoundLostFromProps) => {
+  const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState('');
   const [airoport, setAiroport] = useState({
-    airoportName: '',
+    airportName: '',
     airlineName: '',
     flightNumber: '',
+  });
+
+  const [bus, setBus] = useState({
+    busName: '',
+    busRouteNumber: '',
+  });
+  const [train, setTrain] = useState({
+    trainName: '',
+    trainNumber: '',
+  });
+  const [ferry, setFerry] = useState({
+    ferryName: '',
+    ferryRoute: '',
+  });
+  const [taxi, setTaxi] = useState({
+    taxiName: '',
+    taxiPlate: '',
+  });
+  const [generalLocation, setGeneralLocation] = useState({
+    generaleLocation: '',
   });
   const [input, setInput] = useState({
     name: '',
@@ -46,9 +67,15 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
     label: '',
   });
 
-  const [selectPhoto, setSelectPhoto] = useState<File[]>([]);
+  const airoportArray = Object.entries(airoport).map(([key, value]) => ({
+    [key]: value,
+  }));
 
-  console.log('photo', selectPhoto);
+  console.log('airportArray: ', ...airoportArray);
+
+  console.log('airoport typeof', typeof airoportArray);
+
+  const [selectPhoto, setSelectPhoto] = useState<File[]>([]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedPhotos = e.target.files;
@@ -68,6 +95,8 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
   const createForm = async (e: any) => {
     e.preventDefault();
     try {
+      setLoading(true);
+
       const formData = new FormData();
       selectPhoto.forEach((file, index) => {
         formData.append(`file[]`, file);
@@ -87,11 +116,18 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
         findingDate: selectedDate,
         findingTime: selectedTime,
         photo: fotoS3,
+        airoport: airoport,
+        bus: bus,
+        train: train,
+        ferry: ferry,
+        taxi: taxi,
+        generalLocation: generalLocation,
       });
 
       if (data.status === 200) {
         toast('foundlost', { type: 'success' });
         console.log('Created successfully');
+        setLoading(false);
       }
     } catch (err) {
       toast('Error! Not created', { type: 'error' });
@@ -111,6 +147,11 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
 
   console.log('input', input);
   console.log('airoport', airoport);
+  console.log('bus', bus);
+  console.log('train', train);
+  console.log('ferry', ferry);
+  console.log('taxi', taxi);
+  console.log('generale', generalLocation);
 
   return (
     <div className='w-full my-16 flex items-center justify-center'>
@@ -261,6 +302,16 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
             handleInputChange={handleInputChange}
             setAiroport={setAiroport}
             airoport={airoport}
+            bus={bus}
+            setBus={setBus}
+            train={train}
+            setTrain={setTrain}
+            ferry={ferry}
+            setFerry={setFerry}
+            taxi={taxi}
+            setTaxi={setTaxi}
+            generale={generalLocation}
+            setGenerale={setGeneralLocation}
           />
           <div className='flex flex-col'>
             {input.label === 'found' ? (
@@ -327,7 +378,7 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
           <Button
             type='submit'
             className='bg-orange-500 text-base hover:bg-orange-700'>
-            Submit
+            {loading ? 'Loading...' : 'Submit'}
           </Button>
         </form>
       </div>
