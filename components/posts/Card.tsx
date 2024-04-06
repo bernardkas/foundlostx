@@ -7,31 +7,36 @@ import {
   formatDistanceToNow,
 } from '@/lib/utils';
 import { LostAndFound } from '@prisma/client';
+import emptyPhoto from '@/assets/howitworks/matching.png';
 
 interface CardPorps {
-  allPosts: LostAndFound[];
+  posts: LostAndFound[];
 }
-const Card = ({ allPosts }: CardPorps) => {
-  console.log('all post to CARD', allPosts);
+const Card = ({ posts }: CardPorps) => {
   const router = useRouter();
-
   const handleClickCard = (id: number) => {
     router.push(`/postdetails/${id}`);
   };
 
   return (
     <div className='flex flex-col-reverse gap-7 justify-end my:2 lg:my-10 w-full'>
-      {allPosts.map(item => (
+      {posts?.map(item => (
         <div
           className='border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer '
           key={item.id}
           onClick={() => handleClickCard(item.id)}>
           <div className='flex flex-col md:flex-row gap-5 items-start md:items-start '>
-            <div>
-              {item.photo && (
+            <div className='w-[200px] h-[200px]'>
+              {item.photo.length === 0 ? (
                 <Image
-                  width={200}
-                  height={200}
+                  src={emptyPhoto}
+                  className='w-[200px] h-[200px]'
+                  alt=''
+                />
+              ) : (
+                <Image
+                  width={250}
+                  height={250}
                   src={item.photo[0]}
                   className='w-[200px] h-[200px]'
                   alt=''

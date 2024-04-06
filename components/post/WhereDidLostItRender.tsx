@@ -29,7 +29,7 @@ const WhereDidLostItRender = ({
             <div>
               <p className=' text-slate-500 font-noto-sans'>Airoport Name</p>
               <p className=' text-slate-800 font-noto-sans'>
-                {airoportData.airoportName}
+                {airoportData.airportName}
               </p>
             </div>
             <div>

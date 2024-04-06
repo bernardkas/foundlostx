@@ -61,13 +61,6 @@ export async function POST(req: Request) {
         mapAddress,
         photo,
         label,
-        // airoport: {
-        //   create: {
-        //     airportName: airoport.airportName,
-        //     airlineName: airoport.airlineName,
-        //     flightName: airoport.flightNumber,
-        //   },
-        // },
         airoport,
         bus,
         train,

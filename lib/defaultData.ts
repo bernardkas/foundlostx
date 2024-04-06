@@ -117,7 +117,7 @@
 //   },
 // ];
 
-export const country = [
+export const countryData = [
   {
     value: 'england',
     label: 'England',

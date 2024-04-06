@@ -16,7 +16,9 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { useRouter } from 'next/navigation';
-import { englandCity, country, whereDidYouFindIt } from '@/lib/defaultData';
+import { englandCity, countryData, whereDidYouFindIt } from '@/lib/defaultData';
+import { useSearchInputState } from '@/lib/store';
+import { toast } from 'react-toastify';
 
 interface HeaderProps {}
 
@@ -26,18 +28,25 @@ const Header = ({}: HeaderProps) => {
   const handleGoToCity = () => {
     router.push('/posts/pristina');
   };
-  const [input, setInput] = useState({
-    desc: '',
-    country: '',
-    city: '',
-    whereDidFind: '',
-  });
 
-  const handleInputChange = (fieldName: string, fieldValue: any) => {
-    setInput({ ...input, [fieldName]: fieldValue });
+  const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
+
+  const handleInputChange = (fieldName: string, fieldValue: string) => {
+    setInput({ [fieldName]: fieldValue });
   };
 
-  console.log('input', input);
+  console.log('input', { desc, country, city, whereDidFind });
+
+  const handleSearch = (city: string) => {
+    if (country === '' || city === '' || whereDidFind === '') {
+      toast.error(
+        'You need to fill value (Country, City, Where did you lost/find item)'
+      );
+      return;
+    }
+
+    router.push(`/posts/${city}`);
+  };
 
   return (
     <div className='h-[50vh]  w-full'>
@@ -55,11 +64,11 @@ const Header = ({}: HeaderProps) => {
                 <TooltipTrigger>
                   <Input
                     className='border-t-0 border-l-0 border-r-0 border-b-[1px]  pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-                    placeholder='Descripe what you lose...'
+                    placeholder='Describe what you lose...'
                     onChange={val =>
                       handleInputChange('desc', val.target.value)
                     }
-                    value={input.desc}
+                    value={desc}
                   />
                 </TooltipTrigger>
                 <TooltipContent>
@@ -70,33 +79,35 @@ const Header = ({}: HeaderProps) => {
               </Tooltip>
             </TooltipProvider>
             <Combobox
-              frameworks={country}
+              frameworks={countryData}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*Country...'
               setValue={value => handleInputChange('country', value)}
-              value={input.country}
+              value={country}
             />
             <Combobox
               frameworks={englandCity}
               className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
               placeholder='*City...'
               setValue={value => handleInputChange('city', value)}
-              value={input.city}
+              value={city}
             />
             <Select
               onValueChange={val => handleInputChange('whereDidFind', val)}
-              value={input.whereDidFind}>
+              value={whereDidFind}>
               <SelectTrigger className='border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
-                <SelectValue placeholder='*Where did you lose item?' />
+                <SelectValue placeholder='*Where did you lost/find item?' />
               </SelectTrigger>
               <SelectContent>
                 {whereDidYouFindIt.map(item => (
-                  <SelectItem value={item.value}>{item.label}</SelectItem>
+                  <SelectItem key={item.value} value={item.value}>
+                    {item.label}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <button
-              onClick={handleGoToCity}
+              onClick={() => handleSearch(city)}
               className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-[250px] md:w-[100px] '>
               Search
             </button>

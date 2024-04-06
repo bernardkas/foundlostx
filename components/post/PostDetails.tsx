@@ -45,6 +45,7 @@ interface PostDetailsProps {
 
 const PostDetails = ({ post }: PostDetailsProps) => {
   const route = useRouter();
+
   const otherInformation = [
     {
       id: 1,
@@ -58,18 +59,24 @@ const PostDetails = ({ post }: PostDetailsProps) => {
     },
     {
       id: 2,
-      label: 'Phone',
-      data: post?.phone,
-      icon: <Phone className='text-orange-500 ' size={22} />,
+      label: 'Country',
+      data: <div>{post?.country}</div>,
+      icon: <UserRound className='text-orange-500 ' size={22} />,
     },
     {
       id: 3,
+      label: 'Phone',
+      data: post?.phone,
+      icon: <MapPin className='text-orange-500 ' size={22} />,
+    },
+    {
+      id: 4,
       label: 'Email',
       data: post?.email,
       icon: <MailCheck className='text-orange-500 ' size={22} />,
     },
     {
-      id: 4,
+      id: 5,
       label: 'Where was it found?',
       data: capitalizeFirstLetter(post?.whereDidFind),
       icon: <Radar className='text-orange-500 ' size={22} />,
@@ -114,49 +121,61 @@ const PostDetails = ({ post }: PostDetailsProps) => {
       </div>
       <div className='flex flex-col justify-center items-center '>
         <div className='border-[1px] rounded-md p-5 w-auto lg:w-[850px] flex flex-col gap-5'>
-          <div className='flex flex-wrap flex-row-reverse md:flex-row justify-between'>
-            <div className='flex flex-row flex-wrap gap-5'>
-              <div className='mr-10 w-[340px] h-[400px]'>
+          <div className='flex flex-wrap md:flex-nowrap lg:flex-nowrap flex-row-reverse md:flex-row justify-center'>
+            <div className='flex flex-row flex-wrap gap-5 sm:flex sm:align-center justify-center'>
+              <div className='mr-10 w-[300px] h-[400px] '>
                 {post?.photo.length === 0 ? (
                   <Image width={400} height={400} src={photo} alt='' />
                 ) : (
-                  <Carousel
-                    plugins={[plugin.current]}
-                    onMouseEnter={plugin.current.stop}
-                    onMouseLeave={plugin.current.reset}>
-                    <CarouselContent>
-                      {post?.photo.map((photo, index) => (
-                        <CarouselItem key={index}>
-                          <div className='p-1'>
-                            <div>
-                              <div className='flex aspect-square items-center justify-center p-6 w-[400px] h-[400px]'>
-                                <Image
-                                  src={photo}
-                                  width={300} // Add the width property
-                                  height={300}
-                                  alt=''
-                                  className='object-contain'
-                                />
+                  <div className=''>
+                    <Carousel
+                      plugins={[plugin.current]}
+                      onMouseEnter={plugin.current.stop}
+                      onMouseLeave={plugin.current.reset}>
+                      <CarouselContent>
+                        {post?.photo.map((photo, index) => (
+                          <CarouselItem key={index}>
+                            <div className='p-1'>
+                              <div>
+                                <div className='flex aspect-square items-center justify-center p-6 w-[300px] h-[300px]'>
+                                  <Image
+                                    src={photo}
+                                    width={350}
+                                    height={350}
+                                    alt=''
+                                    className='object-contain'
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <div className='hidden lg:block'>
-                      <CarouselPrevious />
-                      <CarouselNext />
-                    </div>
-                  </Carousel>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <div className='hidden lg:block'>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                      </div>
+                    </Carousel>
+                  </div>
                 )}
               </div>
-              <div className='flex flex-col gap-5'>
-                <div className='flex flex-row flex-wrap items-center gap-1'>
-                  <div className='bg-green-500 p-1 rounded-md text-white font-noto-sans'>
-                    {capitalizeFirstLetter(post?.label)}
+              <div className='flex flex-col gap-5 w-[370px]'>
+                <div className='flex flex-row flex-wrap items-center justify-between gap-1'>
+                  <div className='flex flex-row flex-wrap items-center gap-1'>
+                    <div
+                      className={`${
+                        post?.label === 'found' ? 'bg-green-500' : 'bg-red-500'
+                      } p-1 rounded-md text-white font-noto-sans`}>
+                      {capitalizeFirstLetter(post?.label)}
+                    </div>
+                    <div className='font-noto-sans font-semibold'>
+                      {formatDate(post?.findingDate)} {post?.findingTime}
+                    </div>
                   </div>
-                  <div className='font-noto-sans font-semibold'>
-                    {formatDate(post?.findingDate)} {post?.findingTime}
+                  <div>
+                    <div className='text-sm text-slate-500'>
+                      {formatDistanceToNow(post?.createdAt)}
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -196,11 +215,6 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                 </div>
               </div>
             </div>
-            <div>
-              <div className='text-sm text-slate-500'>
-                {formatDistanceToNow(post?.createdAt)}
-              </div>
-            </div>
           </div>
           <h2 className='font-bold border-b-[2px] pb-2 text-lg'>Information</h2>
           <div className='flex flex-row flex-wrap gap-5 w-auto lg:w-[500px] border-[1px] rounded-md p-2'>
@@ -208,7 +222,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
               <div key={item.id} className='flex flex-row gap-1 flex-wrap'>
                 {item.icon}
                 <div className='flex flex-col gap-1'>
-                  <p className=' text-slate-500 font-noto-sans'>{item.label}</p>
+                  <p className='text-slate-500 font-noto-sans'>{item.label}</p>
                   <p className='font-noto-sans'>{item.data}</p>
                 </div>
               </div>
@@ -226,10 +240,10 @@ const PostDetails = ({ post }: PostDetailsProps) => {
           <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
             <MessageCircle size={22} className=' text-orange-500 ' />
             <div>
-              <p className=' text-slate-500 font-noto-sans'>Description</p>
-              <p className=' text-slate-800 font-noto-sans'>
+              <div className=' text-slate-500 font-noto-sans'>Description</div>
+              <div className=' text-slate-800 font-noto-sans'>
                 {post?.description}
-              </p>
+              </div>
             </div>
           </div>
         </div>

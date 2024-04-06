@@ -14,7 +14,7 @@ import { Button } from '../ui/button';
 import CustomUpload from '../ui/upload';
 import { DatePicker } from '../ui/dataPicker';
 import MapLost from '../map/MapLost';
-import { englandCity, country, whereDidYouFindIt } from '@/lib/defaultData';
+import { englandCity, countryData, whereDidYouFindIt } from '@/lib/defaultData';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import TimePicker from '../ui/timePicker';
@@ -128,6 +128,44 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
         toast('foundlost', { type: 'success' });
         console.log('Created successfully');
         setLoading(false);
+        setInput({
+          name: '',
+          lastname: '',
+          phone: '',
+          email: '',
+          title: '',
+          country: '',
+          city: '',
+          whereDidFind: '',
+          exactLocation: '',
+          description: '',
+          mapAddress: '',
+          label: '',
+        });
+        setAiroport({
+          airlineName: '',
+          airportName: '',
+          flightNumber: '',
+        });
+        setBus({
+          busName: '',
+          busRouteNumber: '',
+        });
+        setTrain({
+          trainName: '',
+          trainNumber: '',
+        });
+        setTaxi({
+          taxiName: '',
+          taxiPlate: '',
+        });
+        setFerry({
+          ferryName: '',
+          ferryRoute: '',
+        });
+        setSelectedTime('');
+        // @ts-ignore
+        setSelectedDate('');
       }
     } catch (err) {
       toast('Error! Not created', { type: 'error' });
@@ -257,7 +295,7 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
             <div className='flex flex-col'>
               <label htmlFor=''>*Country</label>
               <Combobox
-                frameworks={country}
+                frameworks={countryData}
                 className='w-96 outline-none text-base font-noto-sans'
                 setValue={value => handleInputChange('country', value)}
                 value={input.country}
@@ -292,7 +330,9 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
               </SelectTrigger>
               <SelectContent>
                 {whereDidYouFindIt.map(where => (
-                  <SelectItem value={where.value}>{where.label}</SelectItem>
+                  <SelectItem key={where.value} value={where.value}>
+                    {where.label}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>

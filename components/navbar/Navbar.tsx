@@ -66,7 +66,7 @@ const Navbar = ({ userId }: NavbarProps) => {
           initial={{ height: 0 }}
           animate={{ height: '300px' }}
           transition={{ duration: 0.3 }}
-          className='absolute top-0 left-0 w-full h-full bg-white shadow-lg'>
+          className='absolute top-0 left-0 w-full h-full bg-white shadow-lg z-50'>
           <button
             className='text-3xl text-right w-full pr-4 pt-4 text-red-400'
             onClick={() => setIsMobileNavOpen(false)}>

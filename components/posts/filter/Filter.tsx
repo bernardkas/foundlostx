@@ -13,7 +13,23 @@ import {
 import MobileFilter from './MobileFilter';
 import Modal from '@/components/ui/modal';
 
-const Filter = () => {
+interface FilterProps {
+  desc: string;
+  country: string;
+  city: string;
+  whereDidFind: string;
+  foundOrLost: string;
+  setFoundOrLost: (val: string) => void;
+}
+
+const Filter = ({
+  desc,
+  country,
+  city,
+  whereDidFind,
+  foundOrLost,
+  setFoundOrLost,
+}: FilterProps) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const handleDateSelect = (date: Date) => {
@@ -27,31 +43,34 @@ const Filter = () => {
             <div className='flex flex-col gap-1 border-[1px] p-2 rounded-md'>
               <h3 className='font-noto-sans text-base'>What you search</h3>
               <p className='text-sm font-noto-sans text-slate-500'>
-                Description: qant e krahit
+                Description: {desc}
               </p>
               <p className='text-sm font-noto-sans text-slate-500'>
-                Country: Kosova
+                Country: {country}
               </p>
               <p className='text-sm font-noto-sans text-slate-500'>
-                City: Pristina
+                City: {city}
               </p>
               <p className='text-sm font-noto-sans text-slate-500'>
-                Where did you lose items: Airoport
+                Where did you lose/find item: {whereDidFind}
               </p>
             </div>
             <div className='border-[1px] p-2 rounded-md flex flex-col gap-4'>
               <div>
-                <RadioGroup defaultValue='comfortable'>
+                <RadioGroup
+                  onValueChange={val => setFoundOrLost(val)}
+                  defaultValue='all'
+                  value={foundOrLost}>
                   <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='default' id='r1' />
+                    <RadioGroupItem value='all' id='r1' />
                     <label htmlFor='r1'>All</label>
                   </div>
                   <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='comfortable' id='r2' />
+                    <RadioGroupItem value='found' id='r2' />
                     <label htmlFor='r2'>Found</label>
                   </div>
                   <div className='flex items-center space-x-2'>
-                    <RadioGroupItem value='compact' id='r3' />
+                    <RadioGroupItem value='lost' id='r3' />
                     <label htmlFor='r3'>Lost</label>
                   </div>
                 </RadioGroup>
@@ -63,26 +82,6 @@ const Filter = () => {
                   onSelectDate={handleDateSelect}
                   placeholder='Select your date'
                 />
-              </div>
-              <div>
-                <label htmlFor=''>Where did you find it</label>
-                <Select>
-                  <SelectTrigger className='border-[1px] pb-1 outline-none font-golos-text text-base'>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem
-                      // onClick={() => handleLocationSelect('airport')}
-                      value='airport'>
-                      Airoport
-                    </SelectItem>
-                    <SelectItem value='train'>Train</SelectItem>
-                    <SelectItem value='bus'>Bus Station</SelectItem>
-                    <SelectItem value='hotel'>Hotel</SelectItem>
-                    <SelectItem value='ferry'>Ferry</SelectItem>
-                    <SelectItem value='city'>Somwhere in the city</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
             </div>
           </div>
