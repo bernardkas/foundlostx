@@ -7,6 +7,7 @@ import { Skeleton } from '../ui/skeleton';
 import { LostAndFound } from '@prisma/client';
 import { useSearchInputState } from '@/lib/store';
 import Empty from '../ui/empty';
+import { formatDate } from '@/lib/utils';
 
 const AllPosts = () => {
   const [allPosts, setAllPosts] = useState<LostAndFound[]>([]);
@@ -14,6 +15,7 @@ const AllPosts = () => {
   const [loading, setLoading] = useState(true);
   const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
   const [foundOrLost, setFoundOrLost] = useState('all');
+  const [allPostFilter, setAllPostFilter] = useState<LostAndFound[]>([]);
   useEffect(() => {
     axios
       .get('/api/posts')
@@ -28,9 +30,10 @@ const AllPosts = () => {
         console.log('Error fetching data', error);
       });
   }, []);
-  const relevantPosts = allPosts.filter(
+  const relevantPosts = allPostFilter.filter(
     post => !filterPosts.some(fp => fp.id === post.id)
   );
+
 
   useEffect(() => {
     let filterPost = [...allPosts];
@@ -53,10 +56,14 @@ const AllPosts = () => {
     }
     if (foundOrLost) {
       if (foundOrLost === 'all') {
-        filterPost = filterPost.filter(item => item.label);
+        filterPost = filterPost.filter(item => item);
         const allPost = allPosts.filter(item => item);
+        setAllPostFilter(allPost);
       } else {
         filterPost = filterPost.filter(item => item.label === foundOrLost);
+        const allPost = allPosts.filter(item => item.label === foundOrLost);
+        setAllPostFilter(allPost);
+        console.log('allPost', allPost);
       }
     }
 

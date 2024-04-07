@@ -31,10 +31,10 @@ const Filter = ({
   setFoundOrLost,
 }: FilterProps) => {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date>();
-  const handleDateSelect = (date: Date) => {
-    setSelectedDate(date);
-  };
+  // const [selectedDate, setSelectedDate] = useState<Date>();
+  // const handleDateSelect = (date: any) => {
+  //   setDateFilter(date);
+  // };
   return (
     <>
       <div className='my-10 w-auto md:w-[300px] hidden lg:block'>
@@ -75,14 +75,14 @@ const Filter = ({
                   </div>
                 </RadioGroup>
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor=''>What day you find it?</label>
                 <DatePicker
-                  selectedDate={selectedDate}
+                  selectedDate={dateFilter}
                   onSelectDate={handleDateSelect}
                   placeholder='Select your date'
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

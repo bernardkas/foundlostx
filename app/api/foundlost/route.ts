@@ -36,9 +36,6 @@ export async function POST(req: Request) {
     generalLocation,
   } = body;
   try {
-    console.log('airoport', airoport);
-    console.log('bus', bus);
-
     const userPost = await prisma?.lostAndFound.create({
       data: {
         user: {
