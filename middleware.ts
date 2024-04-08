@@ -2,7 +2,7 @@ import { authMiddleware } from '@clerk/nextjs';
 
 export default authMiddleware({
   publicRoutes: req => !req.url.includes('/foundlost'),
-  ignoredRoutes: ['/api/webhook'],
+  ignoredRoutes: ['/sign-in', '/api/webhook'],
 });
 
 export const config = {
