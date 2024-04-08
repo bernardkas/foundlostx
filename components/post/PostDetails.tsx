@@ -67,7 +67,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
       id: 3,
       label: 'Phone',
       data: post?.phone,
-      icon: <MapPin className='text-orange-500 ' size={22} />,
+      icon: <MapPin className='text-orange-500 w-[60px] h-[20px]' size={22} />,
     },
     {
       id: 4,
@@ -191,7 +191,12 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                   </div>
                 </div>
                 <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
-                  <LocateFixed className='text-slate-700' size={22} />
+                  <LocateFixed
+                    className='text-slate-700'
+                    size={22}
+                    width={60}
+                    height={20}
+                  />
                   <div>
                     <p className='text-slate-700 font-noto-sans text-[16px]'>
                       Exact location
@@ -238,7 +243,12 @@ const PostDetails = ({ post }: PostDetailsProps) => {
             generalData={generalData}
           />
           <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
-            <MessageCircle size={22} className=' text-orange-500 ' />
+            <MessageCircle
+              size={22}
+              width={60}
+              height={20}
+              className=' text-orange-500 '
+            />
             <div>
               <div className=' text-slate-500 font-noto-sans'>Description</div>
               <div className=' text-slate-800 font-noto-sans'>

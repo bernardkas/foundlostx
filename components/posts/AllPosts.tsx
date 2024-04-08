@@ -34,7 +34,6 @@ const AllPosts = () => {
     post => !filterPosts.some(fp => fp.id === post.id)
   );
 
-
   useEffect(() => {
     let filterPost = [...allPosts];
 
@@ -91,9 +90,24 @@ const AllPosts = () => {
         <Skeleton className='w-[700px] h-[70px] mt-[20px] rounded-full' />
       ) : (
         <div className='flex flex-col'>
-          {filterPosts.length > 0 ? <Card posts={filterPosts} /> : <Empty />}
+          <div className='flex flex-col items-center'>
+            {filterPosts.length > 0 ? (
+              <Card posts={filterPosts} />
+            ) : (
+              <Empty classname='w-[330px] md:w-[700px] ' />
+            )}
+          </div>
+
           <h2 className='text-xl font-bold'>Revelant</h2>
-          <Card posts={relevantPosts} />
+          <div className='flex flex-col items-center'>
+            {relevantPosts.length > 0 ? (
+              <>
+                <Card posts={relevantPosts} />
+              </>
+            ) : (
+              <Empty classname='w-[330px] md:w-[700px] ' />
+            )}
+          </div>
         </div>
       )}
     </div>

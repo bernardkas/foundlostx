@@ -43,7 +43,7 @@ model LostAndFound {
   title         String
   country       String 
   city          String
-  streetAddress String
+  // streetAddress String 
   whereDidFind  String
   exactLocation   String
   description   String

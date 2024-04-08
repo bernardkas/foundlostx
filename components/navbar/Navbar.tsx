@@ -12,13 +12,6 @@ interface NavbarProps {
 
 const Navbar = ({ userId }: NavbarProps) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [userSignIn, setUserSignIn] = useState(false);
-
-  useEffect(() => {
-    if (!userId) {
-      setUserSignIn(true);
-    }
-  }, [userId]);
 
   return (
     <div className='shadow-lg '>
@@ -39,7 +32,7 @@ const Navbar = ({ userId }: NavbarProps) => {
             Items you lost or find
           </Link>
 
-          {userSignIn ? (
+          {!userId ? (
             <Link
               className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
               href='sign-in'>
