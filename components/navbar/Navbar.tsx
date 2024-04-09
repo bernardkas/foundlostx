@@ -5,6 +5,8 @@ import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { auth } from '@clerk/nextjs';
+import logo from '@/assets/logo.png';
+import Image from 'next/image';
 
 interface NavbarProps {
   userId: any;
@@ -15,14 +17,15 @@ const Navbar = ({ userId }: NavbarProps) => {
 
   return (
     <div className='shadow-lg '>
-      <div className='mx-1 flex  h-16 flex-row items-center justify-between  lg:mx-[15%]'>
+      <div className='mx-1 flex  h-[70px] flex-row items-center justify-between  lg:mx-[15%]'>
         <div>
           <Link
-            className='font-tilt-prism text-2xl font-bold text-orange-500'
+            className='font-tilt-prism text-2xl font-bold text-orange-500 h-16'
             href='/'>
-            <span className=' text-orange-400'>f</span>ound
+            {/* <span className=' text-orange-400'>f</span>ound
             <span className='uppercase text-orange-500'>l</span>ost
-            <span className='uppercase text-orange-400'>x</span>
+            <span className='uppercase text-orange-400'>x</span> */}
+            <Image src={logo} alt='' width={300} height={50} />
           </Link>
         </div>
         <div className='hidden flex-row gap-1 items-center lg:flex'>

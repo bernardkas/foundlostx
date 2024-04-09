@@ -1,6 +1,4 @@
-import { authMiddleware, withClerkMiddleware } from '@clerk/nextjs';
-import { getAuth } from '@clerk/nextjs/server';
-import { NextRequest, NextResponse } from 'next/server';
+import { authMiddleware } from '@clerk/nextjs';
 
 export default authMiddleware({
   publicRoutes: req => !req.url.includes('/foundlost'),
