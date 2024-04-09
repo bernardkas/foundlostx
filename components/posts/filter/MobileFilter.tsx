@@ -47,34 +47,6 @@ const MobileFilter = ({ openModal, setOpenModal }: MobileFilterProps) => {
                 </div>
               </RadioGroup>
             </div>
-            <div className='flex flex-col'>
-              <label htmlFor=''>What day you find it?</label>
-              {/* <DatePicker
-                selectedDate={selectedDate}
-                onSelectDate={handleDateSelect}
-                placeholder='Select your date'
-              /> */}
-            </div>
-            <div>
-              <label htmlFor=''>Where did you find it</label>
-              <Select>
-                <SelectTrigger className='border-[1px] pb-1 outline-none font-golos-text text-base'>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem
-                    // onClick={() => handleLocationSelect('airport')}
-                    value='airport'>
-                    Airoport
-                  </SelectItem>
-                  <SelectItem value='train'>Train</SelectItem>
-                  <SelectItem value='bus'>Bus Station</SelectItem>
-                  <SelectItem value='hotel'>Hotel</SelectItem>
-                  <SelectItem value='ferry'>Ferry</SelectItem>
-                  <SelectItem value='city'>Somwhere in the city</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </div>
         </div>
         <div className='flex flex-row justify-end mt-2'>

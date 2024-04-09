@@ -24,27 +24,21 @@ interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
   const router = useRouter();
-
-  const handleGoToCity = () => {
-    router.push('/posts/pristina');
-  };
-
   const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
 
   const handleInputChange = (fieldName: string, fieldValue: string) => {
     setInput({ [fieldName]: fieldValue });
   };
 
-  console.log('input', { desc, country, city, whereDidFind });
-
   const handleSearch = (city: string) => {
     if (country === '' || city === '' || whereDidFind === '') {
-      toast.error(
-        'You need to fill value (Country, City, Where did you lost/find item)'
+      toast(
+        'You need to fill value (Country, City, Where did you lost/find item',
+        { type: 'error' }
       );
+
       return;
     }
-
     router.push(`/posts/${city}`);
   };
 
