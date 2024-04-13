@@ -37,7 +37,7 @@ const Aboutus = () => {
             Join FoundLostX today and become part of a community dedicated to
             reuniting lost items with their rightful owners. Experience the
             convenience of managing lost and found possessions with ease, all in
-            one centralized platform."
+            one centralized platform.
           </p>
         </div>
       </div>
