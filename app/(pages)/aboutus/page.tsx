@@ -23,7 +23,7 @@ const Aboutus = () => {
             One of the key features of FoundLostX is its robust search
             functionality. Utilizing advanced search algorithms, users can
             efficiently sift through the database to locate items that match
-            their criteria. Whether it's a lost pet, a misplaced electronic
+            their criteria. Whether it&apos;s a lost pet, a misplaced electronic
             device, or a found piece of jewelry, our search capabilities
             streamline the process of reconnecting owners with their belongings.
           </p>
