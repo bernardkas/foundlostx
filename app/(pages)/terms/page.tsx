@@ -10,27 +10,30 @@ const TermsCondition = () => {
         <div className='flex flex-col gap-4'>
           <p className='font-noto-sans'>
             Welcome to FoundLostX! These terms and conditions outline the rules
-            and regulations for the use of FoundLostX's website and services.
+            and regulations for the use of FoundLostX&apos;s website and
+            services.
           </p>
           <p className='font-noto-sans'>
             By accessing this website, we assume you accept these terms and
-            conditions in full. Do not continue to use FoundLostX's website if
-            you do not accept all of the terms and conditions stated on this
+            conditions in full. Do not continue to use FoundLostX&apos;s website
+            if you do not accept all of the terms and conditions stated on this
             page.
           </p>
           <p className='font-noto-sans'>
             The following terminology applies to these Terms and Conditions,
             Privacy Statement, and Disclaimer Notice and any or all Agreements:
-            "Client," "You," and "Your" refers to you, the person accessing this
-            website and accepting the Company's terms and conditions. "The
-            Company," "Ourselves," "We," "Our," and "Us" refer to FoundLostX.
-            "Party," "Parties," or "Us" refer to both the Client and ourselves,
-            or either the Client or ourselves.
+            &quot;Client,&quot; &quot;You,&quot; and &quot;Your&quot; refers to
+            you, the person accessing this website and accepting the
+            Company&apos;s terms and conditions. &quot;The Company,&quot;
+            &quot;Ourselves,&quot; &quot;We,&quot; &quot;Our,&quot; and
+            &quot;Us&quot; refer to FoundLostX. &quot;Party,&quot;
+            &quot;Parties,&quot; or &quot;Us&quot; refer to both the Client and
+            ourselves, or either the Client or ourselves.
           </p>
           <p className='font-noto-sans'>
             <label className='font-bold'>Cookies:</label> We employ the use of
-            cookies. By using FoundLostX's website you consent to the use of
-            cookies in accordance with FoundLostX's privacy policy.
+            cookies. By using FoundLostX&apos;s website you consent to the use
+            of cookies in accordance with FoundLostX&apos;s privacy policy.
           </p>
           <p className='font-noto-sans'>
             <label className='font-bold'>License:</label> Unless otherwise
@@ -49,16 +52,16 @@ const TermsCondition = () => {
           <p className='font-noto-sans'>
             <label className='font-bold'>User Comments:</label> Certain parts of
             this website offer the opportunity for users to post and exchange
-            opinions, information, material, and data ("Comments") in areas of
-            the website. FoundLostX does not screen, edit, publish, or review
-            Comments prior to their appearance on the website and Comments do
-            not reflect the views or opinions of FoundLostX, its agents, or
-            affiliates. Comments reflect the view and opinion of the person who
-            posts such view or opinion. To the extent permitted by applicable
-            laws, FoundLostX shall not be responsible or liable for the Comments
-            or for any loss cost, liability, damages, or expenses caused and/or
-            suffered as a result of any use of and/or posting of and/or
-            appearance of the Comments on this website.
+            opinions, information, material, and data (&quot;Comments&quot;) in
+            areas of the website. FoundLostX does not screen, edit, publish, or
+            review Comments prior to their appearance on the website and
+            Comments do not reflect the views or opinions of FoundLostX, its
+            agents, or affiliates. Comments reflect the view and opinion of the
+            person who posts such view or opinion. To the extent permitted by
+            applicable laws, FoundLostX shall not be responsible or liable for
+            the Comments or for any loss cost, liability, damages, or expenses
+            caused and/or suffered as a result of any use of and/or posting of
+            and/or appearance of the Comments on this website.
           </p>
           <p className='font-noto-sans'>
             FoundLostX reserves the right to monitor all Comments and to remove

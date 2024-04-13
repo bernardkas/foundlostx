@@ -4,7 +4,9 @@ const Privacy = () => {
   return (
     <div className='mx-3 my-16 md:mx-[15%]'>
       <div>
-        <h1 className='font-bold text-xl mb-5 border-b-[2px] pb-1'>Privacy Policy</h1>
+        <h1 className='font-bold text-xl mb-5 border-b-[2px] pb-1'>
+          Privacy Policy
+        </h1>
         <div className='flex flex-col gap-4'>
           <p className='font-noto-sans'>
             At FoundLostX, we understand the importance of your privacy and are
@@ -57,7 +59,7 @@ const Privacy = () => {
             If you have any questions or concerns about this Privacy Policy or
             our data practices, please contact us at foundlostx@gmail.com. By
             using our website or services, you consent to the terms of this
-            Privacy Policy. <br/> 
+            Privacy Policy. <br />
             This Privacy Policy was last updated on 13/04/2024.
           </p>
         </div>
