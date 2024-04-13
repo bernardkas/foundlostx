@@ -11,13 +11,22 @@ const Footer = () => {
             <h1 className='font-noto-sans text-lg font-semibold mb-1 text-white'>
               Information
             </h1>
-            <p className=' font-noto-sans text-white'>About us</p>
-            <p className=' font-noto-sans text-white'>Contact us</p>
-            {/* <p className='text-slate-700 font-noto-sans'>Solution</p> */}
+            <div className='flex flex-col'>
+              <Link href='/aboutus' className=' font-noto-sans text-white'>
+                About us
+              </Link>
+              <Link href='contactus' className=' font-noto-sans text-white'>
+                Contact us
+              </Link>
+            </div>
           </div>
-          <div>
-            <p className=' font-noto-sans text-white'>Terms & Conditions</p>
-            <p className=' font-noto-sans text-white'>Privacy Policy</p>
+          <div className='flex flex-col'>
+            <Link href='/terms' className=' font-noto-sans text-white'>
+              Terms & Conditions
+            </Link>
+            <Link href='/privacy' className=' font-noto-sans text-white'>
+              Privacy Policy
+            </Link>
           </div>
           <div></div>
         </div>

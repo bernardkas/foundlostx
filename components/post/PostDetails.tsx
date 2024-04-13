@@ -49,18 +49,18 @@ const PostDetails = ({ post }: PostDetailsProps) => {
   const otherInformation = [
     {
       id: 1,
-      label: 'Fullname',
+      label: 'Full Name',
       data: (
-        <div>
+        <span>
           {post?.name} {post?.lastname}
-        </div>
+        </span>
       ),
       icon: <UserRound className='text-orange-500 ' size={22} />,
     },
     {
       id: 2,
       label: 'Country',
-      data: <div>{post?.country}</div>,
+      data: <span>{post?.country}</span>,
       icon: <UserRound className='text-orange-500 ' size={22} />,
     },
     {
@@ -107,8 +107,6 @@ const PostDetails = ({ post }: PostDetailsProps) => {
   const generalData = post?.generalLocation as
     | { generaleLocation: string }
     | undefined;
-
-  console.log('generalData', generalData);
 
   return (
     <div suppressHydrationWarning className='mx-2 my-5 lg:mx-[15%]'>
@@ -206,7 +204,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                     </p>
                   </div>
                 </div>
-                <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
+                {/* <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
                   <Map size={22} />
                   <div>
                     <p>Map</p>
@@ -217,7 +215,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                       click here to show the map
                     </Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { Combobox } from '../ui/combobox';
 import {
@@ -11,15 +11,14 @@ import {
 } from '../ui/select';
 import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
-import CustomUpload from '../ui/upload';
 import { DatePicker } from '../ui/dataPicker';
-import MapLost from '../map/MapLost';
 import { englandCity, countryData, whereDidYouFindIt } from '@/lib/defaultData';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import TimePicker from '../ui/timePicker';
 import PhotoUpload from '../ui/uploadphoto';
 import WhereDidFindIt from './whereDidFindIt';
+import Map from '../map/Map';
 
 interface FoundLostFromProps {}
 
@@ -66,20 +65,12 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
     mapAddress: '',
     label: '',
   });
-
-  const airoportArray = Object.entries(airoport).map(([key, value]) => ({
-    [key]: value,
-  }));
-
-  console.log('airportArray: ', ...airoportArray);
-
-  console.log('airoport typeof', typeof airoportArray);
+  // const [address, setAddress] = useState('');
 
   const [selectPhoto, setSelectPhoto] = useState<File[]>([]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedPhotos = e.target.files;
-
     if (selectedPhotos) {
       const newPhotos = Array.from(selectedPhotos);
       setSelectPhoto((prevPhotos: any) => [...prevPhotos, ...newPhotos]);
@@ -94,6 +85,29 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
   };
   const createForm = async (e: any) => {
     e.preventDefault();
+    if (
+      input.name === '' ||
+      input.phone === '' ||
+      input.email === '' ||
+      input.title === '' ||
+      input.country === '' ||
+      input.city === '' ||
+      input.whereDidFind === '' ||
+      input.exactLocation === '' ||
+      input.description === '' ||
+      input.mapAddress === '' ||
+      input.label === '' ||
+      airoport.airportName ||
+      bus.busName === '' ||
+      train.trainName === '' ||
+      ferry.ferryName === '' ||
+      taxi.taxiName === '' ||
+      generalLocation.generaleLocation === ''
+    ) {
+      toast('You need to fill required value', { type: 'error' });
+      return;
+    }
+
     try {
       setLoading(true);
 
@@ -183,18 +197,10 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
     setSelectPhoto(updatedFiles);
   };
 
-  console.log('input', input);
-  console.log('airoport', airoport);
-  console.log('bus', bus);
-  console.log('train', train);
-  console.log('ferry', ferry);
-  console.log('taxi', taxi);
-  console.log('generale', generalLocation);
-
   return (
     <div className='w-full my-16 flex items-center justify-center'>
-      <div className='mx-2 lg:mx-[15%] flex flex-col items-left justify-center gap-5 '>
-        <form className='flex flex-col gap-5' onSubmit={createForm}>
+      <div className='mx-5  lg:mx-[15%] flex flex-col items-left justify-center gap-5 '>
+        <form className='flex flex-col gap-5 p-4' onSubmit={createForm}>
           <div className='w-full md:w-[800px]'>
             <h1
               className={`text-3xl font-noto-sans mb-3 font-semibold ${
@@ -406,6 +412,9 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
             onDateTimeChange={handleTimeSelect}
             label='Select the time'
           />
+          {/* <div>
+            <Map address={address} setAddress={setAddress} />
+          </div> */}
           <div>
             <label htmlFor=''>*Please upload a photo here</label>
             <PhotoUpload
@@ -413,7 +422,6 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
               photo={selectPhoto}
               handleRemovePhoto={handleRemovePhoto}
             />
-            {/* <CustomUpload onChange={value => handlePhoto(value)} /> */}
           </div>
           <Button
             type='submit'

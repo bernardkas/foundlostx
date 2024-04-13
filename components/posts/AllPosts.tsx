@@ -8,6 +8,7 @@ import { LostAndFound } from '@prisma/client';
 import { useSearchInputState } from '@/lib/store';
 import Empty from '../ui/empty';
 import { formatDate } from '@/lib/utils';
+import { Button } from '../ui/button';
 
 const AllPosts = () => {
   const [allPosts, setAllPosts] = useState<LostAndFound[]>([]);
@@ -16,6 +17,8 @@ const AllPosts = () => {
   const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
   const [foundOrLost, setFoundOrLost] = useState('all');
   const [allPostFilter, setAllPostFilter] = useState<LostAndFound[]>([]);
+  const [visiblePosts, setVisiblePosts] = useState(20); // Number of posts to display initially
+  const postsPerPage = 20;
   useEffect(() => {
     axios
       .get('/api/posts')
@@ -33,6 +36,7 @@ const AllPosts = () => {
   const relevantPosts = allPostFilter.filter(
     post => !filterPosts.some(fp => fp.id === post.id)
   );
+  const reversPosts = relevantPosts.reverse();
 
   useEffect(() => {
     let filterPost = [...allPosts];
@@ -69,12 +73,9 @@ const AllPosts = () => {
     setFilterPosts(filterPost);
   }, [allPosts, desc, country, city, whereDidFind, foundOrLost]);
 
-  console.log('all posts', allPosts);
-  console.log('filterPosts', filterPosts);
-
-  console.log('input', { desc, country, city, whereDidFind });
-
-  console.log('foundOrLost', foundOrLost);
+  const handleShowMore = () => {
+    setVisiblePosts(prevVisiblePosts => prevVisiblePosts + postsPerPage);
+  };
 
   return (
     <div className='mx-2 lg:mx-[15%] flex flex-col lg:flex-row gap-2 '>
@@ -86,30 +87,28 @@ const AllPosts = () => {
         foundOrLost={foundOrLost}
         setFoundOrLost={setFoundOrLost}
       />
-      {loading ? (
-        <Skeleton className='w-[700px] h-[70px] mt-[20px] rounded-full' />
-      ) : (
-        <div className='flex flex-col'>
-          <div className='flex flex-col items-center'>
-            {filterPosts.length > 0 ? (
-              <Card posts={filterPosts} />
-            ) : (
-              <Empty classname='w-[330px] md:w-[700px] ' />
-            )}
-          </div>
-
-          <h2 className='text-xl font-bold'>Revelant</h2>
-          <div className='flex flex-col items-center'>
-            {relevantPosts.length > 0 ? (
-              <>
-                <Card posts={relevantPosts} />
-              </>
-            ) : (
-              <Empty classname='w-[330px] md:w-[700px] ' />
-            )}
-          </div>
+      <div className='flex flex-col'>
+        <div className='flex flex-col items-center'>
+          <Card posts={filterPosts} loading={loading} />
         </div>
-      )}
+
+        <h2 className='text-xl font-bold'>Revelant</h2>
+        <div className='flex flex-col items-center'>
+          {reversPosts.slice(0, visiblePosts) && (
+            <>
+              <Card
+                posts={reversPosts.slice(0, visiblePosts)}
+                loading={loading}
+              />
+              {reversPosts.length > visiblePosts && (
+                <Button onClick={handleShowMore} className='my-4 bg-orange-500'>
+                  Show more
+                </Button>
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

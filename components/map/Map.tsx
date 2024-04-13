@@ -8,13 +8,22 @@ import { useEffect, useState } from 'react';
 const API_KEY = 'TYEW9946';
 const MAP_API_KEY = 'AIzaSyDLTfBVtaUXBaflFEyBqa6zhIUjMMYcUTY';
 
-export default function MapFound() {
+interface MapProps {
+  address: string;
+  setAddress: (a: string) => void;
+}
+
+const Map = ({ address, setAddress }: MapProps) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) return <></>;
+
+  const handleAddressChange = (event: any) => {
+    setAddress(event.target.value);
+  };
 
   return (
     <div className='relative'>
@@ -31,19 +40,21 @@ export default function MapFound() {
         search_control_position={2}
         words='filled.count.soap'>
         <div slot='map' className='w-auto md:w-[500px] h-[300px]' />
-        <div slot='search-control' style={{ margin: '10px 0 0 10px' }}>
+        <div slot='search-control'>
           <What3wordsAutosuggest>
             <input
               type='text'
               placeholder='Find your address'
-              style={{ width: '300px' }}
+              className='w-[300px]'
               autoComplete='off'
+              onChange={handleAddressChange}
+              value={address}
             />
           </What3wordsAutosuggest>
         </div>
         <div
           slot='current-location-control'
-          className='top-14 absolute left-0 md:top-5'>
+          className=' absolute bottom-[28px] left-0'>
           <button className='bg-orange-500 p-1 text-white text-sm'>
             Current Location
           </button>
@@ -51,4 +62,6 @@ export default function MapFound() {
       </What3wordsMap>
     </div>
   );
-}
+};
+
+export default Map;

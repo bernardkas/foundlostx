@@ -22,9 +22,6 @@ const Navbar = ({ userId }: NavbarProps) => {
           <Link
             className='font-tilt-prism text-2xl font-bold text-orange-500 h-16'
             href='/'>
-            {/* <span className=' text-orange-400'>f</span>ound
-            <span className='uppercase text-orange-500'>l</span>ost
-            <span className='uppercase text-orange-400'>x</span> */}
             <Image src={logo} alt='' width={300} height={50} />
           </Link>
         </div>
@@ -45,7 +42,7 @@ const Navbar = ({ userId }: NavbarProps) => {
             <>
               <Link
                 className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
-                href='/'>
+                href='/dashboard'>
                 Dashboard
               </Link>
               <UserButton afterSignOutUrl='/' />
@@ -60,7 +57,7 @@ const Navbar = ({ userId }: NavbarProps) => {
       {isMobileNavOpen && (
         <motion.div
           initial={{ height: 0 }}
-          animate={{ height: '300px' }}
+          animate={{ height: '200px' }}
           transition={{ duration: 0.3 }}
           className='absolute top-0 left-0 w-full h-full bg-white shadow-lg z-50'>
           <button
@@ -72,20 +69,23 @@ const Navbar = ({ userId }: NavbarProps) => {
             <div className=' flex flex-col items-center justify-center gap-5 '>
               <Link
                 className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
-                href='foundlost'>
+                href='foundlost'
+                onClick={() => setIsMobileNavOpen(false)}>
                 Items you lost or find
               </Link>
               {!userId ? (
                 <Link
                   className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
-                  href='sign-in'>
+                  href='sign-in'
+                  onClick={() => setIsMobileNavOpen(false)}>
                   Login
                 </Link>
               ) : (
                 <>
                   <Link
                     className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
-                    href='/'>
+                    href='/dashboard'
+                    onClick={() => setIsMobileNavOpen(false)}>
                     Dashboard
                   </Link>
                   <UserButton afterSignOutUrl='/' />
