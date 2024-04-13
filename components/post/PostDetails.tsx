@@ -1,5 +1,4 @@
 'use client';
-import { foundPosts, lostPosts } from '@/dummyData';
 import {
   Bus,
   Flag,
