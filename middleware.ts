@@ -2,9 +2,9 @@ import { authMiddleware } from '@clerk/nextjs';
 
 export default authMiddleware({
   publicRoutes: ['((?!^/foundlost).*)'],
-  ignoredRoutes: ['/api/webhook', '/foundlost'],
+  ignoredRoutes: ['/api/webhook'],
 });
 
-export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-};
+// export const config = {
+//   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+// };
