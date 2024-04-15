@@ -22,11 +22,9 @@ import Map from '../map/Map';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 
-interface FoundLostFromProps {
-  userId: any;
-}
+interface FoundLostFromProps {}
 
-const FoundLostForm = ({ userId }: FoundLostFromProps) => {
+const FoundLostForm = ({}: FoundLostFromProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
@@ -90,10 +88,6 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
   };
   const createForm = async (e: any) => {
     e.preventDefault();
-
-    if (!userId) {
-      return router.push('/sign-in');
-    }
 
     if (
       input.name === '' ||
