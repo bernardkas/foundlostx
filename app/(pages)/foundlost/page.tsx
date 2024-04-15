@@ -6,7 +6,7 @@ const FoundLost = () => {
   const { userId } = auth();
   return (
     <div>
-      <LostForm userId={userId} />
+      <LostForm />
     </div>
   );
 };
