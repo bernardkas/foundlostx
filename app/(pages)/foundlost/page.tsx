@@ -4,9 +4,12 @@ import React from 'react';
 
 const FoundLost = () => {
   const { userId } = auth();
+  if (!userId) {
+    return console.log('You need user id');
+  }
   return (
     <div>
-      <LostForm />
+      <LostForm userId={userId} />
     </div>
   );
 };
