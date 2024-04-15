@@ -3,13 +3,15 @@ import prisma from '@/server/db';
 import { revalidatePath } from 'next/cache';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { auth } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
 
 export async function POST(req: Request) {
   const body = await req.json();
   const { userId } = auth();
 
   if (!userId) {
-    return NextResponse.json({ error: 'No userId' });
+    NextResponse.json({ error: 'No userId' });
+    return redirect('/sign-in');
   }
 
   const {

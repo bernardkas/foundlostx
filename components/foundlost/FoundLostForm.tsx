@@ -19,10 +19,15 @@ import TimePicker from '../ui/timePicker';
 import PhotoUpload from '../ui/uploadphoto';
 import WhereDidFindIt from './whereDidFindIt';
 import Map from '../map/Map';
+import { User } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 
-interface FoundLostFromProps {}
+interface FoundLostFromProps {
+  userId: User;
+}
 
-const FoundLostForm = ({}: FoundLostFromProps) => {
+const FoundLostForm = ({ userId }: FoundLostFromProps) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState('');
@@ -85,6 +90,11 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
   };
   const createForm = async (e: any) => {
     e.preventDefault();
+
+    if (!userId) {
+      return router.push('/sign-in');
+    }
+
     if (
       input.name === '' ||
       input.phone === '' ||
@@ -95,14 +105,7 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
       input.whereDidFind === '' ||
       input.exactLocation === '' ||
       input.description === '' ||
-      input.mapAddress === '' ||
-      input.label === '' ||
-      airoport.airportName ||
-      bus.busName === '' ||
-      train.trainName === '' ||
-      ferry.ferryName === '' ||
-      taxi.taxiName === '' ||
-      generalLocation.generaleLocation === ''
+      input.label === ''
     ) {
       toast('You need to fill required value', { type: 'error' });
       return;
