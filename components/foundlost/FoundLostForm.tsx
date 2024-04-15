@@ -140,7 +140,6 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
 
       if (data.status === 200) {
         toast('foundlost', { type: 'success' });
-        console.log('Created successfully');
         setLoading(false);
         setInput({
           name: '',

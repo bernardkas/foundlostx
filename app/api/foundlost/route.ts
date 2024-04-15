@@ -67,7 +67,6 @@ export async function POST(req: Request) {
       },
     });
     revalidatePath('/posts');
-    console.log('User Post:', userPost);
     return NextResponse.json({ data: userPost });
   } catch (error) {
     console.log('Error creating entry', error);

@@ -23,7 +23,7 @@ const AllPosts = () => {
     axios
       .get('/api/posts')
       .then(res => {
-        const data = res.data.user;
+        const data = res.data.post;
         if (data) {
           setAllPosts(data);
           setLoading(false);
@@ -66,7 +66,6 @@ const AllPosts = () => {
         filterPost = filterPost.filter(item => item.label === foundOrLost);
         const allPost = allPosts.filter(item => item.label === foundOrLost);
         setAllPostFilter(allPost);
-        console.log('allPost', allPost);
       }
     }
 

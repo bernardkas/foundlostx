@@ -18,8 +18,6 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import photo from '@/assets/howitworks/matching.png';
-import Link from 'next/link';
-import { FoundLostItems } from '@/lib/interface';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   formatDate,

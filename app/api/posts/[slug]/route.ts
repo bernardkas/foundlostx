@@ -10,7 +10,6 @@ export const GET = async (
   { params }: { params: Params }
 ) => {
   const { slug } = params;
-  console.log('slugg', slug);
   const slugAsNumber = parseInt(slug, 10);
   try {
     const response = await prisma.lostAndFound.findFirst({
