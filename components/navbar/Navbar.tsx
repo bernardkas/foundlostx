@@ -28,6 +28,11 @@ const Navbar = ({ userId }: NavbarProps) => {
         <div className='hidden flex-row gap-1 items-center lg:flex'>
           <Link
             className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
+            href='/price'>
+            Price
+          </Link>
+          <Link
+            className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
             href='/foundlost'>
             Items you lost or find
           </Link>
