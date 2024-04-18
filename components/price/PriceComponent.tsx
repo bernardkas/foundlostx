@@ -37,7 +37,7 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
       item: [
         'All in Free +',
         'From 1 to 30 days',
-        '3 post per user',
+        'Offers quicker item discovery',
         'Priority Support',
         'In Premium Contests',
         'Distributed on social networks',
@@ -72,6 +72,7 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
       <div className='flex flex-row flex-wrap justify-center gap-5'>
         {info.map(item => (
           <div
+            key={item.id}
             className={`w-[300px] h-[500px] bg-gradient-to-r from-red-500 to-yellow-600 rounded-md p-12 text-white ${
               item.id === 2
                 ? 'border-[3px] border-purple-800 scale-105'
@@ -87,7 +88,7 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
               <p className='my-3 text-[16px] font-noto-sans'>{item.desc}</p>
               <div className='flex flex-col gap-2 items-start'>
                 {item.item.map(item => (
-                  <div className='flex flex-row items-center gap-2'>
+                  <div key={item} className='flex flex-row items-center gap-2'>
                     <Check
                       style={{ width: '22px', height: '22px' }}
                       size={22}
