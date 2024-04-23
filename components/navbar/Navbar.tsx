@@ -7,6 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { auth } from '@clerk/nextjs';
 import logo from '@/assets/logo.png';
 import Image from 'next/image';
+import { User } from '@prisma/client';
+import axios from 'axios';
 
 interface NavbarProps {
   userId: any;
@@ -14,6 +16,17 @@ interface NavbarProps {
 
 const Navbar = ({ userId }: NavbarProps) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [user, setUser] = useState<User>();
+  const fetchOneUser = async () => {
+    const response = await axios
+      .get('/api/user/oneuser')
+      .then(res => setUser(res.data.data));
+
+    return response;
+  };
+  useEffect(() => {
+    fetchOneUser();
+  }, []);
 
   return (
     <div className='shadow-lg '>
@@ -51,6 +64,11 @@ const Navbar = ({ userId }: NavbarProps) => {
                 Dashboard
               </Link>
               <UserButton afterSignOutUrl='/' />
+              {user?.subscriptions === 'premium' && (
+                <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
+                  premium
+                </p>
+              )}
             </>
           )}
         </div>
@@ -62,7 +80,7 @@ const Navbar = ({ userId }: NavbarProps) => {
       {isMobileNavOpen && (
         <motion.div
           initial={{ height: 0 }}
-          animate={{ height: '200px' }}
+          animate={{ height: '250px' }}
           transition={{ duration: 0.3 }}
           className='absolute top-0 left-0 w-full h-full bg-white shadow-lg z-50'>
           <button
@@ -94,6 +112,11 @@ const Navbar = ({ userId }: NavbarProps) => {
                     Dashboard
                   </Link>
                   <UserButton afterSignOutUrl='/' />
+                  {user?.subscriptions === 'premium' && (
+                    <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
+                      premium
+                    </p>
+                  )}
                 </>
               )}
             </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 interface PriceComponentProps {
   userId: any;
@@ -10,10 +11,24 @@ interface PriceComponentProps {
 
 const PriceComponent = ({ userId }: PriceComponentProps) => {
   const router = useRouter();
-  const handlePremium = () => {
+  const handlePremium = async (e: any) => {
+    e.preventDefault();
     if (!userId) {
       router.push('/sign-in');
     }
+    const priceId = 'price_1P6z2UEskKO9rlKaM9cfb0lT';
+    const { data } = await axios.post(
+      '/api/payment',
+      {
+        priceId: priceId,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    window.location.assign(data);
   };
   const handleEnterprise = () => {
     if (!userId) {

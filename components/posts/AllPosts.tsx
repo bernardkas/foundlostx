@@ -17,7 +17,8 @@ const AllPosts = () => {
   const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
   const [foundOrLost, setFoundOrLost] = useState('all');
   const [allPostFilter, setAllPostFilter] = useState<LostAndFound[]>([]);
-  const [visiblePosts, setVisiblePosts] = useState(20); // Number of posts to display initially
+  const [visiblePosts, setVisiblePosts] = useState(20);
+
   const postsPerPage = 20;
   useEffect(() => {
     axios
