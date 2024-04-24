@@ -52,7 +52,7 @@ const Navbar = ({ userId }: NavbarProps) => {
 
           {!userId ? (
             <Link
-              className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
+              className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm w-[100px] text-center'
               href='sign-in'>
               Login
             </Link>
@@ -67,6 +67,11 @@ const Navbar = ({ userId }: NavbarProps) => {
               {user?.subscriptions === 'premium' && (
                 <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
                   premium
+                </p>
+              )}
+              {user?.subscriptions === 'enterprise' && (
+                <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
+                  Enterprise
                 </p>
               )}
             </>
@@ -98,7 +103,7 @@ const Navbar = ({ userId }: NavbarProps) => {
               </Link>
               {!userId ? (
                 <Link
-                  className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm'
+                  className='mx-2 font-noto-sans font-[500] text-base text-white bg-orange-500 p-1 rounded-sm w-[100px] text-center'
                   href='sign-in'
                   onClick={() => setIsMobileNavOpen(false)}>
                   Login
@@ -115,6 +120,11 @@ const Navbar = ({ userId }: NavbarProps) => {
                   {user?.subscriptions === 'premium' && (
                     <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
                       premium
+                    </p>
+                  )}
+                  {user?.subscriptions === 'enterprise' && (
+                    <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
+                      Enterprise
                     </p>
                   )}
                 </>

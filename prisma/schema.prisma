@@ -19,7 +19,6 @@ model User {
   lastname String?
   email      Email[]
   subscriptions String? @default("basic")
-  isPaid Boolean? @default(false)
   password  String
   attributes Json
   createdAt DateTime @default(now())
@@ -45,6 +44,8 @@ model LostAndFound {
   title         String
   country       String 
   city          String
+  isPaid Boolean? @default(false)
+  isEnterprise Boolean? @default(false)
   // streetAddress String 
   whereDidFind  String
   exactLocation   String

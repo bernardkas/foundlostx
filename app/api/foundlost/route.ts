@@ -10,10 +10,68 @@ export async function POST(req: Request) {
   const { userId } = auth();
 
   if (!userId) {
-    NextResponse.json({ error: 'No userId' });
+    NextResponse.json({ error: 'You need to Sign In' });
     return redirect('/sign-in');
   }
 
+  const user = await prisma.user.findUnique({
+    where: {
+      externalId: userId,
+    },
+  });
+
+  if (user?.subscriptions === 'premium') {
+    const packageLimit = 1;
+    const existingPostsCount = await prisma.lostAndFound.count({
+      where: { userId: user.id },
+    });
+
+    if (existingPostsCount >= packageLimit) {
+      return NextResponse.json({
+        error: `You can't create more than ${packageLimit} per post.`,
+      });
+    }
+  } else if (user?.subscriptions === 'enterprise') {
+    const packageLimit = 999;
+    const existingPostsCount = await prisma.lostAndFound.count({
+      where: { userId: user.id },
+    });
+
+    if (existingPostsCount >= packageLimit) {
+      return NextResponse.json({
+        error: `You can't create more than ${packageLimit} per post.`,
+      });
+    }
+  } else if (user?.subscriptions === 'basic') {
+    const packageLimit = 1;
+    const existingPostsCount = await prisma.lostAndFound.count({
+      where: { userId: user.id },
+    });
+
+    if (existingPostsCount >= packageLimit) {
+      return NextResponse.json({
+        error: `You can't create more than ${packageLimit} per post.`,
+      });
+    }
+  } else {
+    return NextResponse.json({
+      error: 'Invalid subscription level for the user.',
+    });
+  }
+
+  let isPremium;
+  if (user?.subscriptions === 'premium') {
+    isPremium = true;
+  } else {
+    isPremium = false;
+  }
+
+  let enterprise;
+  if (user?.subscriptions === 'enterprise') {
+    enterprise = true;
+  } else {
+    enterprise = false;
+  }
   const {
     name,
     lastname,
@@ -60,6 +118,8 @@ export async function POST(req: Request) {
         mapAddress,
         photo,
         label,
+        isPaid: isPremium,
+        isEnterprise: enterprise,
         airoport,
         bus,
         train,
@@ -69,7 +129,11 @@ export async function POST(req: Request) {
       },
     });
     revalidatePath('/posts');
-    return NextResponse.json({ data: userPost });
+    return NextResponse.json({
+      status: 200,
+      data: userPost,
+      error: NextResponse.error(),
+    });
   } catch (error) {
     console.log('Error creating entry', error);
     return NextResponse.error();

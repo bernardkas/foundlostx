@@ -64,7 +64,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
       id: 3,
       label: 'Phone',
       data: post?.phone,
-      icon: <MapPin className='text-orange-500 w-[60px] h-[20px]' size={22} />,
+      icon: <MapPin className='text-orange-500 ' size={22} />,
     },
     {
       id: 4,
@@ -186,15 +186,15 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                   </div>
                 </div>
                 <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
-                  <LocateFixed
+                  {/* <LocateFixed
                     className='text-slate-700'
                     size={22}
                     width={60}
                     height={20}
-                  />
+                  /> */}
                   <div>
-                    <p className='text-slate-700 font-noto-sans text-[16px]'>
-                      Exact location
+                    <p className='text-gray-500 font-noto-sans text-[16px]'>
+                      Exact location:
                     </p>
                     <p className='text-slate-900 font-noto-sans'>
                       {post?.exactLocation}
@@ -217,7 +217,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
             </div>
           </div>
           <h2 className='font-bold border-b-[2px] pb-2 text-lg'>Information</h2>
-          <div className='flex flex-row flex-wrap gap-5 w-auto lg:w-[500px] border-[1px] rounded-md p-2'>
+          <div className='flex flex-row flex-wrap gap-5 w-auto border-[1px] rounded-md p-2'>
             {otherInformation.map(item => (
               <div key={item.id} className='flex flex-row gap-1 flex-wrap'>
                 {item.icon}

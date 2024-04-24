@@ -3,11 +3,8 @@ import React, { Suspense, useEffect, useState } from 'react';
 import Card from './Card';
 import Filter from './filter/Filter';
 import axios, { all } from 'axios';
-import { Skeleton } from '../ui/skeleton';
 import { LostAndFound } from '@prisma/client';
 import { useSearchInputState } from '@/lib/store';
-import Empty from '../ui/empty';
-import { formatDate } from '@/lib/utils';
 import { Button } from '../ui/button';
 
 const AllPosts = () => {
@@ -18,6 +15,8 @@ const AllPosts = () => {
   const [foundOrLost, setFoundOrLost] = useState('all');
   const [allPostFilter, setAllPostFilter] = useState<LostAndFound[]>([]);
   const [visiblePosts, setVisiblePosts] = useState(20);
+  const [premiumPost, setPremiumPost] = useState<LostAndFound[]>([]);
+  const [enterprisePost, setEnterprisePost] = useState<LostAndFound[]>([]);
 
   const postsPerPage = 20;
   useEffect(() => {
@@ -41,6 +40,12 @@ const AllPosts = () => {
 
   useEffect(() => {
     let filterPost = [...allPosts];
+
+    const premium = allPosts.filter(item => item?.isPaid === true);
+    setPremiumPost(premium);
+
+    const enterprise = allPosts.filter(item => item?.isEnterprise === true);
+    setEnterprisePost(enterprise);
 
     if (desc) {
       filterPost = filterPost.filter(item =>
@@ -77,6 +82,8 @@ const AllPosts = () => {
     setVisiblePosts(prevVisiblePosts => prevVisiblePosts + postsPerPage);
   };
 
+  console.log('premiumPost', premiumPost);
+
   return (
     <div className='mx-2 lg:mx-[15%] flex flex-col lg:flex-row gap-2 '>
       <Filter
@@ -88,8 +95,36 @@ const AllPosts = () => {
         setFoundOrLost={setFoundOrLost}
       />
       <div className='flex flex-col'>
+        {enterprisePost.length > 0 && (
+          <div className='flex flex-col mt-5 border-b-[2px] border-orange-500'>
+            <h1 className='font-bold text-lg font-noto-sans text-orange-500 uppercase'>
+              ENTERPRISE
+            </h1>
+            <Card
+              className='border-[1px] border-orange-500'
+              posts={enterprisePost}
+              loading={loading}
+            />
+          </div>
+        )}
+        {premiumPost.length > 0 && (
+          <div className='flex flex-col mt-5 border-b-[2px] border-orange-500'>
+            <h1 className='font-bold text-lg font-noto-sans text-orange-500 uppercase'>
+              Premium
+            </h1>
+            <Card
+              className='border-[1px] border-orange-500'
+              posts={premiumPost}
+              loading={loading}
+            />
+          </div>
+        )}
+
         <div className='flex flex-col items-center'>
-          <Card posts={filterPosts} loading={loading} />
+          <Card
+            posts={filterPosts.filter(post => !premiumPost.includes(post))}
+            loading={loading}
+          />
         </div>
 
         <h2 className='text-xl font-bold'>Revelant</h2>
@@ -97,7 +132,9 @@ const AllPosts = () => {
           {reversPosts.slice(0, visiblePosts) && (
             <>
               <Card
-                posts={reversPosts.slice(0, visiblePosts)}
+                posts={reversPosts
+                  .slice(0, visiblePosts)
+                  .filter(post => !premiumPost.includes(post))}
                 loading={loading}
               />
               {reversPosts.length > visiblePosts && (

@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
           subscriptions: 'premium',
         },
       });
+
       return NextResponse.json({
         message: 'Subscription updated successfully',
       });

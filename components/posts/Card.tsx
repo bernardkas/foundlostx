@@ -3,6 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import {
   capitalizeFirstLetter,
+  cn,
   formatDate,
   formatDistanceToNow,
 } from '@/lib/utils';
@@ -11,18 +12,30 @@ import emptyPhoto from '@/assets/howitworks/matching.png';
 import { Button } from '../ui/button';
 import { Skeleton } from '../ui/skeleton';
 import Empty from '../ui/empty';
+import { Switch } from '../ui/switch';
 
 interface CardPorps {
   posts: LostAndFound[];
   showDeleteButton?: boolean;
   loading: boolean;
   onClickDelete?: (val: any) => void;
+  showPremiumButton?: boolean;
+  isPremium?: any;
+  selectedPremium?: number[];
+  className?: string;
+
+  handleMakePremium?: (id: number) => void;
 }
 const Card = ({
   posts,
   showDeleteButton = false,
   loading,
+  showPremiumButton,
   onClickDelete,
+  isPremium,
+  selectedPremium,
+  handleMakePremium,
+  className,
 }: CardPorps) => {
   const router = useRouter();
   const handleClickCard = (id: number) => {
@@ -37,7 +50,7 @@ const Card = ({
   ));
 
   return (
-    <div className='my:2 lg:my-10 w-full'>
+    <div className='my:2 lg:my-5 w-full'>
       <div className='flex flex-col gap-7 justify-center items-center'>
         {loading ? (
           skeletonArray
@@ -45,7 +58,10 @@ const Card = ({
           posts?.map(item => (
             <div key={item.id} className='flex flex-row gap-2'>
               <div
-                className='border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer '
+                className={cn(
+                  'border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer',
+                  className
+                )}
                 onClick={() => handleClickCard(item.id)}>
                 <div className='flex flex-col md:flex-row gap-5 items-start md:items-start '>
                   <div className='w-[200px] h-[200px]'>
@@ -99,14 +115,33 @@ const Card = ({
                   </div>
                 </div>
               </div>
-              {showDeleteButton && onClickDelete && (
-                <Button
-                  onClick={() => onClickDelete(item.id)}
-                  className=''
-                  variant='destructive'>
-                  Delete
-                </Button>
-              )}
+              <div className='flex flex-col gap-5'>
+                {showDeleteButton && onClickDelete && (
+                  <Button
+                    onClick={() => onClickDelete(item.id)}
+                    className=''
+                    variant='destructive'>
+                    Delete
+                  </Button>
+                )}
+                {showPremiumButton && selectedPremium && (
+                  <div className='flex flex-col'>
+                    <p className='m-0 text-orange-500'>Make Premium</p>
+                    <Switch
+                      className='data-[state=checked]:bg-orange-500'
+                      disabled={!isPremium}
+                      // @ts-ignore
+                      checked={
+                        selectedPremium?.includes(item?.id) || item?.isPaid
+                      }
+                      onCheckedChange={() =>
+                        // @ts-ignore
+                        handleMakePremium(item?.id)
+                      }
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           ))
         ) : (

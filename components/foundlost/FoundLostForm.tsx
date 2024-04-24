@@ -135,8 +135,8 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
         generalLocation: generalLocation,
       });
 
-      if (data.status === 200) {
-        toast('foundlost', { type: 'success' });
+      if (data.data.status === 200) {
+        toast('Created successful', { type: 'success' });
         setLoading(false);
         setInput({
           name: '',
@@ -176,8 +176,11 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
         setSelectedTime('');
         // @ts-ignore
         setSelectedDate('');
+      } else {
+        toast(data.data.error, { type: 'error' });
       }
     } catch (err) {
+      setLoading(false)
       toast('Error! Not created', { type: 'error' });
       console.log(err);
     }
