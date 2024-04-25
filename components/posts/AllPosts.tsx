@@ -95,6 +95,13 @@ const AllPosts = () => {
         setFoundOrLost={setFoundOrLost}
       />
       <div className='flex flex-col'>
+        <div className='flex flex-col items-center pt-3'>
+          <Card
+            posts={filterPosts.filter(post => !premiumPost.includes(post))}
+            loading={loading}
+          />
+        </div>
+
         {enterprisePost.length > 0 && (
           <div className='flex flex-col mt-5 border-b-[2px] p-3 border-indigo-500'>
             <h1 className='font-bold text-lg font-noto-sans text-indigo-500 uppercase'>
@@ -120,14 +127,7 @@ const AllPosts = () => {
           </div>
         )}
 
-        <div className='flex flex-col items-center pt-3'>
-          <Card
-            posts={filterPosts.filter(post => !premiumPost.includes(post))}
-            loading={loading}
-          />
-        </div>
-
-        <h2 className='text-xl font-bold'>Revelant</h2>
+        <h2 className='text-xl font-bold mt-4'>Revelant</h2>
         <div className='flex flex-col items-center my-5'>
           {reversPosts.slice(0, visiblePosts) && (
             <>
