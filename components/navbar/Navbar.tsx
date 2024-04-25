@@ -84,6 +84,19 @@ const Navbar = ({ userId }: NavbarProps) => {
           )}
         </div>
 
+        <div className='lg:hidden'>
+          {user?.subscriptions === 'premium' && (
+            <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
+              premium
+            </p>
+          )}
+          {user?.subscriptions === 'enterprise' && (
+            <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
+              Enterprise
+            </p>
+          )}
+        </div>
+
         <div className='block text-gray-800 lg:hidden'>
           <Menu onClick={() => setIsMobileNavOpen(!isMobileNavOpen)} />
         </div>
@@ -91,7 +104,7 @@ const Navbar = ({ userId }: NavbarProps) => {
       {isMobileNavOpen && (
         <motion.div
           initial={{ height: 0 }}
-          animate={{ height: '280px' }}
+          animate={{ height: '250px' }}
           transition={{ duration: 0.3 }}
           className='absolute top-0 left-0 w-full h-full bg-white shadow-lg z-50'>
           <button
@@ -131,16 +144,6 @@ const Navbar = ({ userId }: NavbarProps) => {
                     <UserButton afterSignOutUrl='/' />
                     <p>Profile</p>
                   </div>
-                  {user?.subscriptions === 'premium' && (
-                    <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
-                      premium
-                    </p>
-                  )}
-                  {user?.subscriptions === 'enterprise' && (
-                    <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
-                      Enterprise
-                    </p>
-                  )}
                 </>
               )}
             </div>
