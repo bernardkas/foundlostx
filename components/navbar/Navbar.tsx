@@ -30,12 +30,18 @@ const Navbar = ({ userId }: NavbarProps) => {
 
   return (
     <div className='shadow-lg '>
-      <div className='mx-1 flex  h-[70px] flex-row items-center justify-between  lg:mx-[15%]'>
+      <div className='mx-4 flex  h-[70px] flex-row items-center justify-between  lg:mx-[15%]'>
         <div>
           <Link
             className='font-tilt-prism text-2xl font-bold text-orange-500 h-16'
             href='/'>
-            <Image src={logo} alt='' width={300} height={50} />
+            <Image
+              src={logo}
+              alt=''
+              className='w-[230px] md:w-[300px]'
+              width={300}
+              height={50}
+            />
           </Link>
         </div>
         <div className='hidden flex-row gap-1 items-center lg:flex'>
