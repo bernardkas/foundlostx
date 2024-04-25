@@ -114,6 +114,7 @@ const Navbar = ({ userId }: NavbarProps) => {
           <div className='flex justify-center'>
             <div className=' flex flex-col items-start justify-center gap-5 '>
               <Link
+                onClick={() => setIsMobileNavOpen(false)}
                 className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
                 href='/price'>
                 Price
