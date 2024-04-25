@@ -51,15 +51,15 @@ const Card = ({
 
   return (
     <div className='my:2 lg:my-5 w-full'>
-      <div className='flex flex-col gap-7 justify-center items-center'>
+      <div className='flex flex-col gap-7 justify-center items-center w-full'>
         {loading ? (
           skeletonArray
         ) : posts.length > 0 ? (
           posts?.map(item => (
-            <div key={item.id} className='flex flex-row gap-2'>
+            <div key={item.id} className='flex flex-row flex-wrap gap-2'>
               <div
                 className={cn(
-                  'border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer',
+                  'border-[1px] p-3 rounded-md flex flex-col md:flex-row justify-between cursor-pointer w-[350px] md:w-[850px]',
                   className
                 )}
                 onClick={() => handleClickCard(item.id)}>

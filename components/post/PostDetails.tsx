@@ -186,12 +186,6 @@ const PostDetails = ({ post }: PostDetailsProps) => {
                   </div>
                 </div>
                 <div className='flex flex-row gap-1 border-b-[1px] pb-2'>
-                  {/* <LocateFixed
-                    className='text-slate-700'
-                    size={22}
-                    width={60}
-                    height={20}
-                  /> */}
                   <div>
                     <p className='text-gray-500 font-noto-sans text-[16px]'>
                       Exact location:

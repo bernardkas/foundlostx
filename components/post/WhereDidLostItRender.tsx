@@ -33,13 +33,13 @@ const WhereDidLostItRender = ({
               </p>
             </div>
             <div>
-              <p className=' text-slate-500 font-noto-sans'>Airoport Name</p>
+              <p className=' text-slate-500 font-noto-sans'>Airoplan Name</p>
               <p className=' text-slate-800 font-noto-sans'>
                 {airoportData.airlineName}
               </p>
             </div>
             <div>
-              <p className=' text-slate-500 font-noto-sans'>Airoport Name</p>
+              <p className=' text-slate-500 font-noto-sans'>Airoplan Number</p>
               <p className=' text-slate-800 font-noto-sans'>
                 {airoportData.flightNumber}
               </p>

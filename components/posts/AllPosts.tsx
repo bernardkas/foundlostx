@@ -85,7 +85,7 @@ const AllPosts = () => {
   console.log('premiumPost', premiumPost);
 
   return (
-    <div className='mx-2 lg:mx-[15%] flex flex-col lg:flex-row gap-2 '>
+    <div className='mx-2 lg:mx-[15%] flex flex-col lg:flex-row gap-2'>
       <Filter
         desc={desc}
         country={country}
@@ -96,7 +96,7 @@ const AllPosts = () => {
       />
       <div className='flex flex-col'>
         {enterprisePost.length > 0 && (
-          <div className='flex flex-col mt-5 border-b-[2px] border-indigo-500'>
+          <div className='flex flex-col mt-5 border-b-[2px] p-3 border-indigo-500'>
             <h1 className='font-bold text-lg font-noto-sans text-indigo-500 uppercase'>
               ENTERPRISE
             </h1>
@@ -108,7 +108,7 @@ const AllPosts = () => {
           </div>
         )}
         {premiumPost.length > 0 && (
-          <div className='flex flex-col mt-5 border-b-[2px] border-orange-500'>
+          <div className='flex flex-col mt-5 border-b-[2px] p-3 border-orange-500'>
             <h1 className='font-bold text-lg font-noto-sans text-orange-500 uppercase'>
               Premium
             </h1>
@@ -120,7 +120,7 @@ const AllPosts = () => {
           </div>
         )}
 
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center pt-3'>
           <Card
             posts={filterPosts.filter(post => !premiumPost.includes(post))}
             loading={loading}
@@ -128,7 +128,7 @@ const AllPosts = () => {
         </div>
 
         <h2 className='text-xl font-bold'>Revelant</h2>
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center my-5'>
           {reversPosts.slice(0, visiblePosts) && (
             <>
               <Card
