@@ -52,12 +52,12 @@ const Header = ({}: HeaderProps) => {
           <p className='mb-12 font-golos-text  text-slate-500'>
             Search what you lost here !!
           </p>
-          <div className='grid grid-cols-1 md:grid-cols-2  justify-center gap-3 md:gap-5 border-[1px] m-1 border-orange-400 p-[20px] rounded-md'>
+          <div className='grid grid-cols-1 md:grid-cols-2  justify-center gap-3 border-[1px] m-1 border-orange-400 p-[20px] rounded-md'>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
                   <Input
-                    className='border-t-0 border-l-0 border-r-0 border-b-[1px]  pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
+                    className='border-[1px]  pb-1 outline-none w-[350px] font-golos-text text-base'
                     placeholder='Describe what you lose...'
                     onChange={val =>
                       handleInputChange('desc', val.target.value)
@@ -72,24 +72,10 @@ const Header = ({}: HeaderProps) => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            <Combobox
-              frameworks={countryData}
-              className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-              placeholder='*Country...'
-              setValue={value => handleInputChange('country', value)}
-              value={country}
-            />
-            <Combobox
-              frameworks={englandCity}
-              className=' border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'
-              placeholder='*City...'
-              setValue={value => handleInputChange('city', value)}
-              value={city}
-            />
             <Select
               onValueChange={val => handleInputChange('whereDidFind', val)}
               value={whereDidFind}>
-              <SelectTrigger className='border-t-0 border-l-0 border-r-0 border-b-[1px] pb-1 outline-none w-[350px] lg:w-[250px] font-golos-text text-base'>
+              <SelectTrigger className=' border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'>
                 <SelectValue placeholder='*Where did you lost/find item?' />
               </SelectTrigger>
               <SelectContent>
@@ -100,6 +86,21 @@ const Header = ({}: HeaderProps) => {
                 ))}
               </SelectContent>
             </Select>
+            <Combobox
+              frameworks={countryData}
+              className=' border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'
+              placeholder='*Country...'
+              setValue={value => handleInputChange('country', value)}
+              value={country}
+            />
+            <Combobox
+              frameworks={englandCity}
+              className='  border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'
+              placeholder='*City...'
+              setValue={value => handleInputChange('city', value)}
+              value={city}
+            />
+
             <div></div>
             <button
               onClick={() => handleSearch(city)}
