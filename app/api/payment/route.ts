@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       cancel_url: 'http://localhost:3000/price',
       payment_intent_data: {
         metadata: {
-          userId: userId,
+          userId: Number(userid),
         },
       },
     });
