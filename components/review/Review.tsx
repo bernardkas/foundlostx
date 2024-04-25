@@ -108,8 +108,6 @@ const Review = ({ lostfoundId }: ReviewProps) => {
     }
   };
 
-  console.log('name', name);
-
   return (
     <div className='my-10 mx-5 md:mx-0'>
       <div className='flex justify-start flex-col items-center'>
@@ -144,7 +142,9 @@ const Review = ({ lostfoundId }: ReviewProps) => {
             {reviewData?.length} Responses
           </h3>
           {reviewData?.map(item => (
-            <div className='flex flex-row mt-5 items-center justify-between gap-3 w-full'>
+            <div
+              key={item.id}
+              className='flex flex-row mt-5 items-center justify-between gap-3 w-full'>
               <div className='flex flex-row items-center gap-3'>
                 <p>
                   <CircleUser size={30} className='text-gray-500' />
