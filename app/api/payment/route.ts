@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: process.env.STRIPE_URL_SUCCESS_PRODUCTION_REDIRECT, //In the future in env production
+      success_url: process.env.STRIPE_URL_SUCCESS_PRODUCTION_REDIRECT,
       cancel_url: process.env.STRIPE_URL_CANCEL_PRODUCTION_REDIRECT,
       payment_intent_data: {
         metadata: {

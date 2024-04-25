@@ -65,6 +65,7 @@ async function scheduleSubscriptionReversion(
   );
   // const threeMinutesLater = new Date(paymentDate.getTime() + 3 * 60 * 1000); for testing 3 min
   const now = new Date();
+  const timeoutDuration = oneMonthLater.getTime() - now.getTime();
 
   if (oneMonthLater > now) {
     setTimeout(async () => {
@@ -84,6 +85,6 @@ async function scheduleSubscriptionReversion(
           isPaid: false,
         },
       });
-    }, oneMonthLater.getTime() - now.getTime());
+    }, timeoutDuration);
   }
 }
