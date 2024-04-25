@@ -238,12 +238,6 @@ const PostDetails = ({ post }: PostDetailsProps) => {
             generalData={generalData}
           />
           <div className='flex flex-row  gap-2 w-auto lg:w-[500px]'>
-            <MessageCircle
-              size={22}
-              width={60}
-              height={20}
-              className=' text-orange-500 '
-            />
             <div>
               <div className=' text-slate-500 font-noto-sans'>Description</div>
               <div className=' text-slate-800 font-noto-sans'>

@@ -96,12 +96,12 @@ const AllPosts = () => {
       />
       <div className='flex flex-col'>
         {enterprisePost.length > 0 && (
-          <div className='flex flex-col mt-5 border-b-[2px] border-orange-500'>
-            <h1 className='font-bold text-lg font-noto-sans text-orange-500 uppercase'>
+          <div className='flex flex-col mt-5 border-b-[2px] border-indigo-500'>
+            <h1 className='font-bold text-lg font-noto-sans text-indigo-500 uppercase'>
               ENTERPRISE
             </h1>
             <Card
-              className='border-[1px] border-orange-500'
+              className='border-[1px] border-indigo-500'
               posts={enterprisePost}
               loading={loading}
             />

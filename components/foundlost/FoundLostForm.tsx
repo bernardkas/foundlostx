@@ -21,10 +21,13 @@ import WhereDidFindIt from './whereDidFindIt';
 import Map from '../map/Map';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
+import { Loader } from 'lucide-react';
 
-interface FoundLostFromProps {}
+interface FoundLostFromProps {
+  userId: any;
+}
 
-const FoundLostForm = ({}: FoundLostFromProps) => {
+const FoundLostForm = ({ userId }: FoundLostFromProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
@@ -88,6 +91,11 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
   };
   const createForm = async (e: any) => {
     e.preventDefault();
+
+    if (!userId) {
+      toast('You need to sign in ', { type: 'error' });
+      return router.push('/sign-in');
+    }
 
     if (
       input.name === '' ||
@@ -180,7 +188,7 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
         toast(data.data.error, { type: 'error' });
       }
     } catch (err) {
-      setLoading(false)
+      setLoading(false);
       toast('Error! Not created', { type: 'error' });
       console.log(err);
     }
@@ -425,7 +433,7 @@ const FoundLostForm = ({}: FoundLostFromProps) => {
           <Button
             type='submit'
             className='bg-orange-500 text-base hover:bg-orange-700'>
-            {loading ? 'Loading...' : 'Submit'}
+            {loading ? <Loader size={20} /> : 'Submit'}
           </Button>
         </form>
       </div>

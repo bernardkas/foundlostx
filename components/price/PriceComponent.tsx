@@ -34,6 +34,8 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
     if (!userId) {
       router.push('/sign-in');
     }
+
+    router.push('/contactus');
   };
 
   const info = [
