@@ -84,7 +84,7 @@ const Navbar = ({ userId }: NavbarProps) => {
           )}
         </div>
 
-        <div className='lg:hidden'>
+        <div className='text-gray-800 lg:hidden flex flex-row items-center gap-5'>
           {user?.subscriptions === 'premium' && (
             <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
               premium
@@ -95,9 +95,6 @@ const Navbar = ({ userId }: NavbarProps) => {
               Enterprise
             </p>
           )}
-        </div>
-
-        <div className='block text-gray-800 lg:hidden'>
           <Menu onClick={() => setIsMobileNavOpen(!isMobileNavOpen)} />
         </div>
       </div>

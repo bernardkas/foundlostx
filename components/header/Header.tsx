@@ -52,7 +52,7 @@ const Header = ({}: HeaderProps) => {
           <p className='mb-12 font-golos-text  text-slate-500'>
             Search what you lost here !!
           </p>
-          <div className='flex flex-row flex-wrap justify-center gap-3 md:gap-0 border-[1px] m-1 border-orange-400 p-5 rounded-md px-2'>
+          <div className='grid grid-cols-1 md:grid-cols-2  justify-center gap-3 md:gap-5 border-[1px] m-1 border-orange-400 p-[20px] rounded-md'>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
@@ -100,9 +100,10 @@ const Header = ({}: HeaderProps) => {
                 ))}
               </SelectContent>
             </Select>
+            <div></div>
             <button
               onClick={() => handleSearch(city)}
-              className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-[250px] md:w-[100px] '>
+              className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-full '>
               Search
             </button>
           </div>
