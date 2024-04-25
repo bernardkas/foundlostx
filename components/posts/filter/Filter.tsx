@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select';
 import MobileFilter from './MobileFilter';
 import Modal from '@/components/ui/modal';
+import { FilterIcon } from 'lucide-react';
 
 interface FilterProps {
   desc: string;
@@ -88,14 +89,26 @@ const Filter = ({
         </div>
       </div>
       <div className='block lg:hidden'>
-        <div className='flex flex-row justify-end my-4'>
-          <p
-            className='cursor-pointer  text-base bg-stone-300 p-2 rounded-md '
-            onClick={() => setOpenModal(true)}>
-            Filter
-          </p>
+        <div className='border-[1px] p-2 rounded-md flex flex-row justify-center gap-4'>
+          <RadioGroup
+            className='flex flex-row'
+            onValueChange={val => setFoundOrLost(val)}
+            defaultValue='all'
+            value={foundOrLost}>
+            <div className='flex items-center space-x-2'>
+              <RadioGroupItem value='all' id='r1' />
+              <label htmlFor='r1'>All</label>
+            </div>
+            <div className='flex items-center space-x-2'>
+              <RadioGroupItem value='found' id='r2' />
+              <label htmlFor='r2'>Found</label>
+            </div>
+            <div className='flex items-center space-x-2'>
+              <RadioGroupItem value='lost' id='r3' />
+              <label htmlFor='r3'>Lost</label>
+            </div>
+          </RadioGroup>
         </div>
-        <MobileFilter setOpenModal={setOpenModal} openModal={openModal} />
       </div>
     </>
   );
