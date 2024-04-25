@@ -95,7 +95,9 @@ const Navbar = ({ userId }: NavbarProps) => {
               Enterprise
             </p>
           )}
-          <Menu onClick={() => setIsMobileNavOpen(!isMobileNavOpen)} />
+          <div onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}>
+            <Menu />
+          </div>
         </div>
       </div>
       {isMobileNavOpen && (
