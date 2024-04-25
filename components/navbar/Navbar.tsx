@@ -91,7 +91,7 @@ const Navbar = ({ userId }: NavbarProps) => {
       {isMobileNavOpen && (
         <motion.div
           initial={{ height: 0 }}
-          animate={{ height: '250px' }}
+          animate={{ height: '280px' }}
           transition={{ duration: 0.3 }}
           className='absolute top-0 left-0 w-full h-full bg-white shadow-lg z-50'>
           <button
@@ -99,8 +99,13 @@ const Navbar = ({ userId }: NavbarProps) => {
             onClick={() => setIsMobileNavOpen(false)}>
             X
           </button>
-          <div>
-            <div className=' flex flex-col items-center justify-center gap-5 '>
+          <div className='flex justify-center'>
+            <div className=' flex flex-col items-start justify-center gap-5 '>
+              <Link
+                className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
+                href='/price'>
+                Price
+              </Link>
               <Link
                 className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
                 href='foundlost'
@@ -122,7 +127,10 @@ const Navbar = ({ userId }: NavbarProps) => {
                     onClick={() => setIsMobileNavOpen(false)}>
                     Dashboard
                   </Link>
-                  <UserButton afterSignOutUrl='/' />
+                  <div className='flex flex-row gap-2 items-center'>
+                    <UserButton afterSignOutUrl='/' />
+                    <p>Profile</p>
+                  </div>
                   {user?.subscriptions === 'premium' && (
                     <p className='bg-orange-500 text-white ml-2 p-[3px] rounded-md text-[14px] font-ibm-plex-mono uppercase'>
                       premium
