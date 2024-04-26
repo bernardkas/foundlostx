@@ -43,8 +43,6 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // scheduleSubscriptionReversion(customerId, paymentDate);
-
       scheduleSubscriptionReversion(paymentDate, customerId);
 
       return NextResponse.json({
@@ -82,49 +80,14 @@ async function revertToBasic(customerId: number) {
 }
 
 function scheduleSubscriptionReversion(paymentDate: any, customerId: any) {
-  // const oneMonthLater = new Date(
-  //       paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000
-  //     )
-  const revertDate = new Date(paymentDate.getTime() + 3 * 60 * 1000);
+  const oneMonthLater = new Date(
+    paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000
+  );
+  // const revertDate = new Date(paymentDate.getTime() + 3 * 60 * 1000); for testing only 3 min revert
 
-  // Schedule the job to run at the revert date and time
-  const job = schedule.scheduleJob(revertDate, async () => {
+  const job = schedule.scheduleJob(oneMonthLater, async () => {
     await revertToBasic(customerId);
-    console.log('Subscription reverted to basic');
   });
 
   return job;
 }
-
-// async function scheduleSubscriptionReversion(
-//   customerId: any,
-//   paymentDate: Date
-// ) {
-//   const oneMonthLater = new Date(
-//     paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000
-//   );
-//   // const threeMinutesLater = new Date(paymentDate.getTime() + 3 * 60 * 1000); for testing 3 min
-//   const now = new Date();
-//   const timeoutDuration = oneMonthLater.getTime() - now.getTime();
-
-//   if (oneMonthLater > now) {
-//     setTimeout(async () => {
-//       await prisma.user.update({
-//         where: {
-//           id: Number(customerId),
-//         },
-//         data: {
-//           subscriptions: 'basic',
-//         },
-//       });
-//       await prisma.lostAndFound.updateMany({
-//         where: {
-//           userId: Number(customerId),
-//         },
-//         data: {
-//           isPaid: false,
-//         },
-//       });
-//     }, timeoutDuration);
-//   }
-// }
