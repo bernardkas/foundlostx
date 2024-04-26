@@ -82,8 +82,6 @@ const AllPosts = () => {
     setVisiblePosts(prevVisiblePosts => prevVisiblePosts + postsPerPage);
   };
 
-  console.log('premiumPost', premiumPost);
-
   return (
     <div className='mx-2 lg:mx-[15%] flex flex-col lg:flex-row gap-2'>
       <Filter
