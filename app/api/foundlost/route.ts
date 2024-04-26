@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/server/db';
-import { revalidatePath } from 'next/cache';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
@@ -128,7 +127,6 @@ export async function POST(req: Request) {
         generalLocation,
       },
     });
-    revalidatePath('/posts');
     return NextResponse.json({
       status: 200,
       data: userPost,
