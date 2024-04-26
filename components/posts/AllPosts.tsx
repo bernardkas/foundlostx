@@ -34,7 +34,8 @@ const AllPosts = () => {
       });
   }, []);
   const relevantPosts = allPostFilter.filter(
-    post => !filterPosts.some(fp => fp.id === post.id)
+    post =>
+      !filterPosts.some(fp => fp.id === post.id) && !premiumPost.includes(post)
   );
   const reversPosts = relevantPosts.reverse();
 
