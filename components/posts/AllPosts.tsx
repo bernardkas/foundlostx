@@ -42,7 +42,7 @@ const AllPosts = () => {
     let filterPost = [...allPosts];
 
     const premium = allPosts.filter(item => item?.isPaid === true);
-    setPremiumPost(premium);
+    setPremiumPost(premium.reverse());
 
     const enterprise = allPosts.filter(item => item?.isEnterprise === true);
     setEnterprisePost(enterprise);
