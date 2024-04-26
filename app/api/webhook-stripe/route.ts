@@ -1,8 +1,6 @@
 import Stripe from 'stripe';
 import { NextResponse, NextRequest } from 'next/server';
 import prisma from '@/server/db';
-// var cron = require('node-cron');
-import cron from 'node-cron';
 import schedule from 'node-schedule';
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!);
