@@ -1,6 +1,9 @@
 import Stripe from 'stripe';
 import { NextResponse, NextRequest } from 'next/server';
 import prisma from '@/server/db';
+// var cron = require('node-cron');
+import cron from 'node-cron';
+import schedule from 'node-schedule';
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!);
 export async function POST(req: NextRequest) {
@@ -18,7 +21,7 @@ export async function POST(req: NextRequest) {
     const customerId = session.metadata?.userId;
     const paymentDate = new Date(session.created * 1000);
 
-    console.log('session', session);
+    console.log('session webhook', session);
 
     if (event.type === 'charge.succeeded') {
       await prisma.user.update({
@@ -40,7 +43,9 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      scheduleSubscriptionReversion(customerId, paymentDate);
+      // scheduleSubscriptionReversion(customerId, paymentDate);
+
+      scheduleSubscriptionReversion(paymentDate, customerId);
 
       return NextResponse.json({
         message: 'Subscription updated successfully',
@@ -56,35 +61,70 @@ export async function POST(req: NextRequest) {
   return new Response('', { status: 200 });
 }
 
-async function scheduleSubscriptionReversion(
-  customerId: any,
-  paymentDate: Date
-) {
-  const oneMonthLater = new Date(
-    paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000
-  );
-  // const threeMinutesLater = new Date(paymentDate.getTime() + 3 * 60 * 1000); for testing 3 min
-  const now = new Date();
-  const timeoutDuration = oneMonthLater.getTime() - now.getTime();
+async function revertToBasic(customerId: number) {
+  await prisma.user.update({
+    where: {
+      id: Number(customerId),
+    },
+    data: {
+      subscriptions: 'basic',
+    },
+  });
 
-  if (oneMonthLater > now) {
-    setTimeout(async () => {
-      await prisma.user.update({
-        where: {
-          id: Number(customerId),
-        },
-        data: {
-          subscriptions: 'basic',
-        },
-      });
-      await prisma.lostAndFound.updateMany({
-        where: {
-          userId: Number(customerId),
-        },
-        data: {
-          isPaid: false,
-        },
-      });
-    }, timeoutDuration);
-  }
+  await prisma.lostAndFound.updateMany({
+    where: {
+      userId: Number(customerId),
+    },
+    data: {
+      isPaid: false,
+    },
+  });
 }
+
+function scheduleSubscriptionReversion(paymentDate: any, customerId: any) {
+  // const oneMonthLater = new Date(
+  //       paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000
+  //     )
+  const revertDate = new Date(paymentDate.getTime() + 3 * 60 * 1000);
+
+  // Schedule the job to run at the revert date and time
+  const job = schedule.scheduleJob(revertDate, async () => {
+    await revertToBasic(customerId);
+    console.log('Subscription reverted to basic');
+  });
+
+  return job;
+}
+
+// async function scheduleSubscriptionReversion(
+//   customerId: any,
+//   paymentDate: Date
+// ) {
+//   const oneMonthLater = new Date(
+//     paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000
+//   );
+//   // const threeMinutesLater = new Date(paymentDate.getTime() + 3 * 60 * 1000); for testing 3 min
+//   const now = new Date();
+//   const timeoutDuration = oneMonthLater.getTime() - now.getTime();
+
+//   if (oneMonthLater > now) {
+//     setTimeout(async () => {
+//       await prisma.user.update({
+//         where: {
+//           id: Number(customerId),
+//         },
+//         data: {
+//           subscriptions: 'basic',
+//         },
+//       });
+//       await prisma.lostAndFound.updateMany({
+//         where: {
+//           userId: Number(customerId),
+//         },
+//         data: {
+//           isPaid: false,
+//         },
+//       });
+//     }, timeoutDuration);
+//   }
+// }
