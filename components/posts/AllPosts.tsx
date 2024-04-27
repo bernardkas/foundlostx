@@ -36,10 +36,6 @@ const AllPosts = () => {
     return resonse;
   };
 
-  useEffect(() => {
-    fetchPostsData();
-  }, []);
-  
   const relevantPosts = allPostFilter.filter(
     post =>
       !filterPosts.some(fp => fp.id === post.id) && !premiumPost.includes(post)
@@ -47,6 +43,8 @@ const AllPosts = () => {
   const reversPosts = relevantPosts.reverse();
 
   useEffect(() => {
+    fetchPostsData();
+
     let filterPost = [...allPosts];
 
     const premium = allPosts.filter(item => item?.isPaid === true);
