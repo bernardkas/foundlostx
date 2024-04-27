@@ -2,15 +2,17 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import Card from './Card';
 import Filter from './filter/Filter';
-import axios, { all } from 'axios';
 import { LostAndFound } from '@prisma/client';
 import { useSearchInputState } from '@/lib/store';
 import { Button } from '../ui/button';
 
-const AllPosts = () => {
-  const [allPosts, setAllPosts] = useState<LostAndFound[]>([]);
+interface AllPostsProps {
+  allPosts: LostAndFound[];
+  loading: boolean;
+}
+
+const AllPosts = ({ allPosts, loading }: AllPostsProps) => {
   const [filterPosts, setFilterPosts] = useState<LostAndFound[]>([]);
-  const [loading, setLoading] = useState(true);
   const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
   const [foundOrLost, setFoundOrLost] = useState('all');
   const [allPostFilter, setAllPostFilter] = useState<LostAndFound[]>([]);
@@ -19,23 +21,6 @@ const AllPosts = () => {
   const [enterprisePost, setEnterprisePost] = useState<LostAndFound[]>([]);
   const postsPerPage = 20;
 
-  const fetchPostsData = async () => {
-    const resonse = await axios
-      .get('/api/posts')
-      .then(res => {
-        const data = res.data.post;
-        if (data) {
-          setAllPosts(data);
-          setLoading(false);
-        }
-      })
-      .catch(error => {
-        console.log('Error fetching data', error);
-      });
-
-    return resonse;
-  };
-
   const relevantPosts = allPostFilter.filter(
     post =>
       !filterPosts.some(fp => fp.id === post.id) && !premiumPost.includes(post)
@@ -43,8 +28,6 @@ const AllPosts = () => {
   const reversPosts = relevantPosts.reverse();
 
   useEffect(() => {
-    fetchPostsData();
-
     let filterPost = [...allPosts];
 
     const premium = allPosts.filter(item => item?.isPaid === true);

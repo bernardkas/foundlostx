@@ -14,21 +14,21 @@ const Posts = () => {
       .get('/api/posts')
       .then(res => {
         const data = res.data.post;
-        if (data) {
-          setAllPosts(data);
-          setLoading(false);
-        }
+        return data;
       })
       .catch(error => {
         console.log('Error fetching data', error);
       });
 
-    return resonse;
+    if (resonse) {
+      setAllPosts(resonse);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchPostsData();
-  });
+  }, []);
 
   return (
     <div>
