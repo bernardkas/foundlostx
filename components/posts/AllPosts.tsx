@@ -126,24 +126,30 @@ const AllPosts = () => {
           </div>
         )}
 
-        <h2 className='text-xl font-bold mt-4'>Revelant</h2>
-        <div className='flex flex-col items-center my-5'>
-          {reversPosts.slice(0, visiblePosts) && (
-            <>
-              <Card
-                posts={reversPosts
-                  .slice(0, visiblePosts)
-                  .filter(post => !premiumPost.includes(post))}
-                loading={loading}
-              />
-              {reversPosts.length > visiblePosts && (
-                <Button onClick={handleShowMore} className='my-4 bg-orange-500'>
-                  Show more
-                </Button>
+        {reversPosts.length > 0 && (
+          <>
+            <h2 className='text-xl font-bold mt-4'>Revelant</h2>
+            <div className='flex flex-col items-center my-5'>
+              {reversPosts.slice(0, visiblePosts) && (
+                <>
+                  <Card
+                    posts={reversPosts
+                      .slice(0, visiblePosts)
+                      .filter(post => !premiumPost.includes(post))}
+                    loading={loading}
+                  />
+                  {reversPosts.length > visiblePosts && (
+                    <Button
+                      onClick={handleShowMore}
+                      className='my-4 bg-orange-500'>
+                      Show more
+                    </Button>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
