@@ -11,7 +11,11 @@ const Posts = () => {
 
   const fetchPostsData = async () => {
     const resonse = await axios
-      .get('/api/posts')
+      .get('/api/posts', {
+        headers: {
+          'Cache-Control': 'no-store',
+        },
+      })
       .then(res => {
         const data = res.data.post;
         setAllPosts(data);
