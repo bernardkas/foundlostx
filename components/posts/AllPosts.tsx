@@ -17,10 +17,10 @@ const AllPosts = () => {
   const [visiblePosts, setVisiblePosts] = useState(20);
   const [premiumPost, setPremiumPost] = useState<LostAndFound[]>([]);
   const [enterprisePost, setEnterprisePost] = useState<LostAndFound[]>([]);
-
   const postsPerPage = 20;
-  useEffect(() => {
-    axios
+
+  const fetchPostsData = async () => {
+    const resonse = await axios
       .get('/api/posts')
       .then(res => {
         const data = res.data.post;
@@ -32,7 +32,14 @@ const AllPosts = () => {
       .catch(error => {
         console.log('Error fetching data', error);
       });
+
+    return resonse;
+  };
+
+  useEffect(() => {
+    fetchPostsData();
   }, []);
+  
   const relevantPosts = allPostFilter.filter(
     post =>
       !filterPosts.some(fp => fp.id === post.id) && !premiumPost.includes(post)

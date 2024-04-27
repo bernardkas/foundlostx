@@ -4,8 +4,6 @@ import Card from '../posts/Card';
 import axios from 'axios';
 import { LostAndFound, User } from '@prisma/client';
 import { toast } from 'react-toastify';
-import Modal from '../ui/modal';
-import { Button } from '../ui/button';
 
 const Dashboard = () => {
   const [post, setPost] = useState<LostAndFound[]>([]);
@@ -72,7 +70,6 @@ const Dashboard = () => {
       toast('Somthing went wrong, try reload', { type: 'error' });
     }
   };
-
 
   return (
     <div className='mx-2 md:mx-32 my-16'>
