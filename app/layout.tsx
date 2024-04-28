@@ -8,7 +8,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytic';
+// import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytic';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,9 +28,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang='en'>
         <body className={inter.className}>
-        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!} />
+          {/* {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
             <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
-          ) : null}
+          ) : null} */}
           <Navbar userId={userId} />
           {children}
           <Footer />
