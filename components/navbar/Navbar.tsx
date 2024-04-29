@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import logo from '@/assets/logo.png';
 import Image from 'next/image';
 import { User } from '@prisma/client';
