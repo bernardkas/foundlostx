@@ -1,6 +1,6 @@
 import PriceComponent from '@/components/price/PriceComponent';
 import { Button } from '@/components/ui/button';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import { Check, ChevronRight } from 'lucide-react';
 import React from 'react';
 

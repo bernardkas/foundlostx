@@ -5,7 +5,7 @@ import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
 require('dotenv').config();
 import { ClerkProvider } from '@clerk/nextjs';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { GoogleAnalytics } from '@next/third-parties/google';

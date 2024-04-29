@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/server/db';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
 export async function POST(req: Request) {

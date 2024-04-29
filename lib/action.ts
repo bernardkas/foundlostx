@@ -5,7 +5,7 @@ import {
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import axios from 'axios';
 
 const s3Client = new S3Client({
@@ -71,5 +71,3 @@ export async function englandCountry() {
     console.log('Error fetching the data', e);
   }
 }
-
-
