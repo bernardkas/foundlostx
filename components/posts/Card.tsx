@@ -54,7 +54,7 @@ const Card = ({
       <div className='flex flex-col gap-7 justify-center items-center w-full'>
         {loading ? (
           skeletonArray
-        ) : posts.length > 0 ? (
+        ) : posts?.length > 0 ? (
           posts?.map(item => (
             <div key={item.id} className='flex flex-row flex-wrap gap-2'>
               <div
