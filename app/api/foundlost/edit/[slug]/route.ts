@@ -1,5 +1,5 @@
 import prisma from '@/server/db';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 export async function DELETE(req: Request, { params }: { params: any }) {
@@ -35,7 +35,6 @@ export async function POST(req: Request, { params }: { params: any }) {
   const idNumber = parseInt(slug, 10);
 
   const { isPaid } = body;
-
 
   try {
     const response = await prisma.lostAndFound.update({
