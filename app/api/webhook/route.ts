@@ -79,6 +79,15 @@ export async function POST(req: Request) {
         },
       });
     }
+
+    if (eventType === 'user.deleted') {
+      const eventData = evt.data;
+      await prisma?.user.delete({
+        where: {
+          externalId: eventData.id,
+        },
+      });
+    }
   } catch (error) {
     console.error('Error updating database:', error);
     return new Response('Error occurred', {
