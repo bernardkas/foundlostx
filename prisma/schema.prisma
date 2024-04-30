@@ -50,7 +50,7 @@ model Email {
 model LostAndFound {
   id            Int      @id @default(sequence())
   userId        Int
-  user          User     @relation("UserLostItems", fields: [userId], references: [id])
+  user          User     @relation("UserLostItems", fields: [userId], references: [id], onDelete: Cascade)
   name          String?
   lastname      String
   phone         String
@@ -77,7 +77,7 @@ model LostAndFound {
   generalLocation Json?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-    review Review[]
+  review Review[]
 }
 
 
