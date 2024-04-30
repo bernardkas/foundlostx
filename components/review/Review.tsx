@@ -61,12 +61,12 @@ const Review = ({ lostfoundId }: ReviewProps) => {
     }
 
     if (name === '' || comment === '') {
-      toast('Ju duhet ti mbusheni te gjitha fushat', { type: 'info' });
+      toast('Fill all field plesae', { type: 'info' });
       return;
     }
 
     if (!lostfoundId) {
-      toast('Nuk mundeni te komentoni ne kompanit qe jane bazike', {
+      toast('You cant comment', {
         type: 'error',
       });
       return;
@@ -100,7 +100,7 @@ const Review = ({ lostfoundId }: ReviewProps) => {
     try {
       const deleteComment = await axios.delete(`/api/review/${id}`);
       if (deleteComment.data.status === 200) {
-        toast('U fshi me sukses', { type: 'success' });
+        toast('Delete successfuly', { type: 'success' });
         fetchData();
       }
     } catch (e) {
