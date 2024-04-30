@@ -26,6 +26,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang='en'>
+        <head>
+          <meta
+            name='google-site-verification'
+            content='Q7WO4v_yuPUJPttWgL9f6r-Hqzy6es0TkopmP52c2_s'
+          />
+        </head>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!} />
         <body className={inter.className}>
           <Navbar userId={userId} />
