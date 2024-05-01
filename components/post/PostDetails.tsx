@@ -57,7 +57,7 @@ const PostDetails = ({ post }: PostDetailsProps) => {
     {
       id: 2,
       label: 'Country',
-      data: <span>{post?.country}</span>,
+      data: capitalizeFirstLetter(post?.country),
       icon: <UserRound className='text-orange-500 ' size={22} />,
     },
     {
