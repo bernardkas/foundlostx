@@ -121,7 +121,7 @@ const Navbar = ({ userId }: NavbarProps) => {
               </Link>
               <Link
                 className='mx-2 font-noto-sans font-[500] text-base text-gray-800'
-                href='foundlost'
+                href='/foundlost'
                 onClick={() => setIsMobileNavOpen(false)}>
                 Items you lost or find
               </Link>

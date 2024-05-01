@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       });
     }
   } else if (user?.subscriptions === 'basic') {
-    const packageLimit = 100;
+    const packageLimit = 1;
     const existingPostsCount = await prisma.lostAndFound.count({
       where: { userId: user.id },
     });
