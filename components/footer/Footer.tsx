@@ -54,7 +54,7 @@ const Footer = () => {
           <div className='flex flex-col gap-2 text-white w-[200px]'>
             <h2 className='font-noto-sans'>Contact Us</h2>
             <p className='text-[15px] font-noto-sans'>
-              Email: infowaxo@gmail.com
+              Email: infofoundlostx@gmail.com
             </p>
             <p className='text-[15px] font-noto-sans'>
               Address: Str: Brigada, Podujevo
