@@ -57,7 +57,7 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
         'Offers quicker item discovery',
         'Priority Support',
         'In Premium Contests',
-        'Distributed on social networks',
+        'AI matching system',
       ],
       button: (
         <Button onClick={handlePremium} className='rounded-3xl'>
