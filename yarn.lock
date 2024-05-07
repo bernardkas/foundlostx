@@ -946,6 +946,40 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@paypal/checkout-server-sdk@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@paypal/checkout-server-sdk/-/checkout-server-sdk-1.0.3.tgz#1de69f5c1af8d74ec0e9e26be9ed225d98a1e453"
+  integrity sha512-UEdq8akEdMz0Vs4qoQFU2gMp8PpyE/HKyMwiZuK4vIWUKl8jfd1fWKjQN5cDFm9NkFUIp5U7h++rdMOVj9WMNA==
+  dependencies:
+    "@paypal/paypalhttp" "^1.0.1"
+
+"@paypal/paypal-js@^8.0.5":
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/@paypal/paypal-js/-/paypal-js-8.0.5.tgz#77bc461b4d1e5a2c6f081269e3ef0b2e3331a68c"
+  integrity sha512-yQNV7rOILeaVCNU4aVDRPqEnbIlzfxgQfFsxzsBuZW1ouqRD/4kYBWJDzczCiscSr2xOeA/Pkm7e3a9fRfnuMQ==
+  dependencies:
+    promise-polyfill "^8.3.0"
+
+"@paypal/paypalhttp@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@paypal/paypalhttp/-/paypalhttp-1.0.1.tgz#406e337bf86cec7ea58c42eb167eb9b57ed88110"
+  integrity sha512-DC7AHxTT7drF6dUi3YaFdPVuT15sIkpD5H2eHmdtFgxM4UanS1o1ZDfMhR9mpxd8o+X6pz2r+EZVRRq+n1cssQ==
+
+"@paypal/react-paypal-js@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@paypal/react-paypal-js/-/react-paypal-js-8.3.0.tgz#a103080b752766b8ff59b8620887abf802e1a01b"
+  integrity sha512-SX17d2h1CMNFGI+wtjb329AEDaBR8Ziy2LCV076eDcY1Q0MFKRkfQ/v0HOAvZtk3sJoydRmYez2pq47BRblwqQ==
+  dependencies:
+    "@paypal/paypal-js" "^8.0.5"
+    "@paypal/sdk-constants" "^1.0.122"
+
+"@paypal/sdk-constants@^1.0.122":
+  version "1.0.148"
+  resolved "https://registry.yarnpkg.com/@paypal/sdk-constants/-/sdk-constants-1.0.148.tgz#3b09b88d4f49c694f86d0e9a85e56f570b262ff7"
+  integrity sha512-8Y3lQArNYoySa738bqR6B6b1D8OwwEz/Q8lTlkkPcSNVkIIEUi+9PRs/g7gpdVQbidEYN4P+YuzpOKJD9PfiPA==
+  dependencies:
+    hi-base32 "^0.5.0"
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
@@ -2082,6 +2116,20 @@
   integrity sha512-D0WfRmU9TQ8I9PFx9Yc+EBHw+vSpIub4IDvQivcp26PtPrdMGAq5SDcpXEo/epqa/DXotVpekHiLNTg3iaKXBQ==
   dependencies:
     undici-types "~5.26.4"
+
+"@types/paypal__checkout-server-sdk@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@types/paypal__checkout-server-sdk/-/paypal__checkout-server-sdk-1.0.8.tgz#525f63425df3bce26002fc9ffaf4570a19620d2a"
+  integrity sha512-PNmNBlcany7Dh42Qb5mkl+KqYfR39aVcalLm3FXHCozKtDyfLE1JAig7C2mANPdC3fmQhdvcs0n3ym6K10CLnw==
+  dependencies:
+    "@types/paypal__paypalhttp" "*"
+
+"@types/paypal__paypalhttp@*":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/paypal__paypalhttp/-/paypal__paypalhttp-1.0.3.tgz#9613d052fe5bdf59a40c95796f97e72fd1405f36"
+  integrity sha512-Zen2JyaCOPRkPFxXetopbYWsSpi3VlWWYBZKNEXruxp6vzh7f/an/IaeZ23tmd11rg56zYtmXS2e1PfllVRZtQ==
+  dependencies:
+    "@types/node" "*"
 
 "@types/prop-types@*":
   version "15.7.11"
@@ -3984,6 +4032,11 @@ hasown@^2.0.1, hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
+hi-base32@^0.5.0:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/hi-base32/-/hi-base32-0.5.1.tgz#1279f2ddae2673219ea5870c2121d2a33132857e"
+  integrity sha512-EmBBpvdYh/4XxsnUybsPag6VikPYnN30td+vQk+GI3qpahVEG9+gTkG0aXVxTjBqQ5T6ijbWIu77O+C5WFWsnA==
+
 ieee754@1.1.13:
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84"
@@ -4900,6 +4953,11 @@ prisma@^5.7.1:
   integrity sha512-ekho7ziH0WEJvC4AxuJz+ewRTMskrebPcrKuBwcNzVDniYxx+dXOGcorNeIb9VEMO5vrKzwNYvhD271Ui2jnNw==
   dependencies:
     "@prisma/engines" "5.7.1"
+
+promise-polyfill@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.3.0.tgz#9284810268138d103807b11f4e23d5e945a4db63"
+  integrity sha512-H5oELycFml5yto/atYqmjyigJoAo3+OXwolYiH7OfQuYlAqhxNvTfiNMbV9hsC6Yp83yE5r2KTVmtrG6R9i6Pg==
 
 prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"

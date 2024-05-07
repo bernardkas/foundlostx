@@ -16,7 +16,7 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
     if (!userId) {
       router.push('/sign-in');
     }
-    const priceId = 'price_1P6z2UEskKO9rlKaM9cfb0lT';
+    const priceId = 'price_1PDqbhEskKO9rlKazUPcPEjP';
     const { data } = await axios.post(
       '/api/payment',
       {
