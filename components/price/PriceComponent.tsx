@@ -16,6 +16,7 @@ const PriceComponent = ({ userId }: PriceComponentProps) => {
     if (!userId) {
       router.push('/sign-in');
     }
+    // This id is in production
     const priceId = 'price_1PDrBjEskKO9rlKaOudEE1FA';
     const { data } = await axios.post(
       '/api/payment',

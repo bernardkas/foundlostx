@@ -20,20 +20,3 @@ export const useSearchInputState = create<SearchInputState>((set, get) => ({
   },
 }));
 
-// export const useSearchInputState = create<SearchInputState>(
-//   persist(
-//     set => ({
-//       desc: '',
-//       country: '',
-//       city: '',
-//       whereDidFind: '',
-
-//       setInput: (data: Partial<SearchInputState>) => {
-//         set(state => ({ ...state, ...data }));
-//       },
-//     }),
-//     {
-//       name: 'search-input-state', // name for the persisted state
-//     }
-//   ) as StateCreator<SearchInputState, [], [], SearchInputState> // Specify the type explicitly
-// );
