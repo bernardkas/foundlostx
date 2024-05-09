@@ -138,7 +138,7 @@ const Header = ({}: HeaderProps) => {
 
             <div></div>
             <button
-              onClick={() => handleSearch(city)}
+              onClick={() => handleSearch(tempInput.city)}
               className='ml-2 bg-orange-500 text-white p-2 rounded-lg w-full '>
               Search
             </button>
