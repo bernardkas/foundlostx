@@ -2,7 +2,7 @@ import { Copyright, Facebook, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import logo from '@/assets/no-bg.png';
+import tiktok from '@/assets/tiktok.png';
 
 const Footer = () => {
   return (
@@ -17,7 +17,7 @@ const Footer = () => {
               Lost but not forgotten, found with ease. Join FoundLostX and
               reunite with your belongings effortlessly
             </p>
-            <p className='flex flex-row gap-4'>
+            <p className='flex flex-row items-center gap-4'>
               <Link
                 href='https://www.facebook.com/profile.php?id=61558843149840'
                 target='_blank'
@@ -26,6 +26,17 @@ const Footer = () => {
               </Link>
               <Link href='' className='cursor-pointer'>
                 <Instagram className='text-red-500' />
+              </Link>
+              <Link
+                href='https://www.tiktok.com/@foundlostx'
+                target='_blank'
+                className='cursor-pointer'>
+                <Image
+                  src={tiktok}
+                  alt=''
+                  width={30}
+                  height={30}
+                  className='cursor-pointer'></Image>
               </Link>
             </p>
           </div>
