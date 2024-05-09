@@ -1,24 +1,10 @@
 'use client';
-import {
-  Bus,
-  Flag,
-  LocateFixed,
-  MailCheck,
-  MapPin,
-  Plane,
-  Smartphone,
-  TrainFront,
-  UserRound,
-  MessageCircle,
-  Map,
-  Phone,
-  Radar,
-} from 'lucide-react';
+import { MailCheck, MapPin, UserRound, Radar } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import photo from '@/assets/howitworks/matching.png';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import {
   formatDate,
   capitalizeFirstLetter,

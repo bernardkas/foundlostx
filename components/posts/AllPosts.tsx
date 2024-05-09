@@ -23,17 +23,23 @@ const AllPosts = ({ allPosts, loading }: AllPostsProps) => {
 
   const relevantPosts = allPostFilter.filter(
     post =>
-      !filterPosts.some(fp => fp.id === post.id) && !premiumPost.includes(post)
+      !filterPosts.some(fp => fp.id === post.id) &&
+      post.city === city &&
+      !premiumPost.includes(post)
   );
   const reversPosts = relevantPosts.reverse();
 
   useEffect(() => {
     let filterPost = [...allPosts];
 
-    const premium = allPosts.filter(item => item?.isPaid === true);
+    const premium = allPosts.filter(
+      item => item?.isPaid === true && item.city === city
+    );
     setPremiumPost(premium.reverse());
 
-    const enterprise = allPosts.filter(item => item?.isEnterprise === true);
+    const enterprise = allPosts.filter(
+      item => item?.isEnterprise === true && item.city === city
+    );
     setEnterprisePost(enterprise);
 
     if (desc) {

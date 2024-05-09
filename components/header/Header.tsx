@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation';
 import { englandCity, countryData, whereDidYouFindIt } from '@/lib/defaultData';
 import { useSearchInputState } from '@/lib/store';
 import { toast } from 'react-toastify';
+import { getCityOptions } from '@/lib/utils';
 
 interface HeaderProps {}
 
@@ -29,6 +30,8 @@ const Header = ({}: HeaderProps) => {
   const handleInputChange = (fieldName: string, fieldValue: string) => {
     setInput({ [fieldName]: fieldValue });
   };
+
+  const citi = getCityOptions(country);
 
   const handleSearch = (city: string) => {
     if (country === '' || city === '' || whereDidFind === '') {
@@ -94,7 +97,7 @@ const Header = ({}: HeaderProps) => {
               value={country}
             />
             <Combobox
-              frameworks={englandCity}
+              frameworks={citi}
               className='  border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'
               placeholder='*City...'
               setValue={value => handleInputChange('city', value)}

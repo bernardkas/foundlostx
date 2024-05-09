@@ -122,6 +122,25 @@ export const countryData = [
     value: 'england',
     label: 'England',
   },
+  {
+    value: 'america',
+    label: 'United States of America',
+  },
+  {
+    value: 'germany',
+    label: 'Germany',
+  },
+];
+
+export const germanyCity = [
+  {
+    value: 'munich',
+    label: 'Munich',
+  },
+  {
+    value: 'berlin',
+    label: 'Berlin',
+  },
 ];
 
 export const englandCity = [
@@ -227,50 +246,122 @@ export const englandCity = [
   // { value: 'hereford', label: 'Hereford' },
 ];
 
-export const formattedAirports = [
+export const americaCity = [
   {
-    value: 'london heathrow airport',
+    value: 'new-york',
+    label: 'New York',
+  },
+];
+
+export const englandAiroports = [
+  {
+    value: 'lha',
     label: 'London Heathrow Airport (LHR)',
   },
   {
-    value: 'london gatwick airport',
+    value: 'lga',
     label: 'London Gatwick Airport (LGW)',
   },
   {
-    value: 'london stansted airport',
+    value: 'lst',
     label: 'London Stansted Airport (STN)',
   },
   {
-    value: 'london luton airport',
+    value: 'llu',
     label: 'London Luton Airport (LTN)',
   },
   {
-    value: 'london city airport',
+    value: 'lcy',
     label: 'London City Airport (LCY)',
   },
   {
-    value: 'london southend airport',
+    value: 'lse',
     label: 'London Southend Airport (SEN)',
   },
   {
-    value: 'london biggin hill airport',
+    value: 'lbh',
     label: 'London Biggin Hill Airport (BQH)',
   },
   {
-    value: 'london ashford airport',
+    value: 'las',
     label: 'London ashford airport',
   },
   {
-    value: 'london elstree airfield',
+    value: 'lea',
     label: 'London Elstree Airfield (EGTR)',
   },
   {
-    value: 'london farnborough airport',
+    value: 'lfa',
     label: 'London Farnborough Airport (FAB)',
   },
   {
-    value: 'london oxford airport',
+    value: 'loa',
     label: 'London Oxford Airport (OXF)',
+  },
+];
+
+export const airoportMunich = [
+  {
+    value: 'muc',
+    label: 'Munich Airport (MUC)',
+  },
+];
+
+export const airoportBerlin = [
+  {
+    value: 'txl',
+    label: 'Berlin Tegel Airport (TXL)',
+  },
+  {
+    value: 'sxf',
+    label: 'Berlin Schönefeld Airport (SXF)',
+  },
+  {
+    value: 'ber',
+    label: 'Berlin Brandenburg Airport (BER)',
+  },
+];
+
+export const airportsNewYork = [
+  {
+    value: 'jfk',
+    label: 'John F. Kennedy International Airport (JFK)',
+  },
+  {
+    value: 'lga',
+    label: 'LaGuardia Airport (LGA)',
+  },
+  {
+    value: 'ewr',
+    label: 'Newark Liberty International Airport (EWR)',
+  },
+  {
+    value: 'swf',
+    label: 'Stewart International Airport (SWF)',
+  },
+  {
+    value: 'isp',
+    label: 'Long Island MacArthur Airport (ISP)',
+  },
+  {
+    value: 'hpn',
+    label: 'Westchester County Airport (HPN)',
+  },
+  {
+    value: 'alb',
+    label: 'Albany International Airport (ALB)',
+  },
+  {
+    value: 'roc',
+    label: 'Greater Rochester International Airport (ROC)',
+  },
+  {
+    value: 'buf',
+    label: 'Buffalo Niagara International Airport (BUF)',
+  },
+  {
+    value: 'syr',
+    label: 'Syracuse Hancock International Airport (SYR)',
   },
 ];
 

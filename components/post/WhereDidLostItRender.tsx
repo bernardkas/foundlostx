@@ -1,3 +1,4 @@
+import { getAirportLabel } from '@/lib/utils';
 import { Bus, CarTaxiFront, Plane, Ship } from 'lucide-react';
 import React from 'react';
 
@@ -18,6 +19,9 @@ const WhereDidLostItRender = ({
   taxiData,
   generalData,
 }: WhereDidLostItRenderProps) => {
+  const airoportsLabel = getAirportLabel(airoportData.airportName);
+ 
+
   return (
     <div className='flex flex-col gap-3'>
       {airoportData &&
@@ -28,9 +32,7 @@ const WhereDidLostItRender = ({
             <Plane size={22} className=' text-orange-500 ' />
             <div>
               <p className=' text-slate-500 font-noto-sans'>Airoport Name</p>
-              <p className=' text-slate-800 font-noto-sans'>
-                {airoportData.airportName}
-              </p>
+              <p className=' text-slate-800 font-noto-sans'>{airoportsLabel}</p>
             </div>
             <div>
               <p className=' text-slate-500 font-noto-sans'>Airoplan Name</p>

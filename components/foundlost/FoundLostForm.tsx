@@ -22,6 +22,7 @@ import Map from '../map/Map';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { Loader } from 'lucide-react';
+import { getAiroportOptions, getCityOptions } from '@/lib/utils';
 
 interface FoundLostFromProps {
   userId: any;
@@ -82,6 +83,9 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
       setSelectPhoto((prevPhotos: any) => [...prevPhotos, ...newPhotos]);
     }
   };
+
+  const citis = getCityOptions(input.country);
+  const airoportsOption = getAiroportOptions(input.city);
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
@@ -320,7 +324,7 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
             <div className='flex flex-col'>
               <label htmlFor=''>*City</label>
               <Combobox
-                frameworks={englandCity}
+                frameworks={citis}
                 className='w-96 outline-none text-base font-noto-sans'
                 setValue={value => handleInputChange('city', value)}
                 value={input.city}
@@ -365,6 +369,7 @@ const FoundLostForm = ({ userId }: FoundLostFromProps) => {
             setTaxi={setTaxi}
             generale={generalLocation}
             setGenerale={setGeneralLocation}
+            airoportsOption={airoportsOption}
           />
           <div className='flex flex-col'>
             {input.label === 'found' ? (

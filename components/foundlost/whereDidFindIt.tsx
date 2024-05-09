@@ -1,6 +1,6 @@
 import React from 'react';
 import { Combobox } from '../ui/combobox';
-import { formattedAirports } from '@/lib/defaultData';
+import { englandAiroports } from '@/lib/defaultData';
 import { Input } from '../ui/input';
 import { LostAndFound } from '@prisma/client';
 
@@ -19,6 +19,7 @@ interface WhereDidFindItProps {
   setTaxi: (a: any) => void;
   generale: any;
   setGenerale: (a: any) => void;
+  airoportsOption?: any;
 }
 
 const WhereDidFindIt = ({
@@ -36,6 +37,7 @@ const WhereDidFindIt = ({
   setTaxi,
   generale,
   setGenerale,
+  airoportsOption,
 }: WhereDidFindItProps) => {
   const handleAiroportChange = (fieldName: string, fieldValue: any) => {
     if (airoport) {
@@ -43,7 +45,23 @@ const WhereDidFindIt = ({
         busName: '',
         busRouteNumber: '',
       });
+      setTrain({
+        trainName: '',
+        trainNumber: '',
+      });
+      setFerry({
+        ferryName: '',
+        ferryRoute: '',
+      });
+      setTaxi({
+        taxiName: '',
+        taxiPlate: '',
+      });
+      setGenerale({
+        generaleLocation: '',
+      });
     }
+
     setAiroport({ ...airoport, [fieldName]: fieldValue });
   };
 
@@ -54,16 +72,46 @@ const WhereDidFindIt = ({
         airlineName: '',
         flightNumber: '',
       });
+      setTrain({
+        trainName: '',
+        trainNumber: '',
+      });
+      setFerry({
+        ferryName: '',
+        ferryRoute: '',
+      });
+      setTaxi({
+        taxiName: '',
+        taxiPlate: '',
+      });
+      setGenerale({
+        generaleLocation: '',
+      });
     }
 
     setBus({ ...bus, [fieldName]: fieldValue });
   };
   const handleTrainChange = (fieldName: string, fieldValue: any) => {
-    if (bus) {
+    if (train) {
       setAiroport({
         airoportName: '',
         airlineName: '',
         flightNumber: '',
+      });
+      setBus({
+        busName: '',
+        busRouteNumber: '',
+      });
+      setFerry({
+        ferryName: '',
+        ferryRoute: '',
+      });
+      setTaxi({
+        taxiName: '',
+        taxiPlate: '',
+      });
+      setGenerale({
+        generaleLocation: '',
       });
     }
 
@@ -71,11 +119,26 @@ const WhereDidFindIt = ({
   };
 
   const handleFerryChange = (fieldName: string, fieldValue: any) => {
-    if (bus) {
+    if (ferry) {
       setAiroport({
         airoportName: '',
         airlineName: '',
         flightNumber: '',
+      });
+      setBus({
+        busName: '',
+        busRouteNumber: '',
+      });
+      setTrain({
+        trainName: '',
+        trainNumber: '',
+      });
+      setTaxi({
+        taxiName: '',
+        taxiPlate: '',
+      });
+      setGenerale({
+        generaleLocation: '',
       });
     }
 
@@ -83,11 +146,22 @@ const WhereDidFindIt = ({
   };
 
   const handleTaxiChange = (fieldName: string, fieldValue: any) => {
-    if (bus) {
+    if (taxi) {
       setAiroport({
         airoportName: '',
         airlineName: '',
         flightNumber: '',
+      });
+      setBus({
+        busName: '',
+        busRouteNumber: '',
+      });
+      setFerry({
+        ferryName: '',
+        ferryRoute: '',
+      });
+      setGenerale({
+        generaleLocation: '',
       });
     }
 
@@ -95,11 +169,27 @@ const WhereDidFindIt = ({
   };
 
   const handleGeneralChange = (fieldName: string, fieldValue: any) => {
-    if (bus) {
+    if (generale) {
       setAiroport({
         airoplanName: '',
         airlineName: '',
         flightNumber: '',
+      });
+      setBus({
+        busName: '',
+        busRouteNumber: '',
+      });
+      setFerry({
+        ferryName: '',
+        ferryRoute: '',
+      });
+      setTrain({
+        trainName: '',
+        trainNumber: '',
+      });
+      setTaxi({
+        taxiName: '',
+        taxiPlate: '',
       });
     }
 
@@ -113,7 +203,7 @@ const WhereDidFindIt = ({
           <div className='flex flex-col'>
             <label htmlFor=''>*Airoport name</label>
             <Combobox
-              frameworks={formattedAirports}
+              frameworks={airoportsOption}
               className='w-96 outline-none text-base font-noto-sans'
               setValue={value => handleAiroportChange('airportName', value)}
               value={airoport.airportName}
