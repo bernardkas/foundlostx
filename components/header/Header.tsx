@@ -25,7 +25,7 @@ interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
   const router = useRouter();
-  const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
+  const { setInput } = useSearchInputState();
 
   const [tempInput, setTempInput] = useState({
     desc: '',
@@ -41,8 +41,6 @@ const Header = ({}: HeaderProps) => {
   const handleInputChange = (fieldName: string, fieldValue: string) => {
     setTempInput(prevState => ({ ...prevState, [fieldName]: fieldValue }));
   };
-
-  console.log('tempInput', tempInput);
 
   const citi = getCityOptions(tempInput.country);
 
