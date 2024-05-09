@@ -24,9 +24,9 @@ const Footer = () => {
                 className='cursor-pointer'>
                 <Facebook className='text-blue-400' />
               </Link>
-              <Link href='' className='cursor-pointer'>
+              {/* <Link href='' className='cursor-pointer'>
                 <Instagram className='text-red-500' />
-              </Link>
+              </Link> */}
               <Link
                 href='https://www.tiktok.com/@foundlostx'
                 target='_blank'
