@@ -101,7 +101,7 @@ export const getAirportLabel = (value: string) => {
       return 'Syracuse Hancock International Airport (SYR)';
     case 'lha':
       return 'London Heathrow Airport (LHR)';
-    case 'lga':
+    case 'lgw':
       return 'London Gatwick Airport (LGW)';
     case 'lst':
       return 'London Stansted Airport (STN)';

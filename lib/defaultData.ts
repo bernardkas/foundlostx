@@ -259,7 +259,7 @@ export const englandAiroports = [
     label: 'London Heathrow Airport (LHR)',
   },
   {
-    value: 'lga',
+    value: 'lgw',
     label: 'London Gatwick Airport (LGW)',
   },
   {
