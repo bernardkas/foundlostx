@@ -9,14 +9,31 @@ interface SearchInputState {
   setInput: (a: any) => void;
 }
 
-export const useSearchInputState = create<SearchInputState>((set, get) => ({
-  desc: '',
-  country: '',
-  city: '',
-  whereDidFind: '',
+// export const useSearchInputState = create<SearchInputState>((set, get) => ({
+//   desc: '',
+//   country: '',
+//   city: '',
+//   whereDidFind: '',
 
-  setInput: (data: Partial<SearchInputState>) => {
-    set(state => ({ ...state, ...data }));
-  },
-}));
+//   setInput: (data: Partial<SearchInputState>) => {
+//     set(state => ({ ...state, ...data }));
+//   },
+// }));
 
+export const useSearchInputState: () => SearchInputState = create(
+  persist<SearchInputState>(
+    set => ({
+      desc: '',
+      country: '',
+      city: '',
+      whereDidFind: '',
+
+      setInput: (data: Partial<SearchInputState>) => {
+        set(state => ({ ...state, ...data }));
+      },
+    }),
+    {
+      name: 'searchInputState', // Key for local storage
+    }
+  )
+);

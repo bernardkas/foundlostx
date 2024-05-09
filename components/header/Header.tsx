@@ -27,14 +27,31 @@ const Header = ({}: HeaderProps) => {
   const router = useRouter();
   const { desc, country, city, whereDidFind, setInput } = useSearchInputState();
 
+  const [tempInput, setTempInput] = useState({
+    desc: '',
+    country: '',
+    city: '',
+    whereDidFind: '',
+  });
+
+  // const handleInputChange = (fieldName: string, fieldValue: string) => {
+  //   setInput({ [fieldName]: fieldValue });
+  // };
+
   const handleInputChange = (fieldName: string, fieldValue: string) => {
-    setInput({ [fieldName]: fieldValue });
+    setTempInput(prevState => ({ ...prevState, [fieldName]: fieldValue }));
   };
 
-  const citi = getCityOptions(country);
+  console.log('tempInput', tempInput);
+
+  const citi = getCityOptions(tempInput.country);
 
   const handleSearch = (city: string) => {
-    if (country === '' || city === '' || whereDidFind === '') {
+    if (
+      tempInput.country === '' ||
+      tempInput.city === '' ||
+      tempInput.whereDidFind === ''
+    ) {
       toast(
         'You need to fill value (Country, City, Where did you lost/find item',
         { type: 'error' }
@@ -42,7 +59,22 @@ const Header = ({}: HeaderProps) => {
 
       return;
     }
+
+    setInput({
+      desc: tempInput.desc,
+      country: tempInput.country,
+      city: tempInput.city,
+      whereDidFind: tempInput.whereDidFind,
+    });
+
     router.push(`/posts/${city}`);
+
+    setTempInput({
+      desc: '',
+      country: '',
+      city: '',
+      whereDidFind: '',
+    });
   };
 
   return (
@@ -65,7 +97,7 @@ const Header = ({}: HeaderProps) => {
                     onChange={val =>
                       handleInputChange('desc', val.target.value)
                     }
-                    value={desc}
+                    value={tempInput.desc}
                   />
                 </TooltipTrigger>
                 <TooltipContent>
@@ -77,7 +109,7 @@ const Header = ({}: HeaderProps) => {
             </TooltipProvider>
             <Select
               onValueChange={val => handleInputChange('whereDidFind', val)}
-              value={whereDidFind}>
+              value={tempInput.whereDidFind}>
               <SelectTrigger className=' border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'>
                 <SelectValue placeholder='*Where did you lost/find item?' />
               </SelectTrigger>
@@ -94,14 +126,14 @@ const Header = ({}: HeaderProps) => {
               className=' border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'
               placeholder='*Country...'
               setValue={value => handleInputChange('country', value)}
-              value={country}
+              value={tempInput.country}
             />
             <Combobox
               frameworks={citi}
               className='  border-[1px] pb-1 outline-none w-[350px]  font-golos-text text-base'
               placeholder='*City...'
               setValue={value => handleInputChange('city', value)}
-              value={city}
+              value={tempInput.city}
             />
 
             <div></div>

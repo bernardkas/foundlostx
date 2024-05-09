@@ -32,6 +32,13 @@ const Posts = () => {
     fetchPostsData();
   }, []);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <></>;
+
   return (
     <div>
       <AllPosts allPosts={allPosts} loading={loading} />

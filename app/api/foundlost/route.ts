@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   });
 
   if (user?.subscriptions === 'premium') {
-    const packageLimit = 1000;
+    const packageLimit = 1;
     const existingPostsCount = await prisma.lostAndFound.count({
       where: { userId: user.id },
     });
