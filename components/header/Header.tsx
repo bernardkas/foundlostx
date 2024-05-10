@@ -77,7 +77,7 @@ const Header = ({}: HeaderProps) => {
 
   return (
     <div className='h-[50vh]  w-full'>
-      <div className='flex flex-col items-center justify-center h-full'>
+      <div className='flex flex-col items-center justify-center h-full mt-4 md:mt-0'>
         <div className='flex flex-col items-center justify-center'>
           <h1 className='text-3xl mt-16 md:mt-0 md:text-4xl font-golos-text font-bold text-slate-600 mb-2 text-center'>
             Did you lose something?
