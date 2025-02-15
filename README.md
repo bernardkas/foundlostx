@@ -1,3 +1,47 @@
+yarn install
+yarn next dev
+
+You need to add in the .env:
+DATABASE_URL=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL='/sign-in'
+NEXT_PUBLIC_CLERK_SIGN_UP_URL='/sign-up'
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL='/'
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL='/'
+
+WEBHOOK_SECRET=
+
+
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_BUCKET_NAME=
+
+
+# This is for local testing
+PREMIUM_PRICE_ID=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+NEXT_PUBLIC_STRIPE_SECRET_KEY=
+STRIPE_WEBOOK_SECRET=
+
+
+STRIPE_URL_SUCCESS_PRODUCTION_REDIRECT="http://localhost:3000/dashboard"
+STRIPE_URL_CANCEL_PRODUCTION_REDIRECT="http://localhost:3000/price"
+
+NEXT_PUBLIC_GOOGLE_ANALYTICS=G-
+
+
+
+PRICE_ID=
+
+
+PAYPAL_CLIENT_ID=
+PAYPAL_CLIENT_SECRET=
+NEXT_PUBLIC_PAYPAL_CLIENT_ID=
+
 Welcome to foundlostx - Connect Lost and Found!
 
 Have you ever found something valuable and wished you could reunite it with its owner? Or perhaps you've lost a cherished item and hoped for a way to increase your chances of getting it back? Look no further—foundlostx is here to bridge the gap between lost and found!
